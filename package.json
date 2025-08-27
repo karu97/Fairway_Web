@@ -28,6 +28,7 @@
     "sanity:start": "sanity start",
     "meili:start": "meilisearch --env .env.meili",
     "meili:index": "tsx src/scripts/meili-index.ts",
+    "prepare": "echo 'Husky install skipped in production'",
     "clean": "rm -rf .next .turbo node_modules",
     "clean:install": "npm clean && npm install",
     "vercel:deploy": "vercel --prod",
