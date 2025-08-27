@@ -67,19 +67,19 @@ export function Header() {
       {/* Top Bar */}
       <div className="bg-blue-900 text-white py-2">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center space-x-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
                 <span>+94 11 234 5678</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
                 <span>info@fairwayhotels.com</span>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center">
               {/* Locale Switcher */}
               <div className="relative group">
                 <button className="flex items-center space-x-2 hover:text-blue-200 transition-colors">
