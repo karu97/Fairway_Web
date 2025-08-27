@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# fairway
-=======
 # Fairway Hotels - World Class 2025 Website
 
 A modern, luxury hotel and tour booking website built with Next.js 14, featuring world-class performance, SEO optimization, and exceptional user experience.
@@ -95,8 +92,8 @@ Fairway Hotels is a premium hospitality brand in Sri Lanka, offering luxury acco
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/fairwayhotels/website.git
-   cd website
+   git clone https://github.com/karu97/Fairway_Web.git
+   cd Fairway_Web
    ```
 
 2. **Install dependencies**
@@ -154,7 +151,7 @@ Fairway Hotels is a premium hospitality brand in Sri Lanka, offering luxury acco
 ## 📁 Project Structure
 
 ```
-fairway-hotels/
+Fairway_Web/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── (public)/          # Public routes
@@ -369,7 +366,7 @@ For support and questions:
 
 - **Email**: tech@fairwayhotels.com
 - **Documentation**: [docs.fairwayhotels.com](https://docs.fairwayhotels.com)
-- **Issues**: [GitHub Issues](https://github.com/fairwayhotels/website/issues)
+- **Issues**: [GitHub Issues](https://github.com/karu97/Fairway_Web/issues)
 
 ## 🙏 Acknowledgments
 
@@ -384,4 +381,3 @@ For support and questions:
 **Built with ❤️ in Sri Lanka by Fairway Hotels**
 
 *Experience luxury, discover adventure, create memories.*
->>>>>>> 803ce83e6 (Initial commit)
