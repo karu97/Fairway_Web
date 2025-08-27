@@ -29,6 +29,7 @@
     "meili:start": "meilisearch --env .env.meili",
     "meili:index": "tsx src/scripts/meili-index.ts",
     "prepare": "echo 'Husky install skipped in production'",
+    "postinstall": "prisma generate || echo 'Prisma generate skipped'",
     "clean": "rm -rf .next .turbo node_modules",
     "clean:install": "npm clean && npm install",
     "vercel:deploy": "vercel --prod",
