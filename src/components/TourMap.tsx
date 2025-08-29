@@ -12,7 +12,7 @@ interface TourMapProps {
       highlights?: string[];
     }>;
     durationDays?: number;
-    groupSize?: string;
+    groupSize?: { min?: number; max?: number } | string;
     availableDates?: string[];
   };
 }
@@ -53,7 +53,11 @@ export function TourMap({ tour }: TourMapProps) {
   ];
 
   const durationDays = tour.durationDays || 10;
-  const groupSize = tour.groupSize || '2-12 people';
+  const groupSize = typeof tour.groupSize === 'string'
+    ? tour.groupSize
+    : tour.groupSize && (tour.groupSize.min || tour.groupSize.max)
+      ? `${tour.groupSize.min ?? 2}-${tour.groupSize.max ?? 12} people`
+      : '2-12 people';
   const availableDates = tour.availableDates || [
     'March 15-25, 2025',
     'April 10-20, 2025',

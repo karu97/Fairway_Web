@@ -14,6 +14,7 @@ interface TourDetailsProps {
     locations?: Array<{ name: string }>;
     availableDates?: string[];
     maxGroupSize?: number;
+    groupSize?: { min?: number; max?: number } | string;
   };
 }
 
@@ -97,11 +98,19 @@ export function TourDetails({ tour }: TourDetailsProps) {
         )}
 
         {/* Group Size */}
-        {tour.maxGroupSize && (
+        {(tour.maxGroupSize || tour.groupSize) && (
           <div className="bg-purple-50 p-6 rounded-xl text-center">
             <Users className="w-8 h-8 text-purple-600 mx-auto mb-3" />
             <h3 className="text-lg font-semibold text-gray-900 mb-1">Group Size</h3>
-            <p className="text-purple-600 font-medium">Max {tour.maxGroupSize} people</p>
+            <p className="text-purple-600 font-medium">
+              {typeof tour.groupSize === 'string'
+                ? tour.groupSize
+                : tour.maxGroupSize
+                  ? `Max ${tour.maxGroupSize} people`
+                  : tour.groupSize && (tour.groupSize.min || tour.groupSize.max)
+                    ? `${tour.groupSize.min ?? 2}-${tour.groupSize.max ?? 12} people`
+                    : ''}
+            </p>
           </div>
         )}
 
