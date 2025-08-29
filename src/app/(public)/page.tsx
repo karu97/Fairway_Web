@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { getFeaturedHotels, getFeaturedTours } from '@/lib/sanity';
 import { 
   ArrowRight, 
   Star, 
@@ -45,7 +46,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [featuredHotels, featuredTours] = await Promise.all([
+    getFeaturedHotels(),
+    getFeaturedTours(),
+  ]);
   return (
     <>
       {/* Hero Section */}
@@ -184,41 +189,16 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Fairway Colombo',
-                location: 'Colombo, Sri Lanka',
-                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
-                rating: 4.8,
-                price: 'From $150',
-                description: 'Luxury hotel in the heart of Colombo with stunning city views.',
-              },
-              {
-                name: 'Fairway Kandy',
-                location: 'Kandy, Sri Lanka',
-                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop',
-                rating: 4.9,
-                price: 'From $180',
-                description: 'Hill country retreat with panoramic views of the mountains.',
-              },
-              {
-                name: 'Fairway Galle',
-                location: 'Galle, Sri Lanka',
-                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&h=400&fit=crop',
-                rating: 4.7,
-                price: 'From $200',
-                description: 'Beachfront paradise with direct access to pristine beaches.',
-              },
-            ].map((hotel, index) => (
+            {featuredHotels.map((hotel, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
                 <div className="relative overflow-hidden">
                   <img
-                    src={hotel.image}
+                    src={hotel.heroImage?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop'}
                     alt={hotel.name}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-                    {hotel.price}
+                    {hotel.priceFrom ? `From $${hotel.priceFrom}` : ''}
                   </div>
                 </div>
                 
@@ -226,20 +206,20 @@ export default function HomePage() {
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-xl font-semibold text-gray-900">{hotel.name}</h3>
                     <div className="flex items-center space-x-1">
-                      <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-gray-700">{hotel.rating}</span>
+                      {hotel.rating && <Star className="w-5 h-5 text-yellow-400 fill-current" />}
+                      {hotel.rating && <span className="text-sm font-medium text-gray-700">{hotel.rating}</span>}
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-2 text-gray-600 mb-3">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{hotel.location}</span>
+                    <span className="text-sm">{hotel.address?.city}{hotel.address?.region ? `, ${hotel.address.region}` : ''}</span>
                   </div>
                   
                   <p className="text-gray-600 mb-4">{hotel.description}</p>
                   
                   <Link
-                    href={`/hotels/${hotel.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/hotels/${hotel.slug}`}
                     className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
                   >
                     <span>View Details</span>
@@ -275,62 +255,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Cultural Heritage Tour',
-                duration: '7 Days',
-                price: 'From $899',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop',
-                description: 'Explore ancient temples, royal palaces, and UNESCO World Heritage sites.',
-                highlights: ['Temple of the Sacred Tooth Relic', 'Ancient City of Polonnaruwa', 'Sigiriya Rock Fortress'],
-              },
-              {
-                name: 'Tea Country Adventure',
-                duration: '5 Days',
-                price: 'From $699',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop',
-                description: 'Journey through misty mountains and lush tea plantations.',
-                highlights: ['Nuwara Eliya', 'Tea Factory Visit', 'Horton Plains'],
-              },
-              {
-                name: 'Beach Paradise Tour',
-                duration: '6 Days',
-                price: 'From $799',
-                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop',
-                description: 'Relax on pristine beaches and explore coastal heritage.',
-                highlights: ['Galle Fort', 'Unawatuna Beach', 'Mirissa Whale Watching'],
-              },
-            ].map((tour, index) => (
+            {featuredTours.map((tour, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="relative overflow-hidden">
                   <img
-                    src={tour.image}
-                    alt={tour.name}
+                    src={tour.heroImage?.url || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop'}
+                    alt={tour.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {tour.duration}
+                    {tour.durationDays ? `${tour.durationDays} Days` : ''}
                   </div>
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-                    {tour.price}
+                    {tour.priceFrom ? `From $${tour.priceFrom}` : ''}
                   </div>
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.name}</h3>
-                  <p className="text-gray-600 mb-4">{tour.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.title}</h3>
+                  <p className="text-gray-600 mb-4">{tour.summary}</p>
                   
-                  <div className="space-y-2 mb-4">
-                    {tour.highlights.map((highlight, highlightIndex) => (
-                      <div key={highlightIndex} className="flex items-center space-x-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {/* optional highlights removed for CMS data */}
                   
                   <Link
-                    href={`/tours/${tour.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/tours/${tour.slug}`}
                     className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
                   >
                     <span>View Details</span>

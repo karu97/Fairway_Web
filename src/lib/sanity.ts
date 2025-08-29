@@ -698,6 +698,50 @@ export async function getHotel(slug: string, locale?: string): Promise<{
   };
 }
 
+// -------- Featured helpers --------
+export async function getFeaturedHotels(locale?: string) {
+  if (!isSanityConfigured()) {
+    return [];
+  }
+  const useLocale = locale || config.site.defaultLocale;
+  // Use featured query; it does not accept params
+  const docs = await fetchData<any[]>(hotelQueries.featured, undefined);
+  return (docs || []).map((doc) => ({
+    slug: doc?.slug?.current || doc?.slug || '',
+    name: doc?.title,
+    description: doc?.summary || undefined,
+    heroImage: mapImage(doc?.heroImage),
+    rating: doc?.rating,
+    address: {
+      street: doc?.address?.street,
+      city: doc?.address?.city,
+      region: doc?.address?.region,
+      country: doc?.address?.country,
+    },
+    amenities: doc?.amenities,
+    priceFrom: doc?.priceFrom,
+    currency: doc?.currency,
+  }));
+}
+
+export async function getFeaturedTours(locale?: string) {
+  if (!isSanityConfigured()) {
+    return [];
+  }
+  const useLocale = locale || config.site.defaultLocale;
+  const docs = await fetchData<any[]>(tourQueries.featured, undefined);
+  return (docs || []).map((doc) => ({
+    slug: doc?.slug?.current || doc?.slug || '',
+    title: doc?.title,
+    summary: doc?.summary,
+    heroImage: mapImage(doc?.heroImage),
+    durationDays: doc?.durationDays,
+    priceFrom: doc?.priceFrom,
+    currency: doc?.currency,
+    rating: doc?.rating,
+  }));
+}
+
 // -------- Blog --------
 export async function getBlogPosts(locale?: string): Promise<Array<{
   slug: string;
