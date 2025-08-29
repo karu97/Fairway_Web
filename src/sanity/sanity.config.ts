@@ -1,15 +1,22 @@
-import { defineConfig } from 'sanity';
-import { deskTool } from 'sanity/desk';
-import { visionTool } from '@sanity/vision';
-import { codeInput } from '@sanity/code-input';
+// @ts-nocheck
+// Importing as any to avoid type dependency on Sanity types in app build
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { defineConfig } = require('sanity');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { deskTool } = require('sanity/desk');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { visionTool } = require('@sanity/vision');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { codeInput } = require('@sanity/code-input');
 import { schemaTypes } from './schemas';
+import resolveProductionUrl from './resolve/productionUrl';
 import { deskStructure } from './deskStructure';
 
 export default defineConfig({
   name: 'default',
   title: 'Fairway Hotels CMS',
   projectId: 'tyzm5r8j',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  dataset: (globalThis as any).process?.env?.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
     deskTool({
       structure: deskStructure,
@@ -21,11 +28,8 @@ export default defineConfig({
     types: schemaTypes,
   },
   document: {
-    // Prevent publishing without required fields
-    productionUrl: {
-      draftMode: {
-        enable: '/api/draft',
-      },
+    productionUrl: async (prev: string | undefined, context: any) => {
+      return resolveProductionUrl(prev, context);
     },
   },
   cors: {
