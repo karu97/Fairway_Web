@@ -314,48 +314,68 @@ export interface TravelAgencySchema {
 
 // Schema builders
 export function generateHotelSchema(data: HotelSchema) {
-  return {
+  const schema: any = {
     '@context': 'https://schema.org',
     '@type': 'Hotel',
     name: data.name,
-    description: data.description,
-    url: data.url,
-    image: data.image,
-    address: {
+    ...(data.description && { description: data.description }),
+    ...(data.url && { url: data.url }),
+    ...(data.image && { image: data.image }),
+  };
+
+  if (data.address) {
+    schema.address = {
       '@type': 'PostalAddress',
       streetAddress: data.address.streetAddress,
       addressLocality: data.address.addressLocality,
       addressRegion: data.address.addressRegion,
       postalCode: data.address.postalCode,
       addressCountry: data.address.addressCountry,
-    },
-    geo: {
+    };
+  }
+
+  if (data.geo && typeof data.geo.latitude === 'number' && typeof data.geo.longitude === 'number') {
+    schema.geo = {
       '@type': 'GeoCoordinates',
       latitude: data.geo.latitude,
       longitude: data.geo.longitude,
-    },
-    priceRange: data.priceRange,
-    aggregateRating: {
+    };
+  }
+
+  if (data.priceRange) schema.priceRange = data.priceRange;
+
+  if (typeof data.rating === 'number') {
+    schema.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: data.rating,
-      reviewCount: data.reviewCount,
+      reviewCount: data.reviewCount ?? 0,
       bestRating: 5,
       worstRating: 1,
-    },
-    amenityFeature: data.amenities.map(amenity => ({
+    };
+  }
+
+  if (Array.isArray(data.amenities) && data.amenities.length > 0) {
+    schema.amenityFeature = data.amenities.map(amenity => ({
       '@type': 'LocationFeatureSpecification',
       name: amenity,
-    })),
-    numberOfRooms: data.roomTypes.length,
-    checkinTime: data.checkInTime,
-    checkoutTime: data.checkOutTime,
-    telephone: data.phone,
-    email: data.email,
-    website: data.website,
-    acceptsReservations: true,
-    hasMap: true,
-    openingHours: '24/7',
-  };
+    }));
+  }
+
+  if (Array.isArray(data.roomTypes)) {
+    schema.numberOfRooms = data.roomTypes.length;
+  }
+
+  if (data.checkInTime) schema.checkinTime = data.checkInTime;
+  if (data.checkOutTime) schema.checkoutTime = data.checkOutTime;
+  if (data.phone) schema.telephone = data.phone;
+  if (data.email) schema.email = data.email;
+  if (data.website) schema.website = data.website;
+
+  schema.acceptsReservations = true;
+  schema.hasMap = Boolean(schema.geo);
+  schema.openingHours = '24/7';
+
+  return schema;
 }
 
 export function generateTourSchema(data: TourSchema) {
