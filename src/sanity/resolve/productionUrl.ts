@@ -25,7 +25,8 @@ export default async function resolveProductionUrl(
   const slug = (document as any)?.slug?.current || (document as any)?.slug;
 
   // Prefer existing url from prev if provided, else build one
-  const url = prev || buildFrontendUrl(schemaType.name || (document as any)?._type, slug);
+  const typeName = (schemaType as any)?.name || (document as any)?._type;
+  const url = prev || buildFrontendUrl(typeName, slug);
 
   return url;
 }
