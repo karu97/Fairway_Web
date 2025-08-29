@@ -13,9 +13,11 @@ export const sanityClient = createClient({
 
 // Check if Sanity is properly configured
 export const isSanityConfigured = () => {
-  return config.sanity.projectId && 
-         config.sanity.projectId !== 'dummy' && 
-         config.sanity.token;
+  // Allow reading without a token when the dataset is public
+  return Boolean(
+    config.sanity.projectId &&
+    config.sanity.projectId !== 'dummy'
+  );
 };
 
 // Create write client for mutations
