@@ -379,43 +379,63 @@ export function generateHotelSchema(data: HotelSchema) {
 }
 
 export function generateTourSchema(data: TourSchema) {
-  return {
+  const schema: any = {
     '@context': 'https://schema.org',
     '@type': 'TouristTrip',
     name: data.name,
-    description: data.description,
-    url: data.url,
-    image: data.image,
-    offers: {
+  };
+
+  if (data.description) schema.description = data.description;
+  if (data.url) schema.url = data.url;
+  if (data.image) schema.image = data.image;
+
+  if (typeof data.price === 'number' && data.currency && data.url) {
+    schema.offers = {
       '@type': 'Offer',
       price: data.price,
       priceCurrency: data.currency,
       availability: 'https://schema.org/InStock',
       validFrom: new Date().toISOString(),
       url: data.url,
-    },
-    duration: `PT${data.durationDays * 24}H`, // ISO 8601 duration
-    tourBookingMode: 'https://schema.org/OnSite',
-    departurePoint: {
+    };
+  }
+
+  if (typeof data.durationDays === 'number') {
+    schema.duration = `PT${data.durationDays * 24}H`;
+  }
+
+  schema.tourBookingMode = 'https://schema.org/OnSite';
+
+  if (data.departurePoint) {
+    schema.departurePoint = {
       '@type': 'Place',
       name: data.departurePoint,
-    },
-    departureTime: data.departureTime,
-    maximumAttendeeCapacity: data.maxGroupSize,
-    suggestedAge: {
+    };
+  }
+
+  if (data.departureTime) schema.departureTime = data.departureTime;
+  if (typeof data.maxGroupSize === 'number') schema.maximumAttendeeCapacity = data.maxGroupSize;
+  if (typeof data.minAge === 'number') {
+    schema.suggestedAge = {
       '@type': 'QuantitativeValue',
       minValue: data.minAge,
-    },
-    difficulty: data.difficulty,
-    category: data.category,
-    location: data.locations.map(location => ({
+    };
+  }
+  if (data.difficulty) schema.difficulty = data.difficulty;
+  if (data.category) schema.category = data.category;
+
+  if (Array.isArray(data.locations) && data.locations.length > 0) {
+    schema.location = data.locations.map(location => ({
       '@type': 'Place',
       name: location,
-    })),
-    highlights: data.highlights,
-    included: data.included,
-    excluded: data.excluded,
-  };
+    }));
+  }
+
+  if (Array.isArray(data.highlights)) schema.highlights = data.highlights;
+  if (Array.isArray(data.included)) schema.included = data.included;
+  if (Array.isArray(data.excluded)) schema.excluded = data.excluded;
+
+  return schema;
 }
 
 export function generateBlogPostSchema(data: BlogPostSchema) {
