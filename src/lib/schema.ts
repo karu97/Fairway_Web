@@ -439,35 +439,51 @@ export function generateTourSchema(data: TourSchema) {
 }
 
 export function generateBlogPostSchema(data: BlogPostSchema) {
-  return {
+  const schema: any = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: data.headline,
-    description: data.description,
-    url: data.url,
-    image: data.image,
-    author: {
+  };
+
+  if (data.description) schema.description = data.description;
+  if (data.url) schema.url = data.url;
+  if (data.image) schema.image = data.image;
+
+  if (data.author && data.author.name) {
+    schema.author = {
       '@type': 'Person',
       name: data.author.name,
-      url: data.author.url,
-    },
-    publisher: {
+      ...(data.author.url ? { url: data.author.url } : {}),
+    };
+  }
+
+  if (data.publisher && data.publisher.name) {
+    schema.publisher = {
       '@type': 'Organization',
       name: data.publisher.name,
-      logo: {
-        '@type': 'ImageObject',
-        url: data.publisher.logo,
-      },
-    },
-    datePublished: data.datePublished,
-    dateModified: data.dateModified,
-    mainEntityOfPage: {
+      ...(data.publisher.logo
+        ? {
+            logo: {
+              '@type': 'ImageObject',
+              url: data.publisher.logo,
+            },
+          }
+        : {}),
+    };
+  }
+
+  if (data.datePublished) schema.datePublished = data.datePublished;
+  if (data.dateModified) schema.dateModified = data.dateModified;
+  if (data.mainEntityOfPage) {
+    schema.mainEntityOfPage = {
       '@type': 'WebPage',
       '@id': data.mainEntityOfPage,
-    },
-    articleSection: data.articleSection,
-    keywords: data.keywords.join(', '),
-  };
+    };
+  }
+  if (data.articleSection) schema.articleSection = data.articleSection;
+  if (Array.isArray(data.keywords)) schema.keywords = data.keywords.join(', ');
+
+  return schema;
 }
 
 export function generateOrganizationSchema(data: OrganizationSchema) {
