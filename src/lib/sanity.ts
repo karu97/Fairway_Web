@@ -99,7 +99,18 @@ export const hotelQueries = {
     address,
     contact,
     policies,
-    rooms,
+    rooms[]{
+      name,
+      description,
+      sleeps,
+      priceFrom,
+      currency,
+      images[]{
+        url,
+        alt
+      },
+      amenities
+    },
     nearby[]->{
       _id,
       name,
@@ -205,7 +216,12 @@ export const tourQueries = {
     itinerary,
     inclusions,
     exclusions,
-    availableDates,
+    availableDates[]{
+      startDate,
+      endDate,
+      price,
+      available
+    },
     locations[]->{
       _id,
       name,

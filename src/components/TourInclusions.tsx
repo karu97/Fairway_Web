@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { CheckCircle, XCircle, Info } from 'lucide-react';
 
 interface TourInclusionsProps {
@@ -11,31 +12,8 @@ interface TourInclusionsProps {
 }
 
 export function TourInclusions({ tour }: TourInclusionsProps) {
-  // Default inclusions and exclusions if none provided
-  const inclusions = tour.inclusions || [
-    'All accommodation in luxury hotels and resorts',
-    'Daily breakfast, lunch, and dinner',
-    'Professional English-speaking tour guide',
-    'All transportation in air-conditioned vehicles',
-    'Entrance fees to all attractions and sites',
-    'Airport transfers on arrival and departure',
-    'Bottled water throughout the tour',
-    'Traditional welcome and farewell ceremonies',
-    '24/7 support during your tour',
-    'Travel insurance coverage',
-  ];
-
-  const exclusions = tour.exclusions || [
-    'International and domestic flights',
-    'Personal expenses and souvenirs',
-    'Optional activities and excursions',
-    'Alcoholic beverages (unless specified)',
-    'Tips for guides and drivers',
-    'Visa fees and travel documents',
-    'Medical expenses and vaccinations',
-    'Personal travel insurance',
-    'Any items not mentioned in the itinerary',
-  ];
+  const hasInclusions = tour.inclusions && tour.inclusions.length > 0;
+  const hasExclusions = tour.exclusions && tour.exclusions.length > 0;
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -51,14 +29,21 @@ export function TourInclusions({ tour }: TourInclusionsProps) {
             <h3 className="text-xl font-semibold text-gray-900">Included in Your Tour</h3>
           </div>
           
-          <div className="space-y-3">
-            {inclusions.map((inclusion, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">{inclusion}</span>
-              </div>
-            ))}
-          </div>
+          {hasInclusions ? (
+            <div className="space-y-3">
+              {tour.inclusions.map((inclusion, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">{inclusion}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-gray-50 p-6 rounded-xl text-center">
+              <CheckCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-600">Tour inclusions will be available soon</p>
+            </div>
+          )}
         </div>
 
         {/* Exclusions */}
@@ -68,14 +53,21 @@ export function TourInclusions({ tour }: TourInclusionsProps) {
             <h3 className="text-xl font-semibold text-gray-900">Not Included</h3>
           </div>
           
-          <div className="space-y-3">
-            {exclusions.map((exclusion, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <XCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">{exclusion}</span>
-              </div>
-            ))}
-          </div>
+          {hasExclusions ? (
+            <div className="space-y-3">
+              {tour.exclusions.map((exclusion, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <XCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">{exclusion}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-gray-50 p-6 rounded-xl text-center">
+              <XCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-600">Tour exclusions will be available soon</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -103,37 +95,37 @@ export function TourInclusions({ tour }: TourInclusionsProps) {
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Airport VIP Service</h4>
             <p className="text-sm text-gray-600 mb-2">Fast-track immigration and luggage handling</p>
-            <span className="text-blue-600 font-semibold">$50 per person</span>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
           
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Photography Package</h4>
             <p className="text-sm text-gray-600 mb-2">Professional photographer throughout your tour</p>
-            <span className="text-blue-600 font-semibold">$200 per group</span>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
           
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Spa & Wellness</h4>
             <p className="text-sm text-gray-600 mb-2">Relaxing spa treatments at luxury hotels</p>
-            <span className="text-blue-600 font-semibold">From $80</span>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
           
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Cooking Classes</h4>
-            <p className="text-sm text-gray-600 mb-2">Learn to cook traditional Sri Lankan dishes</p>
-            <span className="text-blue-600 font-semibold">$60 per person</span>
+            <p className="text-sm text-gray-600 mb-2">Learn to cook traditional local dishes</p>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
           
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Adventure Activities</h4>
             <p className="text-sm text-gray-600 mb-2">White water rafting, hiking, and more</p>
-            <span className="text-blue-600 font-semibold">From $40</span>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
           
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Private Guide</h4>
             <p className="text-sm text-gray-600 mb-2">Dedicated guide for your group only</p>
-            <span className="text-blue-600 font-semibold">$100 per day</span>
+            <span className="text-blue-600 font-semibold">Contact us for pricing</span>
           </div>
         </div>
       </div>

@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
   }
 
   return {
-    title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
-    description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
+    title: `${hotel.title} - Luxury Hotel in ${hotel.address.city}`,
+    description: hotel.summary || `Experience luxury at ${hotel.title} in ${hotel.address.city}, Sri Lanka.`,
     openGraph: {
-      title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
-      description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
+      title: `${hotel.title} - Luxury Hotel in ${hotel.address.city}`,
+      description: hotel.summary || `Experience luxury at ${hotel.title} in ${hotel.address.city}, Sri Lanka.`,
       images: hotel.images?.map(img => img.url) || [],
     },
   };
@@ -50,8 +50,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
 
   const schemas = generateSchemasFromOptions({
     hotel: {
-      name: hotel.name,
-      description: hotel.description || '',
+      name: hotel.title,
+      description: hotel.summary || '',
       url: `${config.site.url}/hotels/${hotel.slug}`,
       images: hotel.images?.map(img => img.url) || [],
       telephone: hotel.contact?.phone,
@@ -73,7 +73,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
       items: [
         { name: 'Home', url: '/' },
         { name: 'Hotels', url: '/' },
-        { name: hotel.name, url: `/hotels/${hotel.slug}` }
+        { name: hotel.title, url: `/hotels/${hotel.slug}` }
       ]
     }
   });
@@ -107,7 +107,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
               <BookingForm 
                 type="HOTEL"
                 hotelSlug={hotel.slug}
-                hotelName={hotel.name}
+                hotelName={hotel.title}
               />
             </div>
           </div>
