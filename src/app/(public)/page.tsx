@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getFeaturedHotels, getFeaturedTours } from '@/lib/sanity';
+import { getFeaturedHotels, getFeaturedTours, getSiteSettings } from '@/lib/sanity';
 import { 
   ArrowRight, 
   Star, 
