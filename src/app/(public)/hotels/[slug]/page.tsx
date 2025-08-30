@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { getHotel, getHotels } from '@/lib/sanity';
 import { HotelHero } from '@/components/HotelHero';
 import { HotelDetails } from '@/components/HotelDetails';
@@ -98,7 +99,21 @@ export default async function HotelPage({ params }: HotelPageProps) {
             <HotelMap hotel={hotel} />
 
             {/* Related Hotels */}
-            <RelatedHotels currentSlug={hotel.slug} />
+            <Suspense fallback={
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-6">
+                  Other Hotels You Might Like
+                </h2>
+                <div className="text-center py-8">
+                  <div className="animate-pulse">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                  </div>
+                </div>
+              </div>
+            }>
+              <RelatedHotels currentSlug={hotel.slug} />
+            </Suspense>
           </div>
 
           {/* Right Column - Booking Form */}

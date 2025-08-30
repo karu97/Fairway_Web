@@ -45,7 +45,23 @@ All single pages (Hotel, Tour, Blog) have been updated to remove hardcoded dummy
   - Exclusions section shows "Tour exclusions will be available soon" if none
   - Optional add-ons show "Contact us for pricing" instead of hardcoded prices
 
-### 6. Sanity Queries Updated (`src/lib/sanity.ts`)
+### 6. RelatedHotels Component (`src/components/RelatedHotels.tsx`)
+- **Converted to server component**: Now fetches real data from Sanity
+- **Removed dummy data**: Eliminated hardcoded hotel examples
+- **Added conditional rendering**: Shows fallback message when no related hotels available
+- **Graceful fallbacks**: Professional messaging when no data is available
+
+### 7. RelatedTours Component (`src/components/RelatedTours.tsx`)
+- **Converted to server component**: Now fetches real data from Sanity
+- **Removed dummy data**: Eliminated hardcoded tour examples
+- **Added conditional rendering**: Shows fallback message when no related tours available
+- **Graceful fallbacks**: Professional messaging when no data is available
+
+### 8. Single Pages Updated
+- **Added Suspense boundaries**: Proper loading states for async related components
+- **Enhanced user experience**: Smooth loading transitions
+
+### 9. Sanity Queries Updated (`src/lib/sanity.ts`)
 - **Hotel query**: Added detailed room information including images and amenities
 - **Tour query**: Added detailed available dates with pricing information
 - **Enhanced data fetching**: All components now receive complete data from Sanity
@@ -80,6 +96,8 @@ All single pages (Hotel, Tour, Blog) have been updated to remove hardcoded dummy
 5. **Tour Locations**: Shows "Tour destinations will be available soon"
 6. **Tour Dates**: Shows "Tour dates will be available soon. Contact us for custom arrangements."
 7. **Inclusions/Exclusions**: Shows appropriate "will be available soon" messages
+8. **Related Hotels**: Shows "No Related Hotels Available" with browse all hotels CTA
+9. **Related Tours**: Shows "No Related Tours Available" with browse all tours CTA
 
 ### User Experience:
 - No broken pages or missing content

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { getTour, getTours } from '@/lib/sanity';
 import { TourHero } from '@/components/TourHero';
 import { TourDetails } from '@/components/TourDetails';
@@ -93,7 +94,21 @@ export default async function TourPage({ params }: TourPageProps) {
             <TourMap tour={tour} />
 
             {/* Related Tours */}
-            <RelatedTours currentSlug={tour.slug} />
+            <Suspense fallback={
+              <div className="bg-white rounded-2xl shadow-lg p-6">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                  Other Tours You Might Like
+                </h3>
+                <div className="text-center py-6">
+                  <div className="animate-pulse">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                  </div>
+                </div>
+              </div>
+            }>
+              <RelatedTours currentSlug={tour.slug} />
+            </Suspense>
           </div>
 
           {/* Right Column - Booking Form */}

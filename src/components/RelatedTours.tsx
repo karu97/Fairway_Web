@@ -1,51 +1,18 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { getTours } from '@/lib/sanity';
 
 interface RelatedToursProps {
   currentSlug: string;
 }
 
-export function RelatedTours({ currentSlug }: RelatedToursProps) {
-  // This would typically fetch related tours from the API
-  // For now, we'll show placeholder content
-  const relatedTours = [
-    {
-      slug: 'cultural-heritage-tour',
-      title: 'Cultural Heritage Tour',
-      summary: 'Discover ancient temples, traditional villages, and cultural traditions...',
-      heroImage: { url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-      rating: 4.8,
-      durationDays: 5,
-      priceFrom: 450,
-      currency: 'USD',
-      locations: [{ name: 'Kandy' }, { name: 'Sigiriya' }],
-    },
-    {
-      slug: 'beach-paradise-tour',
-      title: 'Beach Paradise Tour',
-      summary: 'Relax on pristine beaches and explore coastal towns...',
-      heroImage: { url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop' },
-      rating: 4.7,
-      durationDays: 4,
-      priceFrom: 380,
-      currency: 'USD',
-      locations: [{ name: 'Galle' }, { name: 'Mirissa' }],
-    },
-    {
-      slug: 'tea-country-adventure',
-      title: 'Tea Country Adventure',
-      summary: 'Hike through misty mountains and learn about Ceylon tea...',
-      heroImage: { url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop' },
-      rating: 4.9,
-      durationDays: 3,
-      priceFrom: 320,
-      currency: 'USD',
-      locations: [{ name: 'Nuwara Eliya' }],
-    },
-  ];
+export async function RelatedTours({ currentSlug }: RelatedToursProps) {
+  // Fetch all tours and filter out the current one
+  const allTours = await getTours();
+  const relatedTours = allTours
+    .filter(tour => tour.slug !== currentSlug)
+    .slice(0, 3); // Show max 3 related tours
 
   const formatPrice = (price: number, currency: string = 'USD') => {
     return new Intl.NumberFormat('en-US', {
@@ -66,71 +33,108 @@ export function RelatedTours({ currentSlug }: RelatedToursProps) {
         Other Tours You Might Like
       </h3>
       
-      <div className="space-y-6">
-        {relatedTours.map((tour) => (
-          <article key={tour.slug} className="group">
-            <Link href={`/tours/${tour.slug}`} className="block">
-              <div className="flex gap-4">
-                {/* Image */}
-                <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden">
-                  <Image
-                    src={tour.heroImage.url}
-                    alt={tour.title}
-                    width={96}
-                    height={96}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                  />
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-2 group-hover:text-green-600 transition-colors duration-200 line-clamp-2">
-                    {tour.title}
-                  </h4>
-                  
-                  <p className="text-gray-500 text-xs line-clamp-2 mb-2">
-                    {tour.summary}
-                  </p>
-                  
-                  <div className="flex items-center space-x-4 text-gray-400 text-xs mb-2">
-                    <div className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1" />
-                      <span>{formatDuration(tour.durationDays)}</span>
+      {relatedTours.length > 0 ? (
+        <>
+          <div className="space-y-6">
+            {relatedTours.map((tour) => (
+              <article key={tour.slug} className="group">
+                <Link href={`/tours/${tour.slug}`} className="block">
+                  <div className="flex gap-4">
+                    {/* Image */}
+                    <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden">
+                      {tour.heroImage ? (
+                        <Image
+                          src={tour.heroImage.url}
+                          alt={tour.title}
+                          width={96}
+                          height={96}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                          <span className="text-white text-xs">Tour Image</span>
+                        </div>
+                      )}
                     </div>
                     
-                    {tour.locations && tour.locations.length > 0 && (
-                      <div className="flex items-center">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        <span>{tour.locations.map(loc => loc.name).join(', ')}</span>
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-2 group-hover:text-green-600 transition-colors duration-200 line-clamp-2">
+                        {tour.title}
+                      </h4>
+                      
+                      {tour.summary && (
+                        <p className="text-gray-500 text-xs line-clamp-2 mb-2">
+                          {tour.summary}
+                        </p>
+                      )}
+                      
+                      <div className="flex items-center space-x-4 text-gray-400 text-xs mb-2">
+                        {tour.durationDays && (
+                          <div className="flex items-center">
+                            <Clock className="w-3 h-3 mr-1" />
+                            <span>{formatDuration(tour.durationDays)}</span>
+                          </div>
+                        )}
+                        
+                        {tour.locations && tour.locations.length > 0 && (
+                          <div className="flex items-center">
+                            <MapPin className="w-3 h-3 mr-1" />
+                            <span>{tour.locations.map(loc => loc.name).join(', ')}</span>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-green-600 font-semibold text-sm">
-                      From {formatPrice(tour.priceFrom, tour.currency)}
-                    </span>
-                    
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <ArrowRight className="w-4 h-4 text-green-600" />
+                      
+                      <div className="flex items-center justify-between">
+                        {tour.priceFrom ? (
+                          <span className="text-green-600 font-semibold text-sm">
+                            From {formatPrice(tour.priceFrom, tour.currency || 'USD')}
+                          </span>
+                        ) : (
+                          <span className="text-gray-500 text-xs">Contact for pricing</span>
+                        )}
+                        
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                          <ArrowRight className="w-4 h-4 text-green-600" />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+          
+          {/* View All Tours */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <Link
+              href="/tours"
+              className="block text-center text-green-600 hover:text-green-800 font-medium text-sm transition-colors duration-200"
+            >
+              View All Tours →
             </Link>
-          </article>
-        ))}
-      </div>
-      
-      {/* View All Tours */}
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <Link
-          href="/tours"
-          className="block text-center text-green-600 hover:text-green-800 font-medium text-sm transition-colors duration-200"
-        >
-          View All Tours →
-        </Link>
-      </div>
+          </div>
+        </>
+      ) : (
+        <div className="text-center py-8">
+          <div className="bg-gray-50 rounded-xl p-6">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <MapPin className="w-6 h-6 text-green-600" />
+            </div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">No Related Tours Available</h4>
+            <p className="text-gray-600 text-sm mb-4">
+              We're currently updating our tour offerings. Please check back soon for more adventures!
+            </p>
+            <Link
+              href="/tours"
+              className="inline-flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+            >
+              <span>Browse All Tours</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
