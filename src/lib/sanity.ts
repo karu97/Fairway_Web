@@ -427,8 +427,40 @@ export const settingsQueries = {
     supportedLocales,
     defaultSEO,
     logo,
+    siteIcon,
+    brandColors,
     contact,
     social
+  }`,
+};
+
+export const contentQueries = {
+  // Get content by page type and locale
+  byPageType: (pageType: string, locale: string) => `*[_type == "content" && pageType == $pageType && locale == $locale && isActive == true][0] {
+    _id,
+    pageType,
+    locale,
+    hero,
+    sections,
+    seo
+  }`,
+  
+  // Get all content for a locale
+  byLocale: (locale: string) => `*[_type == "content" && locale == $locale && isActive == true] {
+    _id,
+    pageType,
+    locale,
+    hero,
+    sections,
+    seo
+  }`,
+  
+  // Get footer content
+  footer: (locale: string) => `*[_type == "content" && pageType == "footer" && locale == $locale && isActive == true][0] {
+    _id,
+    pageType,
+    locale,
+    sections
   }`,
 };
 
@@ -808,5 +840,118 @@ export async function getBlogPost(slug: string, locale?: string): Promise<{
       ? doc.relatedTours.map((t: any) => ({ title: t?.title, slug: t?.slug, heroImage: mapImage(t?.heroImage) }))
       : undefined,
     seo: doc?.seo,
+  };
+}
+
+// -------- Content --------
+export async function getPageContent(pageType: string, locale?: string): Promise<{
+  hero?: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    backgroundImage?: { url: string; alt?: string };
+    ctaPrimary?: string;
+    ctaPrimaryLink?: string;
+    ctaSecondary?: string;
+    ctaSecondaryLink?: string;
+  };
+  sections?: any[];
+  seo?: any;
+} | null> {
+  if (!isSanityConfigured()) {
+    console.warn('Sanity is not properly configured. Please configure your Sanity project ID and API token in .env.local');
+    return null;
+  }
+
+  const useLocale = locale || config.site.defaultLocale;
+  const doc = await fetchData<any>(contentQueries.byPageType(pageType, useLocale), { pageType, locale: useLocale });
+  
+  if (!doc) {
+    console.warn(`No content found for page type: ${pageType} and locale: ${useLocale}`);
+    return null;
+  }
+
+  return {
+    hero: doc?.hero ? {
+      title: doc.hero.title,
+      subtitle: doc.hero.subtitle,
+      description: doc.hero.description,
+      backgroundImage: mapImage(doc.hero.backgroundImage),
+      ctaPrimary: doc.hero.ctaPrimary,
+      ctaPrimaryLink: doc.hero.ctaPrimaryLink,
+      ctaSecondary: doc.hero.ctaSecondary,
+      ctaSecondaryLink: doc.hero.ctaSecondaryLink,
+    } : undefined,
+    sections: doc?.sections || [],
+    seo: doc?.seo,
+  };
+}
+
+export async function getFooterContent(locale?: string): Promise<{
+  sections?: any[];
+} | null> {
+  if (!isSanityConfigured()) {
+    return null;
+  }
+
+  const useLocale = locale || config.site.defaultLocale;
+  const doc = await fetchData<any>(contentQueries.footer(useLocale), { locale: useLocale });
+  
+  if (!doc) {
+    console.warn(`No footer content found for locale: ${useLocale}`);
+    return null;
+  }
+
+  return {
+    sections: doc?.sections || [],
+  };
+}
+
+export async function getSiteSettings(): Promise<{
+  siteName?: string;
+  defaultLocale?: string;
+  supportedLocales?: string[];
+  defaultSEO?: any;
+  logo?: { url: string; alt?: string };
+  siteIcon?: { url: string; alt?: string };
+  brandColors?: {
+    primary?: string;
+    secondary?: string;
+    accent?: string;
+    text?: string;
+    background?: string;
+  };
+  contact?: {
+    phone?: string;
+    email?: string;
+    address?: string;
+  };
+  social?: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+  };
+} | null> {
+  if (!isSanityConfigured()) {
+    return null;
+  }
+
+  const doc = await fetchData<any>(settingsQueries.site);
+  
+  if (!doc) {
+    console.warn('No site settings found');
+    return null;
+  }
+
+  return {
+    siteName: doc?.siteName,
+    defaultLocale: doc?.defaultLocale,
+    supportedLocales: doc?.supportedLocales,
+    defaultSEO: doc?.defaultSEO,
+    logo: mapImage(doc?.logo),
+    siteIcon: mapImage(doc?.siteIcon),
+    brandColors: doc?.brandColors,
+    contact: doc?.contact,
+    social: doc?.social,
   };
 }

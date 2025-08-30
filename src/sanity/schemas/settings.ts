@@ -68,6 +68,34 @@ export const settings = defineType({
       ],
     }),
     defineField({
+      name: 'siteIcon',
+      title: 'Site Icon (Favicon)',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    }),
+    defineField({
+      name: 'brandColors',
+      title: 'Brand Colors',
+      type: 'object',
+      fields: [
+        { name: 'primary', type: 'string', title: 'Primary Color (hex)', initialValue: '#2563eb' },
+        { name: 'secondary', type: 'string', title: 'Secondary Color (hex)', initialValue: '#1e40af' },
+        { name: 'accent', type: 'string', title: 'Accent Color (hex)', initialValue: '#3b82f6' },
+        { name: 'text', type: 'string', title: 'Text Color (hex)', initialValue: '#1f2937' },
+        { name: 'background', type: 'string', title: 'Background Color (hex)', initialValue: '#ffffff' },
+      ],
+    }),
+    defineField({
       name: 'contact',
       title: 'Contact Information',
       type: 'object',

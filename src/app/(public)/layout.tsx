@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Analytics, GoogleAnalytics, VercelAnalytics } from '@/components/Analytics';
+import { getSiteSettings } from '@/lib/sanity';
 // Root fonts and global CSS are loaded in `src/app/layout.tsx`
 
 export const metadata: Metadata = {
@@ -126,11 +127,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PublicLayout({
+export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const siteSettings = await getSiteSettings();
+  
   return (
     <>
         {/* Google Analytics */}
@@ -159,7 +162,7 @@ export default function PublicLayout({
         </main>
         
         {/* Footer */}
-        <Footer />
+        <Footer siteSettings={siteSettings} />
     </>
   );
 }

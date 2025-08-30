@@ -14,8 +14,27 @@ import {
   ArrowUp,
   Heart
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-export function Footer() {
+interface FooterProps {
+  siteSettings?: {
+    siteName?: string;
+    contact?: {
+      phone?: string;
+      email?: string;
+      address?: string;
+    };
+    social?: {
+      facebook?: string;
+      twitter?: string;
+      instagram?: string;
+      linkedin?: string;
+      youtube?: string;
+    };
+  };
+}
+
+export function Footer({ siteSettings }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
@@ -57,11 +76,11 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { name: 'Facebook', href: '#', icon: Facebook, color: 'hover:text-blue-600' },
-    { name: 'Twitter', href: '#', icon: Twitter, color: 'hover:text-blue-400' },
-    { name: 'Instagram', href: '#', icon: Instagram, color: 'hover:text-pink-600' },
-    { name: 'LinkedIn', href: '#', icon: Linkedin, color: 'hover:text-blue-700' },
-    { name: 'YouTube', href: '#', icon: Youtube, color: 'hover:text-red-600' },
+    { name: 'Facebook', href: siteSettings?.social?.facebook || '#', icon: Facebook, color: 'hover:text-blue-600' },
+    { name: 'Twitter', href: siteSettings?.social?.twitter || '#', icon: Twitter, color: 'hover:text-blue-400' },
+    { name: 'Instagram', href: siteSettings?.social?.instagram || '#', icon: Instagram, color: 'hover:text-pink-600' },
+    { name: 'LinkedIn', href: siteSettings?.social?.linkedin || '#', icon: Linkedin, color: 'hover:text-blue-700' },
+    { name: 'YouTube', href: siteSettings?.social?.youtube || '#', icon: Youtube, color: 'hover:text-red-600' },
   ];
 
   const scrollToTop = () => {
@@ -80,7 +99,7 @@ export function Footer() {
                 <span className="text-white font-bold text-xl">F</span>
               </div>
               <div>
-                <h3 className="text-2xl font-bold font-playfair">Fairway Hotels</h3>
+                <h3 className="text-2xl font-bold font-playfair">{siteSettings?.siteName || 'Fairway Hotels'}</h3>
                 <p className="text-gray-400 text-sm">Luxury & Excellence</p>
               </div>
             </div>
@@ -92,20 +111,26 @@ export function Footer() {
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">
-                  123 Galle Road, Colombo 00300, Sri Lanka
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">+94 11 234 5678</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">info@fairwayhotels.com</span>
-              </div>
+              {siteSettings?.contact?.address && (
+                <div className="flex items-center space-x-3">
+                  <MapPin className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                  <span className="text-gray-300 text-sm">
+                    {siteSettings.contact.address}
+                  </span>
+                </div>
+              )}
+              {siteSettings?.contact?.phone && (
+                <div className="flex items-center space-x-3">
+                  <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                  <span className="text-gray-300 text-sm">{siteSettings.contact.phone}</span>
+                </div>
+              )}
+              {siteSettings?.contact?.email && (
+                <div className="flex items-center space-x-3">
+                  <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                  <span className="text-gray-300 text-sm">{siteSettings.contact.email}</span>
+                </div>
+              )}
               <div className="flex items-center space-x-3">
                 <Globe className="w-5 h-5 text-blue-400 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">www.fairwayhotels.com</span>

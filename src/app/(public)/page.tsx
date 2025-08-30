@@ -51,6 +51,9 @@ export default async function HomePage() {
     getFeaturedHotels(),
     getFeaturedTours(),
   ]);
+
+  // Get site settings for dynamic content
+  const siteSettings = await getSiteSettings();
   return (
     <>
       {/* Hero Section */}
@@ -189,45 +192,66 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredHotels.map((hotel, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={hotel.heroImage?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop'}
-                    alt={hotel.name}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-                    {hotel.priceFrom ? `From $${hotel.priceFrom}` : ''}
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-semibold text-gray-900">{hotel.name}</h3>
-                    <div className="flex items-center space-x-1">
-                      {hotel.rating && <Star className="w-5 h-5 text-yellow-400 fill-current" />}
-                      {hotel.rating && <span className="text-sm font-medium text-gray-700">{hotel.rating}</span>}
+            {featuredHotels && featuredHotels.length > 0 ? (
+              featuredHotels.map((hotel, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={hotel.heroImage?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop'}
+                      alt={hotel.name}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                      {hotel.priceFrom ? `From $${hotel.priceFrom}` : ''}
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2 text-gray-600 mb-3">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{hotel.address?.city}{hotel.address?.region ? `, ${hotel.address.region}` : ''}</span>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-xl font-semibold text-gray-900">{hotel.name}</h3>
+                      <div className="flex items-center space-x-1">
+                        {hotel.rating && <Star className="w-5 h-5 text-yellow-400 fill-current" />}
+                        {hotel.rating && <span className="text-sm font-medium text-gray-700">{hotel.rating}</span>}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 text-gray-600 mb-3">
+                      <MapPin className="w-4 h-4" />
+                      <span className="text-sm">{hotel.address?.city}{hotel.address?.region ? `, ${hotel.address.region}` : ''}</span>
+                    </div>
+                    
+                    <p className="text-gray-600 mb-4">{hotel.description}</p>
+                    
+                    <Link
+                      href={`/hotels/${hotel.slug}`}
+                      className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
-                  
-                  <p className="text-gray-600 mb-4">{hotel.description}</p>
-                  
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <div className="bg-gray-50 rounded-2xl p-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Star className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No Featured Hotels Available</h3>
+                  <p className="text-gray-600 mb-4">
+                    We're currently updating our hotel offerings. Please check back soon for luxury accommodations!
+                  </p>
                   <Link
-                    href={`/hotels/${hotel.slug}`}
-                    className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
+                    href="/hotels"
+                    className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
                   >
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span>Browse All Hotels</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
-            ))}
+            )}
           </div>
 
           <div className="text-center mt-12">
@@ -255,38 +279,57 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredTours.map((tour, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={tour.heroImage?.url || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop'}
-                    alt={tour.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {tour.durationDays ? `${tour.durationDays} Days` : ''}
+            {featuredTours && featuredTours.length > 0 ? (
+              featuredTours.map((tour, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={tour.heroImage?.url || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop'}
+                      alt={tour.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {tour.durationDays ? `${tour.durationDays} Days` : ''}
+                    </div>
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                      {tour.priceFrom ? `From $${tour.priceFrom}` : ''}
+                    </div>
                   </div>
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-                    {tour.priceFrom ? `From $${tour.priceFrom}` : ''}
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.title}</h3>
+                    <p className="text-gray-600 mb-4">{tour.summary}</p>
+                    
+                    <Link
+                      href={`/tours/${tour.slug}`}
+                      className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
                 </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.title}</h3>
-                  <p className="text-gray-600 mb-4">{tour.summary}</p>
-                  
-                  {/* optional highlights removed for CMS data */}
-                  
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <div className="bg-gray-50 rounded-2xl p-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MapPin className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No Featured Tours Available</h3>
+                  <p className="text-gray-600 mb-4">
+                    We're currently updating our tour offerings. Please check back soon for amazing Sri Lankan adventures!
+                  </p>
                   <Link
-                    href={`/tours/${tour.slug}`}
-                    className="inline-flex items-center space-x-2 text-blue-600 font-medium hover:text-blue-700 transition-colors group"
+                    href="/tours"
+                    className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
                   >
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span>Browse All Tours</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
-            ))}
+            )}
           </div>
 
           <div className="text-center mt-12">
