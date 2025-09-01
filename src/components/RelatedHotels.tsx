@@ -14,10 +14,11 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
     .filter(hotel => hotel.slug !== currentSlug)
     .slice(0, 3); // Show max 3 related hotels
 
-  const formatPrice = (price: number, currency: string = 'USD') => {
+  const formatPrice = (price: number, currency?: string | null) => {
+    const currencyCode = currency || 'USD';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency: currencyCode,
       minimumFractionDigits: 0,
     }).format(price);
   };
@@ -40,7 +41,7 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
                       {hotel.heroImage ? (
                         <Image
                           src={hotel.heroImage.url}
-                          alt={hotel.name}
+                          alt={hotel.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -63,7 +64,7 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
                     {/* Content */}
                     <div className="p-4">
                       <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-                        {hotel.name}
+                        {hotel.title}
                       </h3>
                       
                       {hotel.address && (
@@ -73,9 +74,9 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
                         </div>
                       )}
                       
-                      {hotel.description && (
+                      {hotel.summary && (
                         <p className="text-gray-600 text-sm line-clamp-2 mb-3">
-                          {hotel.description}
+                          {hotel.summary}
                         </p>
                       )}
                       

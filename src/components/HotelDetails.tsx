@@ -4,8 +4,8 @@ import { Star, MapPin, Phone, Mail, Globe, Clock, Users } from 'lucide-react';
 
 interface HotelDetailsProps {
   hotel: {
-    name: string;
-    description?: string;
+    title: string;
+    summary?: string;
     rating?: number;
     address: {
       street: string;
@@ -47,14 +47,14 @@ export function HotelDetails({ hotel }: HotelDetailsProps) {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8">
       <h2 className="text-3xl font-playfair font-bold text-gray-900 mb-6">
-        About {hotel.name}
+        About {hotel.title}
       </h2>
 
       {/* Description */}
-      {hotel.description && (
+      {hotel.summary && (
         <div className="mb-8">
           <p className="text-gray-600 text-lg leading-relaxed">
-            {hotel.description}
+            {hotel.summary}
           </p>
         </div>
       )}

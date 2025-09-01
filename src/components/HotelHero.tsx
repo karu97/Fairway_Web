@@ -5,7 +5,7 @@ import { Star, MapPin, Phone, Mail, Globe } from 'lucide-react';
 
 interface HotelHeroProps {
   hotel: {
-    name: string;
+    title: string;
     heroImage?: { url: string; alt?: string };
     rating?: number;
     address: {
@@ -29,7 +29,7 @@ export function HotelHero({ hotel }: HotelHeroProps) {
       {hotel.heroImage ? (
         <Image
           src={hotel.heroImage.url}
-          alt={hotel.heroImage.alt || hotel.name}
+          alt={hotel.heroImage.alt || hotel.title}
           fill
           className="object-cover"
           priority
@@ -49,7 +49,7 @@ export function HotelHero({ hotel }: HotelHeroProps) {
             {/* Hotel Name and Rating */}
             <div className="mb-6">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-white mb-4">
-                {hotel.name}
+                {hotel.title}
               </h1>
               {hotel.rating && (
                 <div className="flex items-center space-x-2">

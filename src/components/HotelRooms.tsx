@@ -6,7 +6,7 @@ import { Users, Bed, Wifi, Coffee, Car, Dumbbell } from 'lucide-react';
 
 interface HotelRoomsProps {
   hotel: {
-    name: string;
+    title: string;
     rooms?: Array<{
       name: string;
       description?: string;
@@ -22,10 +22,11 @@ interface HotelRoomsProps {
 export function HotelRooms({ hotel }: HotelRoomsProps) {
   const hasRooms = hotel.rooms && hotel.rooms.length > 0;
 
-  const formatPrice = (price: number, currency: string = 'USD') => {
+  const formatPrice = (price: number, currency?: string | null) => {
+    const currencyCode = currency || 'USD';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency: currencyCode,
       minimumFractionDigits: 0,
     }).format(price);
   };

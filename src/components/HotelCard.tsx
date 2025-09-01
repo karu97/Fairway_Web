@@ -7,8 +7,8 @@ import { Star, MapPin, Wifi, Waves, Utensils } from 'lucide-react';
 interface HotelCardProps {
   hotel: {
     slug: string;
-    name: string;
-    description?: string;
+    title: string;
+    summary?: string;
     heroImage?: { url: string; alt?: string };
     rating?: number;
     address: {
@@ -22,10 +22,11 @@ interface HotelCardProps {
 }
 
 export function HotelCard({ hotel }: HotelCardProps) {
-  const formatPrice = (price: number, currency: string = 'USD') => {
+  const formatPrice = (price: number, currency?: string | null) => {
+    const currencyCode = currency || 'USD';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency: currencyCode,
       minimumFractionDigits: 0,
     }).format(price);
   };
@@ -47,7 +48,7 @@ export function HotelCard({ hotel }: HotelCardProps) {
         {hotel.heroImage ? (
           <Image
             src={hotel.heroImage.url}
-            alt={hotel.heroImage.alt || hotel.name}
+            alt={hotel.heroImage.alt || hotel.title}
             fill
             className="object-cover hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -80,7 +81,7 @@ export function HotelCard({ hotel }: HotelCardProps) {
         <div className="mb-3">
           <Link href={`/hotels/${hotel.slug}`}>
             <h3 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-200 mb-2">
-              {hotel.name}
+              {hotel.title}
             </h3>
           </Link>
           <div className="flex items-center text-gray-600 text-sm">
@@ -90,9 +91,9 @@ export function HotelCard({ hotel }: HotelCardProps) {
         </div>
 
         {/* Description */}
-        {hotel.description && (
+        {hotel.summary && (
           <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-            {hotel.description}
+            {hotel.summary}
           </p>
         )}
 
