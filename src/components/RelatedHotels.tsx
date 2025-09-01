@@ -99,6 +99,8 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
               </article>
             ))}
           </div>
+
+          
           
           {/* View All Hotels */}
           <div className="mt-8 text-center">
