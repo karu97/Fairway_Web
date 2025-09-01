@@ -303,7 +303,7 @@ export default async function HomePage() {
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.title}</h3>
                     <p className="text-gray-600 mb-4">
-                      <PortableTextRenderer value={tour.summary} />
+                      {tour.summary}
                     </p>
                     
                     <Link

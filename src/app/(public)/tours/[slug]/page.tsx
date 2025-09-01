@@ -11,6 +11,7 @@ import { BookingForm } from '@/components/BookingForm';
 import { RelatedTours } from '@/components/RelatedTours';
 import { generateSchemasFromOptions } from '@/lib/schema';
 import { config } from '@/lib/config';
+import { extractTextFromPortableText } from '@/lib/portable-text-utils';
 
 interface TourPageProps {
   params: { slug: string };
@@ -49,6 +50,8 @@ export default async function TourPage({ params }: TourPageProps) {
   if (!tour) {
     notFound();
   }
+
+  const summaryText = extractTextFromPortableText(tour.summary);
 
   const schemas = generateSchemasFromOptions({
     tour: {

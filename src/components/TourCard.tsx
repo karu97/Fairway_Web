@@ -3,13 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Clock, Users, Star } from 'lucide-react';
-import { PortableTextRenderer } from './PortableTextRenderer';
 
 interface TourCardProps {
   tour: {
     slug: string;
     title: string;
-    summary?: any; // PortableText content
+    summary?: string;
     heroImage?: { url: string; alt?: string };
     durationDays?: number;
     priceFrom?: number;
@@ -94,9 +93,9 @@ export function TourCard({ tour }: TourCardProps) {
 
         {/* Summary */}
         {tour.summary && (
-          <div className="text-gray-600 text-sm mb-4 line-clamp-2">
-            <PortableTextRenderer value={tour.summary} />
-          </div>
+          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+            {tour.summary}
+          </p>
         )}
 
         {/* Tour Details */}

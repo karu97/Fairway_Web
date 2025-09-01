@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getCanonicalUrl, getHreflangTags, SupportedLocale } from './i18n';
+import { extractTextFromPortableText } from './portable-text-utils';
 
 export interface SEOConfig {
   title: string;
@@ -154,7 +155,7 @@ export function buildHotelMetadata(hotel: {
 
 export function buildTourMetadata(tour: {
   title: string;
-  description: string;
+  description: any; // PortableText content
   slug: string;
   images: string[];
   durationDays?: number;
@@ -163,18 +164,21 @@ export function buildTourMetadata(tour: {
 }): Metadata {
   const keywords = [
     'tour',
-    'package',
-    tour.title,
-    'Sri Lanka',
     'travel',
+    'Sri Lanka',
+    'package',
+    'vacation',
+    'holiday',
     'adventure',
     ...(tour.locations || []),
     ...(tour.tags || []),
   ];
 
+  const descriptionText = extractTextFromPortableText(tour.description);
+
   return buildMetadata({
     title: `${tour.title} - Tour Package in Sri Lanka`,
-    description: tour.description,
+    description: descriptionText,
     keywords,
     canonical: `/tours/${tour.slug}`,
     images: tour.images.map(url => ({

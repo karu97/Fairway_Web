@@ -6,7 +6,7 @@ import { PortableTextRenderer } from './PortableTextRenderer';
 interface TourDetailsProps {
   tour: {
     title: string;
-    summary?: any; // PortableText content
+    summary?: string;
     description?: any; // PortableText content
     rating?: number;
     durationDays?: number;
@@ -46,9 +46,9 @@ export function TourDetails({ tour }: TourDetailsProps) {
       {/* Summary */}
       {tour.summary && (
         <div className="mb-8">
-          <div className="text-gray-600 text-lg leading-relaxed">
-            <PortableTextRenderer value={tour.summary} />
-          </div>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            {tour.summary}
+          </p>
         </div>
       )}
 
