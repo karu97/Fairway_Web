@@ -16,7 +16,17 @@ interface HotelPageProps {
 }
 
 export async function generateMetadata({ params }: HotelPageProps): Promise<Metadata> {
-  const hotel = await getHotel(params.slug);
+  // Try to find the hotel in any locale for metadata
+  let hotel = null;
+  
+  for (const locale of config.site.supportedLocales) {
+    try {
+      hotel = await getHotel(params.slug, locale);
+      if (hotel) break;
+    } catch (error) {
+      console.warn(`Failed to fetch hotel ${params.slug} in locale ${locale} for metadata:`, error);
+    }
+  }
   
   if (!hotel) {
     return {
@@ -38,11 +48,45 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
 export async function generateStaticParams() {
   const params: { slug: string }[] = [];
   
+  // Import the Sanity client directly to avoid slug processing issues
+  const { sanityClient } = await import('@/lib/sanity');
+  
+  // First, let's check if there are any hotels at all
+  try {
+    const allHotels = await sanityClient.fetch(`
+      *[_type == "hotel"] {
+        _id,
+        title,
+        "slug": slug.current,
+        locale,
+        isActive
+      }
+    `);
+    
+    console.log(`Total hotels in dataset: ${allHotels.length}`);
+    console.log('Hotel details:', allHotels);
+    
+    if (allHotels.length === 0) {
+      console.warn('No hotels found in dataset at all!');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error checking total hotels:', error);
+  }
+  
   // Generate params for all supported locales
   for (const locale of config.site.supportedLocales) {
     try {
-      const hotels = await getHotels(locale);
-      const localeParams = hotels.map((hotel) => ({
+      // Query directly to get raw slug values
+      const hotels = await sanityClient.fetch(`
+        *[_type == "hotel" && locale == $locale && isActive == true] {
+          "slug": slug.current
+        }
+      `, { locale });
+      
+      console.log(`Found ${hotels.length} hotels for locale ${locale}:`, hotels.map(h => h.slug));
+      
+      const localeParams = hotels.map((hotel: any) => ({
         slug: hotel.slug,
       }));
       params.push(...localeParams);
@@ -56,7 +100,7 @@ export async function generateStaticParams() {
     index === self.findIndex(p => p.slug === param.slug)
   );
   
-  console.log(`Generated ${uniqueParams.length} unique hotel paths`);
+  console.log(`Generated ${uniqueParams.length} unique hotel paths:`, uniqueParams.map(p => p.slug));
   return uniqueParams;
 }
 
@@ -83,30 +127,30 @@ export default async function HotelPage({ params }: HotelPageProps) {
 
   const schemas = generateSchemasFromOptions({
     hotel: {
-      name: hotel.name,
-      description: hotel.description || '',
-      url: `${config.site.url}/hotels/${hotel.slug}`,
-      images: hotel.images?.map(img => img.url) || [],
-      telephone: hotel.contact?.phone,
+      name: hotel!.name,
+      description: hotel!.description || '',
+      url: `${config.site.url}/hotels/${hotel!.slug}`,
+      images: hotel!.images?.map(img => img.url) || [],
+      telephone: hotel!.contact?.phone,
       address: {
-        street: hotel.address.street,
-        city: hotel.address.city,
-        region: hotel.address.region,
-        country: hotel.address.country,
-        postalCode: hotel.address.postalCode,
+        street: hotel!.address.street,
+        city: hotel!.address.city,
+        region: hotel!.address.region,
+        country: hotel!.address.country,
+        postalCode: hotel!.address.postalCode,
       },
-      geo: hotel.address.lat && hotel.address.lng ? {
-        lat: hotel.address.lat,
-        lng: hotel.address.lng,
+      geo: hotel!.address.lat && hotel!.address.lng ? {
+        lat: hotel!.address.lat,
+        lng: hotel!.address.lng,
       } : undefined,
-      rating: hotel.rating,
+      rating: hotel!.rating,
     },
     includeOrganization: true,
     breadcrumbs: {
       items: [
         { name: 'Home', url: '/' },
         { name: 'Hotels', url: '/hotels' },
-        { name: hotel.name, url: `/hotels/${hotel.slug}` }
+        { name: hotel!.name, url: `/hotels/${hotel!.slug}` }
       ]
     }
   });
@@ -114,7 +158,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <HotelHero hotel={hotel} />
+      <HotelHero hotel={hotel!} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
@@ -122,13 +166,13 @@ export default async function HotelPage({ params }: HotelPageProps) {
           {/* Left Column - Hotel Details */}
           <div className="lg:col-span-2 space-y-8">
             {/* Hotel Details */}
-            <HotelDetails hotel={hotel} />
+            <HotelDetails hotel={hotel!} />
 
             {/* Rooms */}
-            <HotelRooms hotel={hotel} />
+            <HotelRooms hotel={hotel!} />
 
             {/* Map */}
-            <HotelMap hotel={hotel} />
+            <HotelMap hotel={hotel!} />
 
             {/* Related Hotels */}
             <Suspense fallback={
