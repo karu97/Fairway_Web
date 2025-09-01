@@ -11,6 +11,7 @@ const { codeInput } = require('@sanity/code-input');
 import { schemaTypes } from './schemas';
 import resolveProductionUrl from './resolve/productionUrl';
 import { deskStructure } from './deskStructure';
+import { revalidatePlugin } from './plugins/revalidatePlugin';
 
 export default defineConfig({
   name: 'default',
@@ -23,6 +24,7 @@ export default defineConfig({
     }),
     visionTool(),
     codeInput(),
+    revalidatePlugin(),
   ],
   schema: {
     types: schemaTypes,

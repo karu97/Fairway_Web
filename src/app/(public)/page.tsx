@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import { generatePageSchemas, generateWebsiteSchema, generateOrganizationSchema } from '@/lib/schema';
 
+// Add revalidation for ISR
+export const revalidate = 3600; // Revalidate every hour
+
 export const metadata: Metadata = {
   title: 'Fairway Hotels - Luxury Hotels & Tours in Sri Lanka',
   description: 'Experience luxury hospitality and unforgettable adventures across Sri Lanka. Discover our world-class hotels, curated tours, and authentic Sri Lankan experiences.',

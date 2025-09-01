@@ -491,6 +491,23 @@ export async function fetchData<T>(query: string, params?: Record<string, any>):
   }
 }
 
+// Helper function to fetch data with cache tags
+export async function fetchDataWithCache<T>(
+  query: string, 
+  params?: Record<string, any>, 
+  tags?: string[]
+): Promise<T> {
+  try {
+    const data = await sanityClient.fetch(query, params, {
+      next: { tags: tags || ['sanity'] }
+    });
+    return data;
+  } catch (error) {
+    console.error('Error fetching data from Sanity:', error);
+    throw error;
+  }
+}
+
 // Helper function to fetch multiple data sets
 export async function fetchMultipleData<T>(queries: Array<{ query: string; params?: Record<string, any> }>): Promise<T[]> {
   try {
@@ -564,7 +581,7 @@ export async function getTours(locale?: string): Promise<Array<{
     const useLocale = locale || config.site.defaultLocale;
     const query = useLocale ? tourQueries.byLocale(useLocale) : tourQueries.all;
     
-    const docs = await fetchData<any[]>(query, useLocale ? { locale: useLocale } : undefined);
+    const docs = await fetchDataWithCache<any[]>(query, useLocale ? { locale: useLocale } : undefined, ['tours', `tours-${useLocale}`]);
     
     if (!docs) {
       console.warn('No tours data returned from Sanity');
@@ -684,7 +701,7 @@ export async function getHotels(locale?: string): Promise<Array<{
 
   const useLocale = locale || config.site.defaultLocale;
   const query = useLocale ? hotelQueries.byLocale(useLocale) : hotelQueries.all;
-  const docs = await fetchData<any[]>(query, useLocale ? { locale: useLocale } : undefined);
+  const docs = await fetchDataWithCache<any[]>(query, useLocale ? { locale: useLocale } : undefined, ['hotels', `hotels-${useLocale}`]);
   return (docs || []).map((doc) => ({
     slug: doc?.slug?.current || doc?.slug || '',
     name: doc?.title,
@@ -753,7 +770,7 @@ export async function getFeaturedHotels(locale?: string) {
   }
   const useLocale = locale || config.site.defaultLocale;
   // Use featured query; it does not accept params
-  const docs = await fetchData<any[]>(hotelQueries.featured, undefined);
+  const docs = await fetchDataWithCache<any[]>(hotelQueries.featured, undefined, ['hotels', 'featured-hotels', `hotels-${useLocale}`]);
   return (docs || []).map((doc) => ({
     slug: doc?.slug?.current || doc?.slug || '',
     name: doc?.title,
@@ -777,7 +794,7 @@ export async function getFeaturedTours(locale?: string) {
     return [];
   }
   const useLocale = locale || config.site.defaultLocale;
-  const docs = await fetchData<any[]>(tourQueries.featured, undefined);
+  const docs = await fetchDataWithCache<any[]>(tourQueries.featured, undefined, ['tours', 'featured-tours', `tours-${useLocale}`]);
   return (docs || []).map((doc) => ({
     slug: doc?.slug?.current || doc?.slug || '',
     title: doc?.title,

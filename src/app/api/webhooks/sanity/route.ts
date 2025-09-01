@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { indexHotel, indexTour, indexBlogPost, removeFromIndex } from '@/lib/meili';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,16 +55,44 @@ async function handleCreateOrUpdate(type: string, documentId: string) {
       case 'hotel':
         await indexHotel(document);
         console.log(`Indexed hotel: ${documentId}`);
+        // Revalidate hotel-related pages
+        revalidatePath('/hotels');
+        revalidatePath('/');
+        revalidateTag('hotels');
         break;
       
       case 'tour':
         await indexTour(document);
         console.log(`Indexed tour: ${documentId}`);
+        // Revalidate tour-related pages
+        revalidatePath('/tours');
+        revalidatePath('/');
+        revalidateTag('tours');
         break;
       
       case 'blog':
         await indexBlogPost(document);
         console.log(`Indexed blog post: ${documentId}`);
+        // Revalidate blog-related pages
+        revalidatePath('/blog');
+        revalidatePath('/');
+        revalidateTag('blog');
+        break;
+      
+      case 'content':
+        // Revalidate all content pages
+        revalidatePath('/');
+        revalidatePath('/about');
+        revalidatePath('/contact');
+        revalidateTag('content');
+        console.log(`Revalidated content pages for: ${documentId}`);
+        break;
+      
+      case 'settings':
+        // Revalidate all pages when settings change
+        revalidatePath('/', 'layout');
+        revalidateTag('settings');
+        console.log(`Revalidated all pages for settings update: ${documentId}`);
         break;
       
       default:
@@ -79,6 +108,15 @@ async function handleDelete(documentId: string) {
   try {
     await removeFromIndex(documentId);
     console.log(`Removed from index: ${documentId}`);
+    
+    // Revalidate all relevant pages after deletion
+    revalidatePath('/');
+    revalidatePath('/hotels');
+    revalidatePath('/tours');
+    revalidatePath('/blog');
+    revalidateTag('hotels');
+    revalidateTag('tours');
+    revalidateTag('blog');
   } catch (error) {
     console.error(`Error removing ${documentId} from index:`, error);
     throw error;
