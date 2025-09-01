@@ -11,7 +11,7 @@ import { BookingForm } from '@/components/BookingForm';
 import { RelatedTours } from '@/components/RelatedTours';
 import { generateSchemasFromOptions } from '@/lib/schema';
 import { config } from '@/lib/config';
-import { extractTextFromPortableText } from '../../../../lib/portable-text-utils';
+import { extractTextFromPortableText } from '@/lib/portable-text-utils';
 
 interface TourPageProps {
   params: { slug: string };

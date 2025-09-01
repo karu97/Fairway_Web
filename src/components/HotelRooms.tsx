@@ -6,7 +6,7 @@ import { Users, Bed, Wifi, Coffee, Car, Dumbbell } from 'lucide-react';
 
 interface HotelRoomsProps {
   hotel: {
-    title: string;
+    name: string;
     rooms?: Array<{
       name: string;
       description?: string;

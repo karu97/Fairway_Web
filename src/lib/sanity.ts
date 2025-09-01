@@ -789,6 +789,7 @@ export async function getHotel(slug: string, locale?: string): Promise<{
       heroImage: mapImage(doc?.heroImage),
       images: mapImages(doc?.images),
       rating: doc?.rating,
+      amenities: doc?.amenities,
       address: {
         street: doc?.address?.street || '',
         city: doc?.address?.city || '',

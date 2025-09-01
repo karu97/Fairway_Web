@@ -16,17 +16,7 @@ interface HotelPageProps {
 }
 
 export async function generateMetadata({ params }: HotelPageProps): Promise<Metadata> {
-  // Try to find the hotel in any locale for metadata
-  let hotel = null;
-  
-  for (const locale of config.site.supportedLocales) {
-    try {
-      hotel = await getHotel(params.slug, locale);
-      if (hotel) break;
-    } catch (error) {
-      console.warn(`Failed to fetch hotel ${params.slug} in locale ${locale} for metadata:`, error);
-    }
-  }
+  const hotel = await getHotel(params.slug);
   
   if (!hotel) {
     return {
@@ -48,45 +38,11 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
 export async function generateStaticParams() {
   const params: { slug: string }[] = [];
   
-  // Import the Sanity client directly to avoid slug processing issues
-  const { sanityClient } = await import('@/lib/sanity');
-  
-  // First, let's check if there are any hotels at all
-  try {
-    const allHotels = await sanityClient.fetch(`
-      *[_type == "hotel"] {
-        _id,
-        title,
-        "slug": slug.current,
-        locale,
-        isActive
-      }
-    `);
-    
-    console.log(`Total hotels in dataset: ${allHotels.length}`);
-    console.log('Hotel details:', allHotels);
-    
-    if (allHotels.length === 0) {
-      console.warn('No hotels found in dataset at all!');
-      return [];
-    }
-  } catch (error) {
-    console.error('Error checking total hotels:', error);
-  }
-  
   // Generate params for all supported locales
   for (const locale of config.site.supportedLocales) {
     try {
-      // Query directly to get raw slug values
-      const hotels = await sanityClient.fetch(`
-        *[_type == "hotel" && locale == $locale && isActive == true] {
-          "slug": slug.current
-        }
-      `, { locale });
-      
-      console.log(`Found ${hotels.length} hotels for locale ${locale}:`, hotels.map(h => h.slug));
-      
-      const localeParams = hotels.map((hotel: any) => ({
+      const hotels = await getHotels(locale);
+      const localeParams = hotels.map((hotel) => ({
         slug: hotel.slug,
       }));
       params.push(...localeParams);
@@ -100,7 +56,7 @@ export async function generateStaticParams() {
     index === self.findIndex(p => p.slug === param.slug)
   );
   
-  console.log(`Generated ${uniqueParams.length} unique hotel paths:`, uniqueParams.map(p => p.slug));
+  console.log(`Generated ${uniqueParams.length} unique hotel paths`);
   return uniqueParams;
 }
 

@@ -5,7 +5,7 @@ import { MapPin, Navigation, Clock, Star, Phone, Globe, Mail } from 'lucide-reac
 
 interface HotelMapProps {
   hotel: {
-    title: string;
+    name: string;
     address?: {
       street: string;
       city: string;
@@ -74,7 +74,7 @@ export function HotelMap({ hotel }: HotelMapProps) {
                 <div className="flex items-start space-x-3 mb-4">
                   <MapPin className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-gray-900">{hotel.title}</p>
+                    <p className="font-medium text-gray-900">{hotel.name}</p>
                     <p className="text-gray-600">{hotel.address.street}</p>
                     <p className="text-gray-600">{hotel.address.city}, {hotel.address.region}</p>
                     <p className="text-gray-600">{hotel.address.country} {hotel.address.postalCode}</p>
