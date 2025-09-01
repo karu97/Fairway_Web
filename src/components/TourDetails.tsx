@@ -1,12 +1,13 @@
 'use client';
 
 import { Star, MapPin, Clock, Users, DollarSign, Calendar, CheckCircle } from 'lucide-react';
+import { PortableTextRenderer } from './PortableTextRenderer';
 
 interface TourDetailsProps {
   tour: {
     title: string;
-    summary?: string;
-    description?: string;
+    summary?: any; // PortableText content
+    description?: any; // PortableText content
     rating?: number;
     durationDays?: number;
     priceFrom?: number;
@@ -45,9 +46,9 @@ export function TourDetails({ tour }: TourDetailsProps) {
       {/* Summary */}
       {tour.summary && (
         <div className="mb-8">
-          <p className="text-gray-600 text-lg leading-relaxed">
-            {tour.summary}
-          </p>
+          <div className="text-gray-600 text-lg leading-relaxed">
+            <PortableTextRenderer value={tour.summary} />
+          </div>
         </div>
       )}
 
@@ -128,9 +129,9 @@ export function TourDetails({ tour }: TourDetailsProps) {
       {tour.description && (
         <div className="mb-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">About This Tour</h3>
-          <p className="text-gray-600 leading-relaxed">
-            {tour.description}
-          </p>
+          <div className="text-gray-600 leading-relaxed">
+            <PortableTextRenderer value={tour.description} />
+          </div>
         </div>
       )}
 

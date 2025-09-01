@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Star, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { getTours } from '@/lib/sanity';
+import { PortableTextRenderer } from './PortableTextRenderer';
 
 interface RelatedToursProps {
   currentSlug: string;
@@ -64,9 +65,9 @@ export async function RelatedTours({ currentSlug }: RelatedToursProps) {
                       </h4>
                       
                       {tour.summary && (
-                        <p className="text-gray-500 text-xs line-clamp-2 mb-2">
-                          {tour.summary}
-                        </p>
+                        <div className="text-gray-500 text-xs line-clamp-2 mb-2">
+                          <PortableTextRenderer value={tour.summary} />
+                        </div>
                       )}
                       
                       <div className="flex items-center space-x-4 text-gray-400 text-xs mb-2">

@@ -13,6 +13,7 @@ import {
   Play
 } from 'lucide-react';
 import { generatePageSchemas, generateWebsiteSchema, generateOrganizationSchema } from '@/lib/schema';
+import { PortableTextRenderer } from '@/components/PortableTextRenderer';
 
 // Add revalidation for ISR
 export const revalidate = 3600; // Revalidate every hour
@@ -301,7 +302,9 @@ export default async function HomePage() {
                   
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{tour.title}</h3>
-                    <p className="text-gray-600 mb-4">{tour.summary}</p>
+                    <p className="text-gray-600 mb-4">
+                      <PortableTextRenderer value={tour.summary} />
+                    </p>
                     
                     <Link
                       href={`/tours/${tour.slug}`}
