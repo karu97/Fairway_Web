@@ -14,10 +14,20 @@ export const sanityClient = createClient({
 // Check if Sanity is properly configured
 export const isSanityConfigured = () => {
   // Allow reading without a token when the dataset is public
-  return Boolean(
+  const isConfigured = Boolean(
     config.sanity.projectId &&
     config.sanity.projectId !== 'dummy'
   );
+  
+  if (!isConfigured) {
+    console.warn('Sanity configuration check failed:', {
+      projectId: config.sanity.projectId,
+      dataset: config.sanity.dataset,
+      hasToken: !!config.sanity.token
+    });
+  }
+  
+  return isConfigured;
 };
 
 // Create write client for mutations
@@ -640,45 +650,64 @@ export async function getTour(slug: string, locale?: string): Promise<{
   requirements?: string;
   seo?: any;
 } | null> {
-  const useLocale = locale || config.site.defaultLocale;
-  const doc = await fetchData<any>(tourQueries.bySlug(slug, useLocale), { slug, locale: useLocale });
-  if (!doc) return null;
-  return {
-    slug: doc?.slug?.current || doc?.slug || '',
-    title: doc?.title,
-    summary: doc?.summary,
-    // Keeping description optional; components handle absence gracefully
-    description: undefined,
-    heroImage: mapImage(doc?.heroImage),
-    images: mapImages(doc?.images),
-    durationDays: doc?.durationDays,
-    priceFrom: doc?.priceFrom,
-    currency: doc?.currency,
-    difficulty: doc?.difficulty,
-    groupSize: doc?.groupSize,
-    maxGroupSize: doc?.groupSize?.max,
-    itinerary: doc?.itinerary,
-    inclusions: doc?.inclusions,
-    exclusions: doc?.exclusions,
-    availableDates: Array.isArray(doc?.availableDates)
-      ? doc.availableDates
-          .filter((d: any) => d && (d.available === undefined || d.available))
-          .map((d: any) => d?.startDate)
-          .filter(Boolean)
-      : undefined,
-    locations: Array.isArray(doc?.locations)
-      ? doc.locations.map((l: any) => ({
-          name: l?.name,
-          slug: l?.slug,
-          type: l?.type,
-          geo: l?.geo,
-          address: l?.address,
-        }))
-      : undefined,
-    highlights: doc?.highlights,
-    requirements: doc?.requirements,
-    seo: doc?.seo,
-  };
+  try {
+    // Check if Sanity is properly configured
+    if (!isSanityConfigured()) {
+      console.warn('Sanity is not properly configured. Please configure your Sanity project ID and API token in .env.local');
+      return null;
+    }
+
+    const useLocale = locale || config.site.defaultLocale;
+    console.log(`Fetching tour with slug: ${slug}, locale: ${useLocale}`);
+    
+    const doc = await fetchDataWithCache<any>(tourQueries.bySlug(slug, useLocale), { slug, locale: useLocale }, ['tours', `tour-${slug}`]);
+    
+    if (!doc) {
+      console.warn(`No tour found with slug: ${slug} and locale: ${useLocale}`);
+      return null;
+    }
+
+    console.log(`Found tour: ${doc?.title} (${doc?._id})`);
+    
+    return {
+      slug: doc?.slug?.current || doc?.slug || '',
+      title: doc?.title,
+      summary: doc?.summary,
+      description: doc?.description,
+      heroImage: mapImage(doc?.heroImage),
+      images: mapImages(doc?.images),
+      durationDays: doc?.durationDays,
+      priceFrom: doc?.priceFrom,
+      currency: doc?.currency,
+      difficulty: doc?.difficulty,
+      groupSize: doc?.groupSize,
+      maxGroupSize: doc?.groupSize?.max,
+      itinerary: doc?.itinerary,
+      inclusions: doc?.inclusions,
+      exclusions: doc?.exclusions,
+      availableDates: Array.isArray(doc?.availableDates)
+        ? doc.availableDates
+            .filter((d: any) => d && (d.available === undefined || d.available))
+            .map((d: any) => d?.startDate)
+            .filter(Boolean)
+        : undefined,
+      locations: Array.isArray(doc?.locations)
+        ? doc.locations.map((l: any) => ({
+            name: l?.name,
+            slug: l?.slug,
+            type: l?.type,
+            geo: l?.geo,
+            address: l?.address,
+          }))
+        : undefined,
+      highlights: doc?.highlights,
+      requirements: doc?.requirements,
+      seo: doc?.seo,
+    };
+  } catch (error) {
+    console.error('Error in getTour:', error);
+    return null;
+  }
 }
 
 // -------- Hotels --------
@@ -734,33 +763,53 @@ export async function getHotel(slug: string, locale?: string): Promise<{
   nearby?: Array<{ name?: string; slug?: any; summary?: string; type?: string; geo?: any }>;
   seo?: any;
 } | null> {
-  const useLocale = locale || config.site.defaultLocale;
-  const doc = await fetchData<any>(hotelQueries.bySlug(slug, useLocale), { slug, locale: useLocale });
-  if (!doc) return null;
-  return {
-    slug: doc?.slug?.current || doc?.slug || '',
-    name: doc?.title,
-    description: doc?.summary || undefined,
-    heroImage: mapImage(doc?.heroImage),
-    images: mapImages(doc?.images),
-    rating: doc?.rating,
-    address: {
-      street: doc?.address?.street,
-      city: doc?.address?.city,
-      region: doc?.address?.region,
-      country: doc?.address?.country,
-      postalCode: doc?.address?.postalCode,
-      lat: doc?.address?.lat,
-      lng: doc?.address?.lng,
-    },
-    contact: doc?.contact,
-    policies: doc?.policies,
-    rooms: doc?.rooms,
-    nearby: Array.isArray(doc?.nearby)
-      ? doc.nearby.map((n: any) => ({ name: n?.name, slug: n?.slug, summary: n?.summary, type: n?.type, geo: n?.geo }))
-      : undefined,
-    seo: doc?.seo,
-  };
+  try {
+    // Check if Sanity is properly configured
+    if (!isSanityConfigured()) {
+      console.warn('Sanity is not properly configured. Please configure your Sanity project ID and API token in .env.local');
+      return null;
+    }
+
+    const useLocale = locale || config.site.defaultLocale;
+    console.log(`Fetching hotel with slug: ${slug}, locale: ${useLocale}`);
+    
+    const doc = await fetchDataWithCache<any>(hotelQueries.bySlug(slug, useLocale), { slug, locale: useLocale }, ['hotels', `hotel-${slug}`]);
+    
+    if (!doc) {
+      console.warn(`No hotel found with slug: ${slug} and locale: ${useLocale}`);
+      return null;
+    }
+
+    console.log(`Found hotel: ${doc?.title} (${doc?._id})`);
+    
+    return {
+      slug: doc?.slug?.current || doc?.slug || '',
+      name: doc?.title,
+      description: doc?.description || doc?.summary || undefined,
+      heroImage: mapImage(doc?.heroImage),
+      images: mapImages(doc?.images),
+      rating: doc?.rating,
+      address: {
+        street: doc?.address?.street || '',
+        city: doc?.address?.city || '',
+        region: doc?.address?.region || '',
+        country: doc?.address?.country || '',
+        postalCode: doc?.address?.postalCode,
+        lat: doc?.address?.lat,
+        lng: doc?.address?.lng,
+      },
+      contact: doc?.contact,
+      policies: doc?.policies,
+      rooms: doc?.rooms,
+      nearby: Array.isArray(doc?.nearby)
+        ? doc.nearby.map((n: any) => ({ name: n?.name, slug: n?.slug, summary: n?.summary, type: n?.type, geo: n?.geo }))
+        : undefined,
+      seo: doc?.seo,
+    };
+  } catch (error) {
+    console.error('Error in getHotel:', error);
+    return null;
+  }
 }
 
 // -------- Featured helpers --------
@@ -853,27 +902,47 @@ export async function getBlogPost(slug: string, locale?: string): Promise<{
   relatedTours?: Array<{ title?: string; slug?: any; heroImage?: { url: string; alt?: string } }>;
   seo?: any;
 } | null> {
-  const useLocale = locale || config.site.defaultLocale;
-  const doc = await fetchData<any>(blogQueries.bySlug(slug, useLocale), { slug, locale: useLocale });
-  if (!doc) return null;
-  return {
-    slug: doc?.slug?.current || doc?.slug || '',
-    title: doc?.title,
-    excerpt: doc?.excerpt,
-    body: doc?.body,
-    heroImage: mapImage(doc?.heroImage),
-    publishedAt: doc?.publishedAt,
-    author: doc?.author ? { name: doc.author?.name } : undefined,
-    tags: doc?.tags,
-    category: doc?.category,
-    relatedHotels: Array.isArray(doc?.relatedHotels)
-      ? doc.relatedHotels.map((h: any) => ({ title: h?.title, slug: h?.slug, heroImage: mapImage(h?.heroImage) }))
-      : undefined,
-    relatedTours: Array.isArray(doc?.relatedTours)
-      ? doc.relatedTours.map((t: any) => ({ title: t?.title, slug: t?.slug, heroImage: mapImage(t?.heroImage) }))
-      : undefined,
-    seo: doc?.seo,
-  };
+  try {
+    // Check if Sanity is properly configured
+    if (!isSanityConfigured()) {
+      console.warn('Sanity is not properly configured. Please configure your Sanity project ID and API token in .env.local');
+      return null;
+    }
+
+    const useLocale = locale || config.site.defaultLocale;
+    console.log(`Fetching blog post with slug: ${slug}, locale: ${useLocale}`);
+    
+    const doc = await fetchDataWithCache<any>(blogQueries.bySlug(slug, useLocale), { slug, locale: useLocale }, ['blog', `blog-${slug}`]);
+    
+    if (!doc) {
+      console.warn(`No blog post found with slug: ${slug} and locale: ${useLocale}`);
+      return null;
+    }
+
+    console.log(`Found blog post: ${doc?.title} (${doc?._id})`);
+    
+    return {
+      slug: doc?.slug?.current || doc?.slug || '',
+      title: doc?.title,
+      excerpt: doc?.excerpt,
+      body: doc?.body,
+      heroImage: mapImage(doc?.heroImage),
+      publishedAt: doc?.publishedAt,
+      author: doc?.author ? { name: doc.author?.name } : undefined,
+      tags: doc?.tags,
+      category: doc?.category,
+      relatedHotels: Array.isArray(doc?.relatedHotels)
+        ? doc.relatedHotels.map((h: any) => ({ title: h?.title, slug: h?.slug, heroImage: mapImage(h?.heroImage) }))
+        : undefined,
+      relatedTours: Array.isArray(doc?.relatedTours)
+        ? doc.relatedTours.map((t: any) => ({ title: t?.title, slug: t?.slug, heroImage: mapImage(t?.heroImage) }))
+        : undefined,
+      seo: doc?.seo,
+    };
+  } catch (error) {
+    console.error('Error in getBlogPost:', error);
+    return null;
+  }
 }
 
 // -------- Content --------

@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
   }
 
   return {
-    title: `${hotel.title} - Luxury Hotel in ${hotel.address.city}`,
-    description: hotel.summary || `Experience luxury at ${hotel.title} in ${hotel.address.city}, Sri Lanka.`,
+    title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
+    description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
     openGraph: {
-      title: `${hotel.title} - Luxury Hotel in ${hotel.address.city}`,
-      description: hotel.summary || `Experience luxury at ${hotel.title} in ${hotel.address.city}, Sri Lanka.`,
+      title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
+      description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
       images: hotel.images?.map(img => img.url) || [],
     },
   };
@@ -51,8 +51,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
 
   const schemas = generateSchemasFromOptions({
     hotel: {
-      name: hotel.title,
-      description: hotel.summary || '',
+      name: hotel.name,
+      description: hotel.description || '',
       url: `${config.site.url}/hotels/${hotel.slug}`,
       images: hotel.images?.map(img => img.url) || [],
       telephone: hotel.contact?.phone,
@@ -73,8 +73,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
     breadcrumbs: {
       items: [
         { name: 'Home', url: '/' },
-        { name: 'Hotels', url: '/' },
-        { name: hotel.title, url: `/hotels/${hotel.slug}` }
+        { name: 'Hotels', url: '/hotels' },
+        { name: hotel.name, url: `/hotels/${hotel.slug}` }
       ]
     }
   });
@@ -122,7 +122,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
               <BookingForm 
                 type="HOTEL"
                 hotelSlug={hotel.slug}
-                hotelName={hotel.title}
+                hotelName={hotel.name}
               />
             </div>
           </div>

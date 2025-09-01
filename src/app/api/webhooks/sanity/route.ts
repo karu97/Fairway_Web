@@ -125,19 +125,22 @@ async function handleDelete(documentId: string) {
 
 async function fetchDocumentFromSanity(documentId: string) {
   try {
-    // Use Sanity client to fetch the document
-    // This would typically use the Sanity client configured in your app
+    // Import the Sanity client
+    const { sanityClient } = await import('@/lib/sanity');
+    
     const query = `*[_id == $documentId][0]`;
     const params = { documentId };
     
-    // For now, we'll return null as the actual Sanity client integration
-    // would depend on your specific setup
-    console.log(`Would fetch document ${documentId} from Sanity`);
-    return null;
+    console.log(`Fetching document ${documentId} from Sanity`);
+    const document = await sanityClient.fetch(query, params);
     
-    // Example with actual Sanity client:
-    // const document = await sanityClient.fetch(query, params);
-    // return document;
+    if (!document) {
+      console.log(`Document ${documentId} not found in Sanity`);
+      return null;
+    }
+    
+    console.log(`Successfully fetched document ${documentId}:`, document._type);
+    return document;
   } catch (error) {
     console.error(`Error fetching document ${documentId} from Sanity:`, error);
     return null;
