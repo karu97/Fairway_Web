@@ -36,16 +36,48 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
 }
 
 export async function generateStaticParams() {
-  const hotels = await getHotels();
-  return hotels.map((hotel) => ({
-    slug: hotel.slug,
-  }));
+  const params: { slug: string }[] = [];
+  
+  // Generate params for all supported locales
+  for (const locale of config.site.supportedLocales) {
+    try {
+      const hotels = await getHotels(locale);
+      const localeParams = hotels.map((hotel) => ({
+        slug: hotel.slug,
+      }));
+      params.push(...localeParams);
+    } catch (error) {
+      console.warn(`Failed to generate static params for locale ${locale}:`, error);
+    }
+  }
+  
+  // Remove duplicates based on slug
+  const uniqueParams = params.filter((param, index, self) => 
+    index === self.findIndex(p => p.slug === param.slug)
+  );
+  
+  console.log(`Generated ${uniqueParams.length} unique hotel paths`);
+  return uniqueParams;
 }
 
 export default async function HotelPage({ params }: HotelPageProps) {
-  const hotel = await getHotel(params.slug);
+  // Try to find the hotel in any locale
+  let hotel = null;
+  
+  for (const locale of config.site.supportedLocales) {
+    try {
+      hotel = await getHotel(params.slug, locale);
+      if (hotel) {
+        console.log(`Found hotel ${hotel.name} in locale ${locale}`);
+        break;
+      }
+    } catch (error) {
+      console.warn(`Failed to fetch hotel ${params.slug} in locale ${locale}:`, error);
+    }
+  }
   
   if (!hotel) {
+    console.warn(`Hotel not found with slug: ${params.slug} in any locale`);
     notFound();
   }
 

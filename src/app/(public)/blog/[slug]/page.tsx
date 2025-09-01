@@ -36,16 +36,48 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const params: { slug: string }[] = [];
+  
+  // Generate params for all supported locales
+  for (const locale of config.site.supportedLocales) {
+    try {
+      const posts = await getBlogPosts(locale);
+      const localeParams = posts.map((post) => ({
+        slug: post.slug,
+      }));
+      params.push(...localeParams);
+    } catch (error) {
+      console.warn(`Failed to generate static params for locale ${locale}:`, error);
+    }
+  }
+  
+  // Remove duplicates based on slug
+  const uniqueParams = params.filter((param, index, self) => 
+    index === self.findIndex(p => p.slug === param.slug)
+  );
+  
+  console.log(`Generated ${uniqueParams.length} unique blog post paths`);
+  return uniqueParams;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getBlogPost(params.slug);
+  // Try to find the blog post in any locale
+  let post = null;
+  
+  for (const locale of config.site.supportedLocales) {
+    try {
+      post = await getBlogPost(params.slug, locale);
+      if (post) {
+        console.log(`Found blog post ${post.title} in locale ${locale}`);
+        break;
+      }
+    } catch (error) {
+      console.warn(`Failed to fetch blog post ${params.slug} in locale ${locale}:`, error);
+    }
+  }
   
   if (!post) {
+    console.warn(`Blog post not found with slug: ${params.slug} in any locale`);
     notFound();
   }
 

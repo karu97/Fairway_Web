@@ -38,38 +38,71 @@ export async function generateMetadata({ params }: TourPageProps): Promise<Metad
 }
 
 export async function generateStaticParams() {
-  const tours = await getTours();
-  return tours.map((tour) => ({
-    slug: tour.slug,
-  }));
+  const params: { slug: string }[] = [];
+  
+  // Generate params for all supported locales
+  for (const locale of config.site.supportedLocales) {
+    try {
+      const tours = await getTours(locale);
+      const localeParams = tours.map((tour) => ({
+        slug: tour.slug,
+      }));
+      params.push(...localeParams);
+    } catch (error) {
+      console.warn(`Failed to generate static params for locale ${locale}:`, error);
+    }
+  }
+  
+  // Remove duplicates based on slug
+  const uniqueParams = params.filter((param, index, self) => 
+    index === self.findIndex(p => p.slug === param.slug)
+  );
+  
+  console.log(`Generated ${uniqueParams.length} unique tour paths`);
+  return uniqueParams;
 }
 
 export default async function TourPage({ params }: TourPageProps) {
-  const tour = await getTour(params.slug);
+  // Try to find the tour in any locale
+  let tour = null;
+  
+  for (const locale of config.site.supportedLocales) {
+    try {
+      tour = await getTour(params.slug, locale);
+      if (tour) {
+        console.log(`Found tour ${tour.title} in locale ${locale}`);
+        break;
+      }
+    } catch (error) {
+      console.warn(`Failed to fetch tour ${params.slug} in locale ${locale}:`, error);
+    }
+  }
   
   if (!tour) {
+    console.warn(`Tour not found with slug: ${params.slug} in any locale`);
     notFound();
   }
 
-  const summaryText = extractTextFromPortableText(tour.summary);
+  // At this point, tour is guaranteed to be non-null
+  const summaryText = extractTextFromPortableText(tour!.summary);
 
   const schemas = generateSchemasFromOptions({
     tour: {
-      name: tour.title,
-      description: tour.summary || '',
-      url: `${config.site.url}/tours/${tour.slug}`,
-      images: tour.images?.map(img => img.url) || [],
-      duration: `${tour.durationDays} days`,
-      price: tour.priceFrom || 0,
-      currency: tour.currency || 'USD',
-      location: tour.locations?.[0]?.name || 'Sri Lanka',
+      name: tour!.title,
+      description: tour!.summary || '',
+      url: `${config.site.url}/tours/${tour!.slug}`,
+      images: tour!.images?.map(img => img.url) || [],
+      duration: `${tour!.durationDays} days`,
+      price: tour!.priceFrom || 0,
+      currency: tour!.currency || 'USD',
+      location: tour!.locations?.[0]?.name || 'Sri Lanka',
     },
     includeOrganization: true,
     breadcrumbs: {
       items: [
         { name: 'Home', url: '/' },
         { name: 'Tours', url: '/tours' },
-        { name: tour.title, url: `/tours/${tour.slug}` }
+        { name: tour!.title, url: `/tours/${tour!.slug}` }
       ]
     }
   });
@@ -77,7 +110,7 @@ export default async function TourPage({ params }: TourPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <TourHero tour={tour} />
+      <TourHero tour={tour!} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
@@ -85,16 +118,16 @@ export default async function TourPage({ params }: TourPageProps) {
           {/* Left Column - Tour Details */}
           <div className="lg:col-span-2 space-y-8">
             {/* Tour Details */}
-            <TourDetails tour={tour} />
+            <TourDetails tour={tour!} />
 
             {/* Itinerary */}
-            <TourItinerary tour={tour} />
+            <TourItinerary tour={tour!} />
 
             {/* Inclusions & Exclusions */}
-            <TourInclusions tour={tour} />
+            <TourInclusions tour={tour!} />
 
             {/* Map */}
-            <TourMap tour={tour} />
+            <TourMap tour={tour!} />
 
             {/* Related Tours */}
             <Suspense fallback={
