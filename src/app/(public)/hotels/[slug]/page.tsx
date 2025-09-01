@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: HotelPageProps): Promise<Meta
   }
 
   return {
-    title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
-    description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
+    title: `${(hotel as any).title} - Luxury Hotel in ${(hotel as any).address.city}`,
+    description: (hotel as any).summary || `Experience luxury at ${(hotel as any).title} in ${(hotel as any).address.city}, Sri Lanka.`,
     openGraph: {
-      title: `${hotel.name} - Luxury Hotel in ${hotel.address.city}`,
-      description: hotel.description || `Experience luxury at ${hotel.name} in ${hotel.address.city}, Sri Lanka.`,
-      images: hotel.images?.map(img => img.url) || [],
+      title: `${(hotel as any).title} - Luxury Hotel in ${(hotel as any).address.city}`,
+      description: (hotel as any).summary || `Experience luxury at ${(hotel as any).title} in ${(hotel as any).address.city}, Sri Lanka.`,
+      images: (hotel as any).images?.map((img: any) => img.url) || [],
     },
   };
 }
@@ -68,7 +68,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
     try {
       hotel = await getHotel(params.slug, locale);
       if (hotel) {
-        console.log(`Found hotel ${hotel.name} in locale ${locale}`);
+        console.log(`Found hotel ${(hotel as any).title} in locale ${locale}`);
         break;
       }
     } catch (error) {
@@ -81,32 +81,34 @@ export default async function HotelPage({ params }: HotelPageProps) {
     notFound();
   }
 
+  console.log('Hotel object:', hotel);
+
   const schemas = generateSchemasFromOptions({
     hotel: {
-      name: hotel!.name,
-      description: hotel!.description || '',
-      url: `${config.site.url}/hotels/${hotel!.slug}`,
-      images: hotel!.images?.map(img => img.url) || [],
-      telephone: hotel!.contact?.phone,
+      name: (hotel as any).title,
+      description: (hotel as any).summary || '',
+      url: `${config.site.url}/hotels/${(hotel as any).slug}`,
+      images: (hotel as any).images?.map((img: any) => img.url) || [],
+      telephone: (hotel as any).contact?.phone,
       address: {
-        street: hotel!.address.street,
-        city: hotel!.address.city,
-        region: hotel!.address.region,
-        country: hotel!.address.country,
-        postalCode: hotel!.address.postalCode,
+        street: (hotel as any).address.street,
+        city: (hotel as any).address.city,
+        region: (hotel as any).address.region,
+        country: (hotel as any).address.country,
+        postalCode: (hotel as any).address.postalCode,
       },
-      geo: hotel!.address.lat && hotel!.address.lng ? {
-        lat: hotel!.address.lat,
-        lng: hotel!.address.lng,
+      geo: (hotel as any).address.lat && (hotel as any).address.lng ? {
+        lat: (hotel as any).address.lat,
+        lng: (hotel as any).address.lng,
       } : undefined,
-      rating: hotel!.rating,
+      rating: (hotel as any).rating,
     },
     includeOrganization: true,
     breadcrumbs: {
       items: [
         { name: 'Home', url: '/' },
         { name: 'Hotels', url: '/hotels' },
-        { name: hotel!.name, url: `/hotels/${hotel!.slug}` }
+        { name: (hotel as any).title, url: `/hotels/${(hotel as any).slug}` }
       ]
     }
   });
@@ -114,7 +116,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <HotelHero hotel={hotel!} />
+      <HotelHero hotel={hotel as any} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
@@ -122,13 +124,13 @@ export default async function HotelPage({ params }: HotelPageProps) {
           {/* Left Column - Hotel Details */}
           <div className="lg:col-span-2 space-y-8">
             {/* Hotel Details */}
-            <HotelDetails hotel={hotel!} />
+            <HotelDetails hotel={hotel as any} />
 
             {/* Rooms */}
-            <HotelRooms hotel={hotel!} />
+            <HotelRooms hotel={hotel as any} />
 
             {/* Map */}
-            <HotelMap hotel={hotel!} />
+            <HotelMap hotel={hotel as any} />
 
             {/* Related Hotels */}
             <Suspense fallback={
@@ -144,7 +146,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
                 </div>
               </div>
             }>
-              <RelatedHotels currentSlug={hotel.slug} />
+              <RelatedHotels currentSlug={(hotel as any).slug} />
             </Suspense>
           </div>
 
@@ -153,8 +155,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
             <div className="sticky top-8">
               <BookingForm 
                 type="HOTEL"
-                hotelSlug={hotel.slug}
-                hotelName={hotel.name}
+                hotelSlug={(hotel as any).slug}
+                hotelName={(hotel as any).title}
               />
             </div>
           </div>

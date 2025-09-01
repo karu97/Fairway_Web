@@ -100,7 +100,6 @@ export const hotelQueries = {
     title,
     slug,
     locale,
-    description,
     summary,
     rating,
     amenities,
