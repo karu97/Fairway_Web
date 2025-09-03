@@ -104,7 +104,7 @@ export default async function HomePage() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-300">
+          {/* <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-300">
             <div className="flex items-center space-x-2">
               <Shield className="w-5 h-5 text-green-400" />
               <span>ISO 9001:2015 Certified</span>
@@ -117,7 +117,7 @@ export default async function HomePage() {
               <Star className="w-5 h-5 text-blue-400" />
               <span>Member of SLITH</span>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Scroll Indicator */}

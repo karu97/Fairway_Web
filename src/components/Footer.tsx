@@ -282,13 +282,13 @@ export function Footer({ siteSettings }: FooterProps) {
               <span>in Sri Lanka</span>
             </div>
             
-            <div className="flex items-center space-x-6 text-sm text-gray-400">
+            {/* <div className="flex items-center space-x-6 text-sm text-gray-400">
               <span>ISO 9001:2015 Certified</span>
               <span>•</span>
               <span>Travel Agent License: TA/1234</span>
               <span>•</span>
               <span>Member of SLITH</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
