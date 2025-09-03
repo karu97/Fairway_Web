@@ -92,9 +92,9 @@ export function Footer({ siteSettings }: FooterProps) {
     <footer className="bg-gray-900 text-white">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 lg:gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               {siteSettings?.logo?.url ? (
                 <img
@@ -218,18 +218,18 @@ export function Footer({ siteSettings }: FooterProps) {
 
         {/* Newsletter Signup */}
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="max-w-2xl">
-            <h4 className="text-xl font-semibold mb-4 text-white">Stay Updated</h4>
-            <p className="text-gray-300 mb-6">
+          <div className="max-w-2xl mx-auto lg:mx-0">
+            <h4 className="text-xl font-semibold mb-4 text-white text-center lg:text-left">Stay Updated</h4>
+            <p className="text-gray-300 mb-6 text-center lg:text-left">
               Subscribe to our newsletter for exclusive offers, travel tips, and updates about our properties.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm sm:text-base"
               />
-              <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
                 Subscribe
               </button>
             </div>
@@ -296,10 +296,10 @@ export function Footer({ siteSettings }: FooterProps) {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center z-50"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center z-50"
         aria-label="Scroll to top"
       >
-        <ArrowUp className="w-5 h-5" />
+        <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
     </footer>
   );

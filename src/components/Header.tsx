@@ -17,7 +17,9 @@ import {
   Star,
   Hotel,
   Plane,
-  BookOpen
+  BookOpen,
+  Info,
+  MessageCircle
 } from 'lucide-react';
 import { useSiteSettings } from './Providers';
 
@@ -55,8 +57,8 @@ export function Header() {
     { name: 'Hotels', href: '/hotels', icon: Hotel },
     { name: 'Tours', href: '/tours', icon: Plane },
     { name: 'Blog', href: '/blog', icon: BookOpen },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'About', href: '/about', icon: Info },
+    { name: 'Contact', href: '/contact', icon: MessageCircle },
   ];
 
   const isActive = (href: string) => {
@@ -70,27 +72,27 @@ export function Header() {
       <div className="bg-blue-900 text-white py-2">
         <div className="container mx-auto px-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-x-4 gap-y-2">
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4" />
-                <span>+94 11 234 5678</span>
+                <Phone className="w-4 h-4 flex-shrink-0" />
+                <span className="break-all">+94 72 250 9609</span>
               </div>
-              <div className="hidden sm:flex items-center space-x-2">
-                <Mail className="w-4 h-4" />
-                <span>info@fairwayhotels.com</span>
+              <div className="flex items-center space-x-2">
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span className="break-all">info@hotelsfairway.com</span>
               </div>
             </div>
-            
-            <div className="flex items-center">
+
+            <div className="flex items-center self-start sm:self-auto">
               {/* Locale Switcher */}
               <div className="relative group">
                 <button className="flex items-center space-x-2 hover:text-blue-200 transition-colors">
-                  <Globe className="w-4 h-4" />
-                  <span>{locales.find(l => l.code === currentLocale)?.flag}</span>
-                  <span className="hidden sm:inline">{locales.find(l => l.code === currentLocale)?.name}</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <Globe className="w-4 h-4 flex-shrink-0" />
+                  <span className="text-lg">{locales.find(l => l.code === currentLocale)?.flag}</span>
+                  <span className="hidden sm:inline ml-1">{locales.find(l => l.code === currentLocale)?.name}</span>
+                  <ChevronDown className="w-4 h-4 flex-shrink-0" />
                 </button>
-                
+
                 <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[150px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   {locales.map((locale) => (
                     <button
@@ -120,23 +122,23 @@ export function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 group">
+            <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
               {siteSettings?.logo?.url ? (
                 <img
                   src={siteSettings.logo.url}
                   alt={siteSettings.logo.alt || 'Fairway Hotels Logo'}
-                  className="w-12 h-12 rounded-xl group-hover:scale-105 transition-transform duration-200"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl group-hover:scale-105 transition-transform duration-200"
                 />
               ) : (
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                  <Hotel className="w-7 h-7 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                  <Hotel className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                 </div>
               )}
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 font-playfair">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 font-playfair truncate">
                   {siteSettings?.siteName || 'Fairway Hotels'}
                 </h1>
-                <p className="text-sm text-gray-600 -mt-1">Luxury & Excellence</p>
+                <p className="text-xs sm:text-sm text-gray-600 -mt-1 hidden sm:block">Luxury & Excellence</p>
               </div>
             </Link>
 
@@ -213,9 +215,9 @@ export function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-50 bg-black bg-opacity-50">
-          <div className="fixed inset-y-0 right-0 w-80 bg-white shadow-2xl">
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Menu</h2>
+          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="p-2 text-gray-600 hover:text-gray-900 rounded-lg"
@@ -224,7 +226,7 @@ export function Header() {
               </button>
             </div>
 
-            <nav className="p-6 space-y-4">
+            <nav className="p-4 space-y-2">
               {navigation.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -237,30 +239,30 @@ export function Header() {
                         : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                     }`}
                   >
-                    {Icon && <Icon className="w-5 h-5" />}
+                    {Icon && <Icon className="w-5 h-5 flex-shrink-0" />}
                     <span className="font-medium">{item.name}</span>
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="p-6 border-t border-gray-200 space-y-4">
+            <div className="p-4 border-t border-gray-200 space-y-3">
               <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">123 Galle Road, Colombo</span>
+                <MapPin className="w-5 h-5 text-gray-600 flex-shrink-0" />
+                <span className="text-gray-700 text-sm break-words">123 Galle Road, Colombo</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">+94 11 234 5678</span>
+                <Phone className="w-5 h-5 text-gray-600 flex-shrink-0" />
+                <span className="text-gray-700 text-sm break-all">+94 11 234 5678</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">info@fairwayhotels.com</span>
+                <Mail className="w-5 h-5 text-gray-600 flex-shrink-0" />
+                <span className="text-gray-700 text-sm break-all">info@fairwayhotels.com</span>
               </div>
-              
+
               <Link
                 href="/contact"
-                className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors mt-4"
               >
                 Book Now
               </Link>

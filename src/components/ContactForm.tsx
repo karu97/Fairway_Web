@@ -71,7 +71,7 @@ export function ContactForm() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             <User className="inline w-4 h-4 mr-1" />
@@ -103,7 +103,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             <Phone className="inline w-4 h-4 mr-1" />
@@ -149,8 +149,8 @@ export function ContactForm() {
           required
           value={formData.message}
           onChange={(e) => handleInputChange('message', e.target.value)}
-          rows={6}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          rows={4}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical min-h-[100px] sm:min-h-[120px]"
           placeholder="Tell us how we can help you..."
         />
       </div>

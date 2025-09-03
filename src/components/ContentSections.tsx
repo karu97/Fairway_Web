@@ -45,18 +45,18 @@ export function ContentSections({ sections }: ContentSectionsProps) {
     switch (section._type) {
       case 'features':
         return (
-          <section key={index} className="py-20 bg-white">
+          <section key={index} className="py-12 sm:py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-900 mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4 sm:mb-6">
                   {section.title || 'Why Choose Fairway Hotels?'}
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                   {section.description || 'We combine luxury accommodation with authentic experiences, ensuring every moment of your stay is memorable.'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {section.features?.map((feature: any, featureIndex: number) => {
                   const IconComponent = iconMap[feature.icon?.toLowerCase()] || Star;
                   const colorMap: { [key: string]: string } = {
@@ -87,18 +87,18 @@ export function ContentSections({ sections }: ContentSectionsProps) {
 
       case 'stats':
         return (
-          <section key={index} className="py-20 bg-blue-900 text-white">
+          <section key={index} className="py-12 sm:py-16 lg:py-20 bg-blue-900 text-white">
             <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-playfair mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair mb-4 sm:mb-6">
                   {section.title || 'Our Numbers Speak'}
                 </h2>
-                <p className="text-xl text-blue-200 max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl text-blue-200 max-w-3xl mx-auto px-4">
                   {section.description || 'Trusted by thousands of travelers worldwide for exceptional experiences.'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {section.stats?.map((stat: any, statIndex: number) => {
                   const IconComponent = iconMap[stat.icon?.toLowerCase()] || Award;
                   return (
@@ -118,18 +118,18 @@ export function ContentSections({ sections }: ContentSectionsProps) {
 
       case 'team':
         return (
-          <section key={index} className="py-20 bg-white">
+          <section key={index} className="py-12 sm:py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-900 mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4 sm:mb-6">
                   {section.title || 'Our Leadership Team'}
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                   {section.description || 'Meet the passionate individuals who drive our mission to provide exceptional hospitality experiences across Sri Lanka.'}
                 </p>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {section.members?.map((member: any, memberIndex: number) => {
                   const imageUrl = member.image ? urlFor(member.image).width(200).height(200).url() : null;
                   return (
@@ -160,18 +160,18 @@ export function ContentSections({ sections }: ContentSectionsProps) {
 
       case 'contact':
         return (
-          <section key={index} className="py-20 bg-white">
+          <section key={index} className="py-12 sm:py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-900 mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4 sm:mb-6">
                   {section.title || 'Get in Touch'}
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                   {section.description || 'Our team is available to assist you with bookings, inquiries, and personalized travel recommendations.'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {section.contactMethods?.map((method: any, methodIndex: number) => {
                   const IconComponent = iconMap[method.icon?.toLowerCase()] || Phone;
                   const colorMap: { [key: string]: string } = {
@@ -232,18 +232,18 @@ export function ContentSections({ sections }: ContentSectionsProps) {
 
       case 'values':
         return (
-          <section key={index} className="py-20 bg-white">
+          <section key={index} className="py-12 sm:py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-4">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-900 mb-6">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair text-gray-900 mb-4 sm:mb-6">
                   {section.title || 'Our Values'}
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
                   {section.description || 'The principles that guide everything we do.'}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {section.values?.map((value: any, valueIndex: number) => {
                   const IconComponent = iconMap[value.icon?.toLowerCase()] || Heart;
                   const colorMap: { [key: string]: string } = {
