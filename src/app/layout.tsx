@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { config } from '@/lib/config';
 import Providers from '@/components/Providers';
+import { getSiteSettings } from '@/lib/sanity';
 
 export const metadata: Metadata = {
 	metadataBase: new URL(config.site.url),
@@ -20,11 +21,13 @@ const playfair = Playfair_Display({
 	display: 'swap',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const siteSettings = await getSiteSettings() || undefined;
+
 	return (
 		<html lang="en" className={`${inter.variable} ${playfair.variable}`}>
 			<head>
@@ -34,9 +37,18 @@ export default function RootLayout({
 				<link rel="preconnect" href="https://res.cloudinary.com" />
 				<link rel="dns-prefetch" href="//www.google-analytics.com" />
 				<link rel="dns-prefetch" href="//vercel.live" />
-				<link rel="icon" href="/favicon.ico" sizes="any" />
-				<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+				{siteSettings?.siteIcon?.url ? (
+					<>
+						<link rel="icon" href={siteSettings.siteIcon.url} sizes="any" />
+						<link rel="apple-touch-icon" href={siteSettings.siteIcon.url} />
+					</>
+				) : (
+					<>
+						<link rel="icon" href="/favicon.ico" sizes="any" />
+						<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+						<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+					</>
+				)}
 				<link rel="manifest" href="/manifest.json" />
 				<meta name="theme-color" content="#1e40af" />
 				<meta name="msapplication-TileColor" content="#1e40af" />
@@ -52,9 +64,9 @@ export default function RootLayout({
 						__html: JSON.stringify({
 							'@context': 'https://schema.org',
 							'@type': 'Organization',
-							name: 'Fairway Hotels',
+							name: siteSettings?.siteName || 'Fairway Hotels',
 							url: 'https://fairwayhotels.com',
-							logo: 'https://fairwayhotels.com/logo.png',
+							logo: siteSettings?.logo?.url || 'https://fairwayhotels.com/logo.png',
 							description: 'Luxury hotels and tours in Sri Lanka',
 							address: {
 								'@type': 'PostalAddress',
@@ -110,13 +122,11 @@ export default function RootLayout({
 					}}
 				/>
 			</head>
-			<body 
+			<body
 				className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
 				suppressHydrationWarning={true}
 			>
-				<Providers>
-					{children}
-				</Providers>
+				<Providers siteSettings={siteSettings} children={children} />
 			</body>
 		</html>
 	);

@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 interface FooterProps {
   siteSettings?: {
     siteName?: string;
+    logo?: { url: string; alt?: string };
     contact?: {
       phone?: string;
       email?: string;
@@ -95,9 +96,17 @@ export function Footer({ siteSettings }: FooterProps) {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">F</span>
-              </div>
+              {siteSettings?.logo?.url ? (
+                <img
+                  src={siteSettings.logo.url}
+                  alt={siteSettings.logo.alt || 'Fairway Hotels Logo'}
+                  className="w-12 h-12 rounded-xl"
+                />
+              ) : (
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">F</span>
+                </div>
+              )}
               <div>
                 <h3 className="text-2xl font-bold font-playfair">{siteSettings?.siteName || 'Fairway Hotels'}</h3>
                 <p className="text-gray-400 text-sm">Luxury & Excellence</p>

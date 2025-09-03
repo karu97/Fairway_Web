@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  Menu, 
-  X, 
-  Search, 
-  Globe, 
-  Phone, 
-  Mail, 
+import {
+  Menu,
+  X,
+  Search,
+  Globe,
+  Phone,
+  Mail,
   MapPin,
   ChevronDown,
   User,
@@ -19,6 +19,7 @@ import {
   Plane,
   BookOpen
 } from 'lucide-react';
+import { useSiteSettings } from './Providers';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +27,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentLocale, setCurrentLocale] = useState('en');
   const pathname = usePathname();
+  const siteSettings = useSiteSettings();
 
   // Handle scroll effect
   useEffect(() => {
@@ -119,11 +121,21 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                <Hotel className="w-7 h-7 text-white" />
-              </div>
+              {siteSettings?.logo?.url ? (
+                <img
+                  src={siteSettings.logo.url}
+                  alt={siteSettings.logo.alt || 'Fairway Hotels Logo'}
+                  className="w-12 h-12 rounded-xl group-hover:scale-105 transition-transform duration-200"
+                />
+              ) : (
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                  <Hotel className="w-7 h-7 text-white" />
+                </div>
+              )}
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 font-playfair">Fairway Hotels</h1>
+                <h1 className="text-2xl font-bold text-gray-900 font-playfair">
+                  {siteSettings?.siteName || 'Fairway Hotels'}
+                </h1>
                 <p className="text-sm text-gray-600 -mt-1">Luxury & Excellence</p>
               </div>
             </Link>
