@@ -1,20 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { 
-  Star, 
-  MapPin, 
-  Shield, 
-  Award, 
-  Users, 
-  Phone, 
-  Mail, 
+import {
+  Star,
+  MapPin,
+  Shield,
+  Award,
+  Users,
+  Phone,
+  Mail,
   Clock,
   ArrowRight,
   CheckCircle,
   Sun,
   Heart
 } from 'lucide-react';
+import { urlFor } from '@/lib/sanity';
+import { PortableTextRenderer } from './PortableTextRenderer';
 
 interface ContentSectionsProps {
   sections?: any[];
@@ -128,22 +130,29 @@ export function ContentSections({ sections }: ContentSectionsProps) {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {section.members?.map((member: any, memberIndex: number) => (
-                  <div key={memberIndex} className="text-center">
-                    <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-                      {member.image?.url && (
-                        <img 
-                          src={member.image.url} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
+                {section.members?.map((member: any, memberIndex: number) => {
+                  const imageUrl = member.image ? urlFor(member.image).width(200).height(200).url() : null;
+                  return (
+                    <div key={memberIndex} className="text-center">
+                      <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                        {imageUrl ? (
+                          <img
+                            src={imageUrl}
+                            alt={member.name || 'Team member'}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+                            <Users className="w-12 h-12 text-gray-500" />
+                          </div>
+                        )}
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name || 'Team Member'}</h3>
+                      <p className="text-blue-600 mb-2">{member.position || 'Position'}</p>
+                      <p className="text-gray-600 text-sm">{member.bio || 'Bio will be displayed here.'}</p>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                    <p className="text-blue-600 mb-2">{member.position}</p>
-                    <p className="text-gray-600 text-sm">{member.bio}</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -204,16 +213,16 @@ export function ContentSections({ sections }: ContentSectionsProps) {
         return (
           <section key={index} className="py-20 bg-gray-50">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl font-playfair font-bold text-gray-900 mb-6">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-playfair font-bold text-gray-900 mb-6 text-center">
                   {section.title || 'Our Story'}
                 </h2>
                 {section.content && (
-                  <div className="prose prose-lg mx-auto text-gray-600">
-                    {/* This would need a proper rich text renderer for Sanity blocks */}
-                    <p className="text-lg leading-relaxed">
-                      {typeof section.content === 'string' ? section.content : 'Our story content will be displayed here.'}
-                    </p>
+                  <div className="prose prose-lg mx-auto text-gray-700">
+                    <PortableTextRenderer
+                      value={section.content}
+                      className="text-lg leading-relaxed"
+                    />
                   </div>
                 )}
               </div>
