@@ -99,6 +99,7 @@ export async function RelatedHotels({ currentSlug }: RelatedHotelsProps) {
               </article>
             ))}
           </div>
+          
 
           
           
