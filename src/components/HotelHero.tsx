@@ -23,6 +23,9 @@ interface HotelHeroProps {
 }
 
 export function HotelHero({ hotel }: HotelHeroProps) {
+  console.log('HotelHero received hotel data:', hotel);
+  console.log('HotelHero heroImage:', hotel.heroImage);
+
   return (
     <div className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden">
       {/* Hero Image */}
@@ -34,9 +37,23 @@ export function HotelHero({ hotel }: HotelHeroProps) {
           className="object-cover"
           priority
           sizes="100vw"
+          onError={(e) => {
+            console.error('HotelHero image failed to load:', hotel.heroImage?.url);
+            console.error('Image error event:', e);
+          }}
+          onLoad={() => {
+            console.log('HotelHero image loaded successfully:', hotel.heroImage?.url);
+          }}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-blue-900 to-blue-700" />
+        <div className="w-full h-full bg-gradient-to-br from-blue-900 to-blue-700">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center text-white">
+              <p className="text-xl font-semibold">No Image Available</p>
+              <p className="text-sm opacity-75">Hero image not found for {hotel.title}</p>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Overlay */}

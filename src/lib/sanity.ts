@@ -18,7 +18,7 @@ export const isSanityConfigured = () => {
     config.sanity.projectId &&
     config.sanity.projectId !== 'dummy'
   );
-  
+
   if (!isConfigured) {
     console.warn('Sanity configuration check failed:', {
       projectId: config.sanity.projectId,
@@ -26,7 +26,16 @@ export const isSanityConfigured = () => {
       hasToken: !!config.sanity.token
     });
   }
-  
+
+  // Debug Sanity client configuration
+  console.log('Sanity client configuration:', {
+    projectId: config.sanity.projectId,
+    dataset: config.sanity.dataset,
+    hasToken: !!config.sanity.token,
+    useCdn: config.sanity.useCdn,
+    isConfigured
+  });
+
   return isConfigured;
 };
 
@@ -547,16 +556,50 @@ export async function checkDataExists(query: string, params?: Record<string, any
 function getImageUrl(image: any): string | undefined {
   try {
     if (!image) return undefined;
-    return urlFor(image).url();
-  } catch {
+
+    // Check if Sanity is configured
+    if (!isSanityConfigured()) {
+      console.warn('Sanity not configured, cannot generate image URL');
+      return undefined;
+    }
+
+    // Check if image has the required properties
+    if (!image || typeof image !== 'object') {
+      console.warn('Invalid image object:', image);
+      return undefined;
+    }
+
+    const url = urlFor(image).url();
+    if (!url) {
+      console.warn('Failed to generate URL for image:', image);
+      return undefined;
+    }
+
+    return url;
+  } catch (error) {
+    console.error('Error generating image URL:', error);
     return undefined;
   }
 }
 
 function mapImage(image: any): { url: string; alt?: string } | undefined {
-  const url = getImageUrl(image);
-  if (!url) return undefined;
-  return { url, alt: image?.alt };
+  try {
+    if (!image) {
+      console.warn('mapImage called with null/undefined image');
+      return undefined;
+    }
+
+    const url = getImageUrl(image);
+    if (!url) {
+      console.warn('Failed to get URL for image:', image);
+      return undefined;
+    }
+
+    return { url, alt: image?.alt };
+  } catch (error) {
+    console.error('Error in mapImage:', error);
+    return undefined;
+  }
 }
 
 function mapImages(images: any[] | undefined): Array<{ url: string; alt?: string }> | undefined {
@@ -667,14 +710,22 @@ export async function getTour(slug: string, locale?: string): Promise<{
     }
 
     console.log(`Found tour: ${doc?.title} (${doc?._id})`);
-    
+    console.log('Tour heroImage data:', doc?.heroImage);
+    console.log('Tour images data:', doc?.images);
+
+    const heroImage = mapImage(doc?.heroImage);
+    const images = mapImages(doc?.images);
+
+    console.log('Processed tour heroImage:', heroImage);
+    console.log('Processed tour images:', images);
+
     return {
       slug: doc?.slug?.current || doc?.slug || '',
       title: doc?.title,
       summary: doc?.summary,
       description: doc?.description,
-      heroImage: mapImage(doc?.heroImage),
-      images: mapImages(doc?.images),
+      heroImage,
+      images,
       durationDays: doc?.durationDays,
       priceFrom: doc?.priceFrom,
       currency: doc?.currency,
@@ -780,13 +831,21 @@ export async function getHotel(slug: string, locale?: string): Promise<{
     }
 
     console.log(`Found hotel: ${doc?.title} (${doc?._id})`);
-    
+    console.log('Hotel heroImage data:', doc?.heroImage);
+    console.log('Hotel images data:', doc?.images);
+
+    const heroImage = mapImage(doc?.heroImage);
+    const images = mapImages(doc?.images);
+
+    console.log('Processed heroImage:', heroImage);
+    console.log('Processed images:', images);
+
     return {
       slug: doc?.slug?.current || doc?.slug || '',
       name: doc?.title,
       description: doc?.description || doc?.summary || undefined,
-      heroImage: mapImage(doc?.heroImage),
-      images: mapImages(doc?.images),
+      heroImage,
+      images,
       rating: doc?.rating,
       amenities: doc?.amenities,
       address: {
@@ -920,13 +979,17 @@ export async function getBlogPost(slug: string, locale?: string): Promise<{
     }
 
     console.log(`Found blog post: ${doc?.title} (${doc?._id})`);
-    
+    console.log('Blog post heroImage data:', doc?.heroImage);
+
+    const heroImage = mapImage(doc?.heroImage);
+    console.log('Processed blog post heroImage:', heroImage);
+
     return {
       slug: doc?.slug?.current || doc?.slug || '',
       title: doc?.title,
       excerpt: doc?.excerpt,
       body: doc?.body,
-      heroImage: mapImage(doc?.heroImage),
+      heroImage,
       publishedAt: doc?.publishedAt,
       author: doc?.author ? { name: doc.author?.name } : undefined,
       tags: doc?.tags,
