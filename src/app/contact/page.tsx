@@ -11,7 +11,7 @@ export default function ContactPage() {
       <section className="mx-auto max-w-7xl px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
         <div>
           <h1 className="text-2xl sm:text-3xl font-serif">Contact Us</h1>
-          <p className="text-black/70 mt-2 text-sm sm:text-base">We'd love to help plan your stay and Sri Lankan journey.</p>
+          <p className="text-black/70 mt-2 text-sm sm:text-base">We&apos;d love to help plan your stay and Sri Lankan journey.</p>
           <form className="mt-6 space-y-4">
             <input className="w-full border border-black/20 px-3 py-2 rounded-md text-sm sm:text-base" placeholder="Full name" />
             <input className="w-full border border-black/20 px-3 py-2 rounded-md text-sm sm:text-base" placeholder="Email address" type="email" />
