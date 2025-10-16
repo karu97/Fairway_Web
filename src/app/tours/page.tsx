@@ -1,3 +1,4 @@
+import Image from "next/image";
 import MainLayout from "@/components/layout/MainLayout";
 
 export const metadata = {
@@ -5,6 +6,29 @@ export const metadata = {
   description: "Curated tour packages across Sri Lanka with expert local guides.",
 };
 
+const tours = [
+  {
+    id: 1,
+    title: "Cultural Triangle Tour",
+    image: "/images/tour-1.svg",
+    days: 7,
+    price: 1200,
+  },
+  {
+    id: 2,
+    title: "Beach Paradise Escape",
+    image: "/images/tour-2.svg",
+    days: 5,
+    price: 800,
+  },
+  {
+    id: 3,
+    title: "Hill Country Adventure",
+    image: "/images/tour-3.svg",
+    days: 6,
+    price: 950,
+  },
+];
 
 export default function ToursPage() {
   return (
@@ -13,7 +37,7 @@ export default function ToursPage() {
         <h1 className="text-2xl sm:text-3xl font-serif">Tours</h1>
         <p className="text-black/70 mt-2 text-sm sm:text-base">Thoughtfully designed itineraries to explore the best of Sri Lanka.</p>
 
-        {/* <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           {tours.map((t) => (
             <article key={t.id} className="rounded-xl overflow-hidden border border-black/10 hover:shadow-sm transition">
               <div className="relative h-44">
@@ -27,7 +51,7 @@ export default function ToursPage() {
               </div>
             </article>
           ))}
-        </div> */}
+        </div>
       </section>
     </MainLayout>
   );
