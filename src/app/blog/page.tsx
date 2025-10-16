@@ -10,8 +10,8 @@ export default function BlogIndexPage() {
   return (
     <MainLayout>
       <section className="mx-auto max-w-7xl px-4 py-12">
-        <h1 className="text-3xl font-serif">Journal</h1>
-        <p className="text-black/70 mt-2">Stories, design notes, and travel inspiration.</p>
+        <h1 className="text-2xl sm:text-3xl font-serif">Journal</h1>
+        <p className="text-black/70 mt-2 text-sm sm:text-base">Stories, design notes, and travel inspiration.</p>
 
         {/* <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((p) => (

@@ -12,34 +12,34 @@ export default function E34KoslandaPage() {
   return (
     <MainLayout>
       <article className="mx-auto max-w-7xl px-4 py-10">
-        <header className="grid md:grid-cols-2 gap-6 items-center">
+        <header className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
           <div>
-            <h1 className="text-3xl font-serif">e34 Café, Restaurant & Hotel Koslanda Hideaway</h1>
-            <p className="text-black/70 mt-2">Colombo - Ratnapura - Wellawaya - Batticaloa Rd, Koslanda 90190</p>
-            <p className="text-black/70 mt-3 max-w-prose">Comfortable accommodations with a private natural pool, lush garden, and water sports facilities. Enjoy live music and karaoke, with diverse dining including Indian, Korean, local Sri Lankan, Asian, international, and BBQ options. Vegetarian, vegan, gluten-free, and dairy-free menus available.</p>
-            <div className="mt-4 text-sm text-black/80">
+            <h1 className="text-2xl sm:text-3xl font-serif">e34 Café, Restaurant & Hotel Koslanda Hideaway</h1>
+            <p className="text-black/70 mt-2 text-sm sm:text-base">Colombo - Ratnapura - Wellawaya - Batticaloa Rd, Koslanda 90190</p>
+            <p className="text-black/70 mt-3 max-w-prose text-sm sm:text-base">Comfortable accommodations with a private natural pool, lush garden, and water sports facilities. Enjoy live music and karaoke, with diverse dining including Indian, Korean, local Sri Lankan, Asian, international, and BBQ options. Vegetarian, vegan, gluten-free, and dairy-free menus available.</p>
+            <div className="mt-4 text-xs sm:text-sm text-black/80">
               <div>🕘 24-hour front desk • ☕ Coffee shop • 🚲 Bicycle parking • 🧳 Luggage storage</div>
               <div>👨‍👩‍👧 Family rooms • 🅿️ Free private parking • 🏡 Outdoor seating</div>
             </div>
           </div>
-          <div className="relative h-56 md:h-72 rounded-xl overflow-hidden border border-black/10">
+          <div className="relative h-48 sm:h-56 md:h-72 rounded-xl overflow-hidden border border-black/10">
             <Image fill src="/images/E34_hotel_koslanda/2.JPG" alt="E34 Koslanda" className="object-cover" />
           </div>
         </header>
 
-        <section className="mt-10 grid md:grid-cols-3 gap-6">
+        <section className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2 space-y-6">
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">About this property</div>
-              <p className="text-sm text-black/70 mt-2">Located near iconic attractions: Demodara Nine Arch Bridge (30 mi), Haputale Railway Station (15 mi), Ella Rock (26 mi). Approximately 46 mi from Mattala Rajapaksa International Airport.</p>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">About this property</div>
+              <p className="text-xs sm:text-sm text-black/70 mt-2">Located near iconic attractions: Demodara Nine Arch Bridge (30 mi), Haputale Railway Station (15 mi), Ella Rock (26 mi). Approximately 46 mi from Mattala Rajapaksa International Airport.</p>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Dining Experience</div>
-              <p className="text-sm text-black/70 mt-2">Restaurant serves Indian, Korean, local, Asian, international, and BBQ grill cuisines. Live music and karaoke available. Vegetarian, vegan, gluten-free, and dairy-free options on request.</p>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Dining Experience</div>
+              <p className="text-xs sm:text-sm text-black/70 mt-2">Restaurant serves Indian, Korean, local, Asian, international, and BBQ grill cuisines. Live music and karaoke available. Vegetarian, vegan, gluten-free, and dairy-free options on request.</p>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Vacation Home</div>
-              <ul className="text-sm text-black/70 mt-2 space-y-2">
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Vacation Home</div>
+              <ul className="text-xs sm:text-sm text-black/70 mt-2 space-y-2">
                 <li>Entire vacation home • 46 m² • View • Private bathroom</li>
                 <li>Bedroom: 6 full beds • Living room: 1 sofa bed</li>
                 <li>Layout: 1 living room, 1 bedroom, 1 bathroom with shower</li>
@@ -48,9 +48,9 @@ export default function E34KoslandaPage() {
             </div>
           </div>
           <aside className="space-y-6">
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Location</div>
-              <div className="text-sm text-black/70 mt-2">Colombo - Ratnapura - Wellawaya - Batticaloa Rd, Koslanda 90190</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Location</div>
+              <div className="text-xs sm:text-sm text-black/70 mt-2">Colombo - Ratnapura - Wellawaya - Batticaloa Rd, Koslanda 90190</div>
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden border border-black/10">
                 <iframe
                   title="E34 Koslanda Map"
@@ -61,8 +61,8 @@ export default function E34KoslandaPage() {
                 />
               </div>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Gallery</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Gallery</div>
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {gallery.map((src) => (
                   <div key={src} className="relative aspect-square rounded-md overflow-hidden border border-black/10">

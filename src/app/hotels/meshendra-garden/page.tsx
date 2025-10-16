@@ -52,63 +52,63 @@ export default function MeshendraGardenPage() {
   return (
     <MainLayout>
       <article className="mx-auto max-w-7xl px-4 py-10">
-        <header className="grid md:grid-cols-2 gap-6 items-center">
+        <header className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
           <div>
-            <h1 className="text-3xl font-serif">Meshendra Garden Hotel by Fairway Hotels</h1>
-            <p className="text-black/70 mt-2">Katunayake, Western Province</p>
-            <p className="text-black/70 mt-3 max-w-prose">A tranquil and convenient stay near Colombo Airport, with a focus on comfort, accessibility, and modern amenities.</p>
-            <div className="mt-4 text-sm text-black/80">
+            <h1 className="text-2xl sm:text-3xl font-serif">Meshendra Garden Hotel by Fairway Hotels</h1>
+            <p className="text-black/70 mt-2 text-sm sm:text-base">Katunayake, Western Province</p>
+            <p className="text-black/70 mt-3 max-w-prose text-sm sm:text-base">A tranquil and convenient stay near Colombo Airport, with a focus on comfort, accessibility, and modern amenities.</p>
+            <div className="mt-4 text-xs sm:text-sm text-black/80">
               <div>📍 16B, Airport Road, Katunayake, Western Province, Sri Lanka</div>
               <div>📞 +94 11 225 4050 | +94 11 225 2860</div>
               <div>✉️ infor@hotelsfairway.com</div>
             </div>
           </div>
-          <div className="relative h-56 md:h-72 rounded-xl overflow-hidden border border-black/10">
+          <div className="relative h-48 sm:h-56 md:h-72 rounded-xl overflow-hidden border border-black/10">
             <Image fill src="/images/Meshendra_Garden/Main Image.png" alt="Meshendra Garden" className="object-cover" />
           </div>
         </header>
 
-        <section className="mt-10 grid md:grid-cols-3 gap-6">
+        <section className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2 space-y-6">
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">About</div>
-              <p className="text-sm text-black/70 mt-2">
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">About</div>
+              <p className="text-xs sm:text-sm text-black/70 mt-2">
                 5/5 (Based on guest reviews). A calm oasis minutes from Colombo International Airport, offering modern rooms,
                 thoughtful amenities, and warm hospitality.
               </p>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Hotel Policies</div>
-              <ul className="text-sm text-black/70 mt-2 space-y-2">
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Hotel Policies</div>
+              <ul className="text-xs sm:text-sm text-black/70 mt-2 space-y-2">
                 <li>Check-in: 2:00 PM</li>
                 <li>Check-out: 12:00 PM</li>
                 <li>Cancellation: Free cancellation 24 hours before check-in</li>
               </ul>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Amenities</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Amenities</div>
               <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {amenities.map((a) => (
-                  <div key={a.v} className="rounded-full border border-black/10 px-3 py-2 text-xs bg-white">{a.k}</div>
+                  <div key={a.v} className="rounded-full border border-black/10 px-2 sm:px-3 py-2 text-xs bg-white">{a.k}</div>
                 ))}
               </div>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Rooms</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Rooms</div>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                 {rooms.map((r) => (
                   <article key={r.title} className="rounded-lg overflow-hidden border border-black/10">
-                    <div className="relative h-36">
+                    <div className="relative h-32 sm:h-36">
                       <Image fill src={r.image} alt={r.title} className="object-cover" />
                     </div>
-                    <div className="p-4">
-                      <div className="font-medium text-sm">{r.title}</div>
+                    <div className="p-3 sm:p-4">
+                      <div className="font-medium text-xs sm:text-sm">{r.title}</div>
                       <div className="text-xs text-black/60">Sleeps {r.sleeps} • From ${r.price}</div>
                       <p className="text-xs text-black/70 mt-2">{r.desc}</p>
                       <ul className="mt-2 text-xs text-black/70 list-disc list-inside space-y-1">
                         {r.features.map((f) => (<li key={f}>{f}</li>))}
                       </ul>
-                      <div className="mt-3 text-[11px] text-black/60">• Free cancellation 24h • Best price • Instant confirmation</div>
+                      <div className="mt-3 text-[10px] sm:text-[11px] text-black/60">• Free cancellation 24h • Best price • Instant confirmation</div>
                     </div>
                   </article>
                 ))}
@@ -116,9 +116,9 @@ export default function MeshendraGardenPage() {
             </div>
           </div>
           <aside className="space-y-6">
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Location</div>
-              <div className="text-sm text-black/70 mt-2">16B, Airport Road, Katunayake, Western Province, Sri Lanka</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Location</div>
+              <div className="text-xs sm:text-sm text-black/70 mt-2">16B, Airport Road, Katunayake, Western Province, Sri Lanka</div>
               <div className="mt-3 aspect-video w-full rounded-lg overflow-hidden border border-black/10">
                 <iframe
                   title="Meshendra Garden Map"
@@ -129,14 +129,14 @@ export default function MeshendraGardenPage() {
                 />
               </div>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5 text-sm text-black/80">
-              <div className="font-medium">Contact</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5 text-xs sm:text-sm text-black/80">
+              <div className="font-medium text-sm sm:text-base">Contact</div>
               <div className="mt-2">📞 +94 11 225 4050 | +94 11 225 2860</div>
               <div>✉️ infor@hotelsfairway.com</div>
-              <a className="mt-3 inline-block px-4 py-2 rounded-md border border-black/15 hover:bg-black/5" href="#">Visit Website</a>
+              <a className="mt-3 inline-block px-3 sm:px-4 py-2 rounded-md border border-black/15 hover:bg-black/5 text-xs sm:text-sm" href="#">Visit Website</a>
             </div>
-            <div className="rounded-xl border border-black/10 bg-white p-5">
-              <div className="font-medium">Gallery</div>
+            <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+              <div className="font-medium text-sm sm:text-base">Gallery</div>
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {["Swiming_pool.png","Swiming_pool_1.png","4.png","5.png","6.png","10.png"].map((src) => (
                   <div key={src} className="relative aspect-square rounded-md overflow-hidden border border-black/10">
