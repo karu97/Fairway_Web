@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import MainLayout from "@/components/layout/MainLayout";
 import { jsonLdOrganization } from "@/lib/seo";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });

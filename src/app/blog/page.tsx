@@ -1,20 +1,10 @@
 import MainLayout from "@/components/layout/MainLayout";
-import Link from "next/link";
 
 export const metadata = {
   title: "Blog",
   description: "Insights, guides, and stories from Fairway Hotels.",
 };
 
-const posts = Array.from({ length: 6 })
-  .map((_, i) => ({
-    slug: `post-${i + 1}`,
-    title: `Designing Calm Spaces ${i + 1}`,
-    excerpt: "How we craft soothing interiors and experiences across Sri Lanka.",
-    date: "2025-10-16",
-  }))
-  // Hide the first placeholder post
-  .filter((p) => p.slug !== "post-1");
 
 export default function BlogIndexPage() {
   return (
