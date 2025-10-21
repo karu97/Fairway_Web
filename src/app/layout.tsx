@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import { jsonLdOrganization } from "@/lib/seo";
+import { jsonLdOrganization, jsonLdWebSite } from "@/lib/seo";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -14,27 +14,91 @@ export const metadata: Metadata = {
     apple: "/images/fairway_hotels_fv_icon.png",
   },
   title: {
-    default: "Fairway Hotels | Luxury Stays & Curated Tours in Sri Lanka",
-    template: "%s | Fairway Hotels",
+    default: "Fairway Hotels Sri Lanka | Luxury Boutique Hotels & Premium Tours",
+    template: "%s | Fairway Hotels Sri Lanka",
   },
   description:
-    "Experience luxury hospitality in Sri Lanka. Premium rooms, boutique stays, and curated tours by Fairway Hotels.",
+    "Discover luxury boutique hotels in Sri Lanka with Fairway Hotels. Experience world-class hospitality, premium accommodations, and curated adventure tours. Book your luxury stay today!",
+  keywords: [
+    "Fairway Hotels Sri Lanka",
+    "luxury hotels Sri Lanka",
+    "boutique hotels Sri Lanka",
+    "premium hotels Sri Lanka",
+    "luxury accommodation Sri Lanka",
+    "Sri Lanka hotel booking",
+    "luxury resorts Sri Lanka",
+    "Sri Lanka tourism",
+    "luxury travel Sri Lanka",
+    "boutique stays Sri Lanka",
+    "Meshendra Garden Hotel",
+    "e34 Koslanda Hotel",
+    "luxury hotel Katunayake",
+    "luxury hotel Koslanda",
+    "Sri Lanka luxury hotels",
+    "best hotels Sri Lanka",
+    "luxury hospitality Sri Lanka"
+  ],
+  authors: [{ name: "Fairway Hotels" }],
+  creator: "Fairway Hotels",
+  publisher: "Fairway Hotels",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  category: "Hospitality & Tourism",
+  classification: "Luxury Hotels & Tours",
   openGraph: {
-    title: "Fairway Hotels",
+    title: "Fairway Hotels Sri Lanka | Luxury Boutique Hotels & Premium Tours",
     description:
-      "Experience luxury hospitality in Sri Lanka. Premium rooms, boutique stays, and curated tours by Fairway Hotels.",
-    url: "/",
-    siteName: "Fairway Hotels",
-    images: [{ url: "/images/fairway_hotels_hero.png", width: 1200, height: 630 }],
+      "Discover luxury boutique hotels in Sri Lanka with Fairway Hotels. Experience world-class hospitality, premium accommodations, and curated adventure tours. Book your luxury stay today!",
+    url: "https://www.hotelsfairway.com",
+    siteName: "Fairway Hotels Sri Lanka",
+    images: [
+      {
+        url: "/images/fairway_hotels_hero.png",
+        width: 1200,
+        height: 630,
+        alt: "Fairway Hotels Sri Lanka - Luxury Boutique Hotels"
+      },
+      {
+        url: "/images/fairway_hotels_logo.png",
+        width: 400,
+        height: 400,
+        alt: "Fairway Hotels Logo"
+      }
+    ],
     locale: "en_US",
     type: "website",
+    countryName: "Sri Lanka",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fairway Hotels",
+    title: "Fairway Hotels Sri Lanka | Luxury Boutique Hotels & Premium Tours",
     description:
-      "Experience luxury hospitality in Sri Lanka. Premium rooms, boutique stays, and curated tours by Fairway Hotels.",
+      "Discover luxury boutique hotels in Sri Lanka with Fairway Hotels. Experience world-class hospitality, premium accommodations, and curated adventure tours.",
     images: ["/images/fairway_hotels_hero.png"],
+    creator: "@fairwayhotels",
+    site: "@fairwayhotels",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-site-verification-code',
+  },
+  alternates: {
+    canonical: "https://www.hotelsfairway.com",
   },
 };
 
@@ -56,6 +120,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite()) }}
         />
         {children}
       </body>

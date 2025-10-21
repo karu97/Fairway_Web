@@ -2,10 +2,90 @@ import Image from "next/image";
 import Link from "next/link";
 import MainLayout from "@/components/layout/MainLayout";
 import Reveal from "@/components/shared/Reveal";
+import { jsonLdHotel, jsonLdBreadcrumbList } from "@/lib/seo";
 
 export default function Home() {
+  const breadcrumbData = [
+    { name: "Home", url: "https://www.hotelsfairway.com" }
+  ];
+
+  const meshendraHotelData = {
+    name: "Meshendra Garden Hotel",
+    description: "Luxury boutique hotel in Katunayake, Sri Lanka. Premium accommodations with world-class amenities, infinity pools, and exceptional hospitality. Perfect for airport gateway stays.",
+    image: "https://www.hotelsfairway.com/images/Meshendra_Garden/Main Image.png",
+    address: {
+      streetAddress: "Katunayake Airport Access Road",
+      addressLocality: "Katunayake",
+      addressRegion: "Western Province",
+      postalCode: "11450",
+      addressCountry: "LK"
+    },
+    rating: 4.9,
+    reviewCount: 1200,
+    priceRange: "$$$$",
+    amenities: [
+      "Infinity Pool",
+      "Spa & Wellness",
+      "Free Airport Transfer",
+      "Restaurant",
+      "Fitness Center",
+      "Business Center",
+      "24/7 Concierge",
+      "Room Service"
+    ],
+    geo: {
+      latitude: 7.1707,
+      longitude: 79.8830
+    }
+  };
+
+  const koslandaHotelData = {
+    name: "e34 Koslanda Hotel",
+    description: "Boutique luxury hotel nestled in the natural paradise of Koslanda, Sri Lanka. Experience authentic luxury with natural surroundings, premium accommodations, and exceptional service.",
+    image: "https://www.hotelsfairway.com/images/E34_hotel_koslanda/2.JPG",
+    address: {
+      streetAddress: "Koslanda",
+      addressLocality: "Koslanda",
+      addressRegion: "Uva Province",
+      postalCode: "90000",
+      addressCountry: "LK"
+    },
+    rating: 4.8,
+    reviewCount: 800,
+    priceRange: "$$$$",
+    amenities: [
+      "Natural Pool",
+      "Spa & Wellness",
+      "Restaurant",
+      "Garden Views",
+      "Adventure Tours",
+      "24/7 Service",
+      "Local Cuisine",
+      "Nature Trails"
+    ],
+    geo: {
+      latitude: 6.9167,
+      longitude: 81.2833
+    }
+  };
+
   return (
     <MainLayout>
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbList(breadcrumbData)) }}
+      />
+
+      {/* Hotel Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHotel(meshendraHotelData)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHotel(koslandaHotelData)) }}
+      />
       {/* World-Class Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Advanced Background System */}
@@ -214,7 +294,7 @@ export default function Home() {
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse delay-300"></div>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-serif mb-6 sm:mb-8 bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                Iconic Destinations
+                Luxury Hotels Sri Lanka | Iconic Destinations
               </h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mx-auto leading-relaxed font-light">
                 Each property is a masterpiece of design and luxury, crafted to provide
