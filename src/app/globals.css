@@ -6,6 +6,17 @@
   --border: 0 0 0 / 0.1;
 }
 
+/* Force light mode regardless of system preference */
+html {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -22,12 +33,195 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  overflow-x: hidden;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* World-class animated background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.06) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%);
+  animation: backgroundShift 20s ease-in-out infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+  animation: particleFloat 15s ease-in-out infinite;
+}
+
+/* Floating particles */
+@keyframes backgroundShift {
+  0%, 100% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 0%;
+    filter: hue-rotate(5deg);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: hue-rotate(10deg);
+  }
+  75% {
+    background-position: 0% 100%;
+    filter: hue-rotate(5deg);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+    opacity: 0.4;
+  }
+}
+
+/* Additional animated elements */
+body::before,
+body::after {
+  pointer-events: none;
+}
+
+/* Floating orbs for extra magic - Responsive */
+.floating-orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: floatOrb 25s ease-in-out infinite;
+}
+
+/* Hide floating orbs on mobile for better performance */
+@media (max-width: 768px) {
+  .floating-orb {
+    display: none;
+  }
+}
+
+.floating-orb:nth-child(1) {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floating-orb:nth-child(2) {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.08), transparent);
+  top: 20%;
+  right: 15%;
+  animation-delay: -5s;
+}
+
+.floating-orb:nth-child(3) {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.06), transparent);
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -10s;
+}
+
+.floating-orb:nth-child(4) {
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.07), transparent);
+  bottom: 30%;
+  right: 10%;
+  animation-delay: -15s;
+}
+
+.floating-orb:nth-child(5) {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.05), transparent);
+  top: 60%;
+  left: 70%;
+  animation-delay: -20s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translate(150px, -80px) rotate(90deg) scale(1.2);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(300px, 0) rotate(180deg) scale(0.8);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate(150px, 80px) rotate(270deg) scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    opacity: 0.2;
+  }
+}
+
+/* Additional subtle animations */
+@keyframes gentleGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+  }
+}
+
+.floating-orb:nth-child(1) {
+  animation: floatOrb 30s ease-in-out infinite, gentleGlow 4s ease-in-out infinite;
+}
+
+.floating-orb:nth-child(2) {
+  animation: floatOrb 25s ease-in-out infinite reverse, gentleGlow 5s ease-in-out infinite;
+}
+
+.floating-orb:nth-child(3) {
+  animation: floatOrb 35s ease-in-out infinite, gentleGlow 6s ease-in-out infinite;
+}
+
+.floating-orb:nth-child(4) {
+  animation: floatOrb 28s ease-in-out infinite reverse, gentleGlow 4.5s ease-in-out infinite;
+}
+
+.floating-orb:nth-child(5) {
+  animation: floatOrb 32s ease-in-out infinite, gentleGlow 5.5s ease-in-out infinite;
 }
 
 @keyframes marquee {
