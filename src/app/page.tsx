@@ -18,6 +18,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.12),transparent_50%)] animate-pulse delay-1000" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_40%,rgba(120,219,255,0.1),transparent_50%)] animate-pulse delay-500" />
 
+
           {/* Geometric patterns */}
           <div className="absolute inset-0 opacity-[0.02]">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 border border-black/20 rotate-45 animate-spin" style={{animationDuration: '20s'}} />
