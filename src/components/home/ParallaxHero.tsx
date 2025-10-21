@@ -22,18 +22,18 @@ export default function ParallaxHero() {
 
   return (
     <section ref={ref} className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#f6f3ee] to-white dark:from-[#1a1a1a] dark:to-black" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#f6f3ee] to-white" />
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div className="[transform:translateY(var(--hero-y,0))] [filter:blur(var(--hero-blur,0))] transition-[filter,transform] duration-300">
-          <p className="uppercase tracking-[0.3em] text-xs text-black/60 dark:text-white/60">Sri Lanka • Luxury Hospitality</p>
-          <h1 className="mt-3 text-4xl md:text-5xl font-serif leading-tight text-black dark:text-white">
+          <p className="uppercase tracking-[0.3em] text-xs text-black/60">Sri Lanka • Luxury Hospitality</p>
+          <h1 className="mt-3 text-4xl md:text-5xl font-serif leading-tight text-black">
             Fairway Hotels
-            <span className="block text-black/70 dark:text-white/70 font-normal text-xl md:text-2xl mt-3">Boutique stays & curated island tours</span>
+            <span className="block text-black/70 font-normal text-xl md:text-2xl mt-3">Boutique stays & curated island tours</span>
           </h1>
           <p className="mt-5 text-black/70 dark:text-white/70 max-w-prose">Immerse yourself in contemporary elegance along Sri Lanka&apos;s golden coasts and misty highlands. Reserve beautifully designed rooms and discover bespoke journeys.</p>
           <div className="mt-8 flex items-center gap-3">
-            <Link href="/hotels" className="px-5 py-3 rounded-md bg-black dark:bg-white text-white dark:text-black text-sm hover:opacity-90">Explore Hotels</Link>
-            <Link href="/tours" className="px-5 py-3 rounded-md border border-black/15 dark:border-white/15 text-black dark:text-white text-sm hover:bg-black/5 dark:hover:bg-white/5">View Tours</Link>
+            <Link href="/hotels" className="px-5 py-3 rounded-md bg-black text-white text-sm hover:opacity-90">Explore Hotels</Link>
+            <Link href="/tours" className="px-5 py-3 rounded-md border border-black/15 text-black text-sm hover:bg-black/5">View Tours</Link>
           </div>
         </div>
         <div className="relative h-80 md:h-[420px] [transform:translateY(calc(var(--hero-y,0)*-1))] transition-transform duration-300">

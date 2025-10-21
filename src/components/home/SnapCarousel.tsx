@@ -13,11 +13,11 @@ export default function SnapCarousel() {
     <div className="overflow-x-auto snap-x snap-mandatory pb-4">
       <div className="flex gap-4 min-w-max px-4">
         {slides.map((s) => (
-          <div key={s.id} className="snap-center shrink-0 w-[280px] overflow-hidden rounded-xl border border-black/10 dark:border-white/10">
+          <div key={s.id} className="snap-center shrink-0 w-[280px] overflow-hidden rounded-xl border border-black/10">
             <div className="relative h-40">
               <Image fill src={s.img} alt={s.title} className="object-cover" />
             </div>
-            <div className="p-3 text-sm font-medium text-black dark:text-white">{s.title}</div>
+            <div className="p-3 text-sm font-medium text-black">{s.title}</div>
           </div>
         ))}
       </div>
