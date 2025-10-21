@@ -2,28 +2,50 @@
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("fh-theme");
-    const initial = saved ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setTheme(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    setIsClient(true);
+
+    // Get saved theme or system preference
+    const savedTheme = localStorage.getItem("fh-theme") as "light" | "dark" | null;
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+
+    setTheme(initialTheme);
+
+    // Apply theme to document
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
   }, []);
 
-  function toggle() {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.classList.toggle("dark", next === "dark");
-    window.localStorage.setItem("fh-theme", next);
+  const toggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+
+    // Update document class
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+
+    // Save to localStorage
+    localStorage.setItem("fh-theme", newTheme);
+  };
+
+  if (!isClient) {
+    return (
+      <button
+        aria-label="Toggle theme"
+        className="p-2 rounded-md border border-black/10 text-black hover:bg-black/5 transition-colors"
+      >
+        🌙
+      </button>
+    );
   }
 
-  if (!theme) return null;
   return (
     <button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="p-2 rounded-md border border-black/10 text-sm"
+      className="p-2 rounded-md border border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
     >
       {theme === "dark" ? "☀️" : "🌙"}
     </button>
