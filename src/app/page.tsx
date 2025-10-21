@@ -56,7 +56,7 @@ export default function Home() {
                 <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-xl border border-white/20 shadow-2xl mb-8 group hover:scale-105 transition-transform duration-300">
                   <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse shadow-lg"></div>
                   <span className="text-sm font-semibold bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
-                    World's Most Luxurious Hospitality Experience
+                    World&apos;s Most Luxurious Hospitality Experience
                   </span>
                   <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-ping"></div>
                 </div>
@@ -218,7 +218,7 @@ export default function Home() {
               </h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mx-auto leading-relaxed font-light">
                 Each property is a masterpiece of design and luxury, crafted to provide
-                unparalleled experiences in Sri Lanka's most breathtaking locations.
+                unparalleled experiences in Sri Lanka&apos;s most breathtaking locations.
               </p>
             </div>
           </Reveal>
