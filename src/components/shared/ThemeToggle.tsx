@@ -34,7 +34,7 @@ export default function ThemeToggle() {
     return (
       <button
         aria-label="Toggle theme"
-        className="p-2 rounded-md border border-black/10 text-black hover:bg-black/5 transition-colors"
+        className="p-2 rounded-md border border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
       >
         🌙
       </button>

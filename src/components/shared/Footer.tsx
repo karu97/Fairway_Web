@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="md:col-span-2">
         <Image src="/images/fairway_hotels_logo.png" alt="Fairway Hotels" width={170} height={50} className="rounded" />
         <p className="mt-3 text-sm text-black/60 dark:text-white/60 max-w-sm">Luxury stays and curated tours across Sri Lanka. Thoughtful design, warm service, and unforgettable journeys.</p>
-          <div className="flex items-center gap-4 mt-4 text-black/60">
+          <div className="flex items-center gap-4 mt-4 text-black/60 dark:text-white/60">
             <a href="#" aria-label="Facebook" className="hover:text-black dark:hover:text-white">𐄷</a>
             <a href="#" aria-label="Instagram" className="hover:text-black dark:hover:text-white">◎</a>
             <a href="#" aria-label="X" className="hover:text-black dark:hover:text-white">𝕏</a>
