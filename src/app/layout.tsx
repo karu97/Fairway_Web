@@ -9,7 +9,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.hotelsfairway.com"),
   icons: {
-    icon: "/images/fairway_hotels_fv_icon.png",
+    icon: [
+      { url: "/images/fairway_hotels_fv_icon.png", sizes: "any" },
+      { url: "/images/fairway_hotels_fv_icon.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/fairway_hotels_fv_icon.png", sizes: "32x32", type: "image/png" },
+    ],
     shortcut: "/images/fairway_hotels_fv_icon.png",
     apple: "/images/fairway_hotels_fv_icon.png",
   },
@@ -56,16 +60,17 @@ export const metadata: Metadata = {
     siteName: "Fairway Hotels Sri Lanka",
     images: [
       {
-        url: "/images/fairway_hotels_hero.png",
+        url: "https://www.hotelsfairway.com/images/fairway_hotels_logo.png",
         width: 1200,
         height: 630,
-        alt: "Fairway Hotels Sri Lanka - Luxury Boutique Hotels"
+        alt: "Fairway Hotels Sri Lanka - Luxury Boutique Hotels",
+        type: "image/png"
       },
       {
-        url: "/images/fairway_hotels_logo.png",
-        width: 400,
-        height: 400,
-        alt: "Fairway Hotels Logo"
+        url: "https://www.hotelsfairway.com/images/fairway_hotels_hero.png",
+        width: 1200,
+        height: 630,
+        alt: "Fairway Hotels Sri Lanka Hero Image"
       }
     ],
     locale: "en_US",
@@ -77,7 +82,12 @@ export const metadata: Metadata = {
     title: "Fairway Hotels Sri Lanka | Luxury Boutique Hotels & Premium Tours",
     description:
       "Discover luxury boutique hotels in Sri Lanka with Fairway Hotels. Experience world-class hospitality, premium accommodations, and curated adventure tours.",
-    images: ["/images/fairway_hotels_hero.png"],
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/fairway_hotels_logo.png",
+        alt: "Fairway Hotels Sri Lanka Logo"
+      }
+    ],
     creator: "@fairwayhotels",
     site: "@fairwayhotels",
   },
@@ -96,6 +106,12 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-site-verification-code',
+  },
+  manifest: "/manifest.json",
+  other: {
+    "msapplication-TileColor": "#000000",
+    "msapplication-config": "/browserconfig.xml",
+    "theme-color": "#000000"
   },
   alternates: {
     canonical: "https://www.hotelsfairway.com",
