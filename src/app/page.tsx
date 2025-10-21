@@ -514,7 +514,7 @@ export default function Home() {
                       <span key={i} className="text-yellow-400 text-base sm:text-lg animate-pulse">★</span>
                     ))}
                   </div>
-                  <p className="text-black/80 mb-4 sm:mb-6 leading-relaxed italic group-hover:text-black transition-colors text-sm sm:text-base">"{testimonial.text}"</p>
+                  <p className="text-black/80 mb-4 sm:mb-6 leading-relaxed italic group-hover:text-black transition-colors text-sm sm:text-base">&ldquo;{testimonial.text}&rdquo;</p>
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-full flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       {testimonial.image}
