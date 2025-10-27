@@ -168,13 +168,6 @@ export default function WhatsAppChat() {
               <span className="text-[10px] sm:text-xs text-white font-bold">1</span>
             </div>
           </button>
-
-          {/* Enhanced Tooltip - Hidden on mobile for better UX */}
-          <div className={`hidden md:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-2.5 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-xl whitespace-nowrap transition-all duration-300 shadow-lg border border-gray-700 ${
-            isExpanded ? 'opacity-0 translate-y-2 pointer-events-none' : 'opacity-100 translate-y-0'
-          }`}>
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
-          </div>
         </div>
       </div>
     </>
