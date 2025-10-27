@@ -72,7 +72,7 @@ export default function WhatsAppChat() {
             // Responsive positioning for chat bubble
             'bottom-full left-0 mb-4 md:left-0 md:right-auto'
           }`}>
-            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 sm:p-5 max-w-[320px] sm:max-w-sm mx-4 md:mx-0">
+            <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 sm:p-5 w-full max-w-[340px] sm:max-w-sm mx-4 md:mx-0">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                   <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
