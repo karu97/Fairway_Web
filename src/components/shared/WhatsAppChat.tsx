@@ -49,7 +49,7 @@ export default function WhatsAppChat() {
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-semibold text-gray-900 mb-1">Fairway Hotels</div>
                   <div className="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed">
-                    Hi! 👋 Ready to plan your luxury Sri Lankan adventure? We're here to help!
+                    Hi! 👋 Ready to plan your luxury Sri Lankan adventure? We are here to help!
                   </div>
                   <div className="flex gap-2 flex-wrap">
                     <button
