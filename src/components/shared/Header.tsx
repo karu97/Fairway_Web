@@ -92,7 +92,7 @@ export default function Header({ scrolled }: HeaderProps) {
           </button>
         </div>
         <div className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
           <div className={`absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transition-all duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}>
             {/* Header */}
             <div className="px-6 py-6 flex items-center justify-between border-b border-black/10 bg-gradient-to-r from-white to-gray-50">
