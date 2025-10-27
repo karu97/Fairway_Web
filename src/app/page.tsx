@@ -8,7 +8,6 @@ import { jsonLdHotel, jsonLdBreadcrumbList } from "@/lib/seo";
 import dynamic from "next/dynamic";
 const SnapCarousel = dynamic(() => import("@/components/home/SnapCarousel"), {
   loading: () => <div className="h-40 bg-gray-100 animate-pulse rounded-xl" />,
-  ssr: false, // Disable SSR for this component if it causes hydration issues
 });
 
 export default function Home() {
