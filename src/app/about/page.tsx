@@ -104,7 +104,7 @@ export default function AboutPage() {
                 gradient: "from-purple-500 to-pink-500",
                 bgGradient: "from-purple-50 to-pink-50"
               }
-            ].map((value, idx) => (
+            ].map((value) => (
               <div key={value.title} className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${value.bgGradient} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-black/5 overflow-hidden`}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
 
@@ -142,7 +142,7 @@ export default function AboutPage() {
               { number: "15k+", label: "Happy Guests" },
               { number: "12+", label: "Properties" },
               { number: "5+", label: "Years Experience" }
-            ].map((stat, idx) => (
+            ].map((stat) => (
               <div key={stat.label} className="group">
                 <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent group-hover:scale-110 transition-transform">
                   {stat.number}{stat.suffix}
