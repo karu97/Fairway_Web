@@ -251,7 +251,7 @@ export function jsonLdFAQ() {
         name: "What makes Fairway Hotels different from other luxury hotels in Sri Lanka?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Fairway Hotels combines authentic Sri Lankan hospitality with world-class luxury amenities. Our boutique properties feature infinity pools, spa facilities, premium dining, and personalized service that creates unforgettable experiences tailored to each guest."
+          text: "Fairway Hotels combines authentic Sri Lankan hospitality with world-class luxury amenities. Our boutique properties feature Swiming Pools, spa facilities, premium dining, and personalized service that creates unforgettable experiences tailored to each guest."
         }
       },
       {

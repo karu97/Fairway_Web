@@ -17,7 +17,7 @@ export default function Home() {
 
   const meshendraHotelData = {
     name: "Meshendra Garden Hotel",
-    description: "Luxury boutique hotel in Katunayake, Sri Lanka. Premium accommodations with world-class amenities, infinity pools, and exceptional hospitality. Perfect for airport gateway stays.",
+    description: "Luxury boutique hotel in Katunayake, Sri Lanka. Premium accommodations with world-class amenities, Swiming Pools, and exceptional hospitality. Perfect for airport gateway stays.",
     image: "https://www.hotelsfairway.com/images/Meshendra_Garden/Main Image.png",
     address: {
       streetAddress: "Katunayake Airport Access Road",
@@ -248,7 +248,7 @@ export default function Home() {
                         <span className="text-xl lg:text-2xl">🏊</span>
                       </div>
                       <div>
-                        <div className="font-bold text-base lg:text-lg text-black">Infinity Pools</div>
+                        <div className="font-bold text-base lg:text-lg text-black">Swiming Pools</div>
                         <div className="text-xs lg:text-sm text-black/60">Crystal-clear luxury</div>
                       </div>
                     </div>
@@ -507,7 +507,7 @@ export default function Home() {
             {[
               {
                 icon: "🏊",
-                title: "Infinity Pools",
+                title: "Swiming Pools",
                 description: "Crystal-clear waters overlooking breathtaking landscapes that take your breath away",
                 gradient: "from-blue-500 to-cyan-500",
                 bgGradient: "from-blue-50 to-cyan-50"
