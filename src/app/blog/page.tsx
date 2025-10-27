@@ -28,16 +28,8 @@ const featuredPosts = [
     date: "2024-01-10",
     featured: true
   },
-  {
-    id: 3,
-    title: "Hidden Gems: Beyond the Tourist Trail",
-    excerpt: "Explore Sri Lanka's secret destinations that only locals know about, from pristine beaches to ancient temples off the beaten path.",
-    image: "/images/E34_hotel_koslanda/2.JPG",
-    category: "Destinations",
-    readTime: "6 min read",
-    date: "2024-01-05",
-    featured: true
-  }
+  
+
 ];
 
 const categories = [
