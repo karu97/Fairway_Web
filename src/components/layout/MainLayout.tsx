@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import BackToTop from "@/components/shared/BackToTop";
+import WhatsAppChat from "@/components/shared/WhatsAppChat";
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -26,6 +27,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       </main>
       <Footer />
       <BackToTop />
+      <WhatsAppChat />
     </div>
   );
 }
