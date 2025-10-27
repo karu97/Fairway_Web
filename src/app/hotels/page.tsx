@@ -3,8 +3,50 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Luxury Hotels Sri Lanka | Boutique Stays by Fairway Hotels",
-  description: "Discover our collection of luxury boutique hotels in Sri Lanka. Experience world-class hospitality at Meshendra Garden and e34 Koslanda with personalized service and stunning locations.",
+  title: "Luxury Hotels Sri Lanka | Boutique Hotels Meshendra Garden & e34 Koslanda",
+  description: "Book luxury boutique hotels in Sri Lanka. Experience world-class hospitality at Meshendra Garden (Katunayake airport) and e34 Koslanda with premium amenities, personalized service, and stunning locations.",
+  keywords: [
+    "luxury hotels Sri Lanka",
+    "boutique hotels Sri Lanka",
+    "Meshendra Garden Hotel",
+    "e34 Koslanda Hotel",
+    "luxury hotel Katunayake",
+    "luxury hotel Koslanda",
+    "airport hotels Sri Lanka",
+    "boutique resorts Sri Lanka",
+    "premium accommodation Sri Lanka",
+    "luxury stays Sri Lanka",
+    "Sri Lanka hotel booking",
+    "best hotels Sri Lanka",
+    "luxury hospitality Sri Lanka",
+    "boutique hotel Sri Lanka",
+    "luxury resorts near Colombo",
+    "Sri Lanka luxury hotels",
+    "hotel reservations Sri Lanka",
+    "exclusive hotels Sri Lanka"
+  ],
+  openGraph: {
+    title: "Luxury Hotels Sri Lanka | Boutique Stays by Fairway Hotels",
+    description: "Discover our collection of luxury boutique hotels in Sri Lanka. Experience world-class hospitality at Meshendra Garden and e34 Koslanda.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Meshendra_Garden/Main Image.png",
+        width: 1200,
+        height: 630,
+        alt: "Luxury Hotels Sri Lanka - Meshendra Garden & e34 Koslanda"
+      }
+    ]
+  },
+  twitter: {
+    title: "Luxury Hotels Sri Lanka | Boutique Hotels",
+    description: "Book luxury boutique hotels in Sri Lanka. Experience world-class hospitality at Meshendra Garden and e34 Koslanda.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Meshendra_Garden/Main Image.png",
+        alt: "Luxury Hotels Sri Lanka"
+      }
+    ]
+  }
 };
 
 const hotels = [

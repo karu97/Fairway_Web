@@ -3,8 +3,52 @@ import MainLayout from "@/components/layout/MainLayout";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Sri Lanka Tours | Luxury Adventure Experiences by Fairway Hotels",
-  description: "Discover curated luxury tour packages across Sri Lanka. Experience cultural heritage, beach paradises, and hill country adventures with expert local guides and boutique accommodations.",
+  title: "Sri Lanka Tours | Luxury Adventure Packages - Cultural, Beach & Hill Country",
+  description: "Book luxury tour packages in Sri Lanka. Experience cultural heritage, beach paradises, and hill country adventures with expert guides, boutique accommodations, and personalized service.",
+  keywords: [
+    "Sri Lanka tours",
+    "luxury tours Sri Lanka",
+    "cultural tours Sri Lanka",
+    "beach tours Sri Lanka",
+    "hill country tours Sri Lanka",
+    "Sri Lanka adventure tours",
+    "luxury travel packages Sri Lanka",
+    "Sri Lanka guided tours",
+    "cultural heritage tours Sri Lanka",
+    "beach paradise tours Sri Lanka",
+    "mountain tours Sri Lanka",
+    "Sri Lanka tourism packages",
+    "luxury vacation Sri Lanka",
+    "Sri Lanka travel experiences",
+    "boutique tours Sri Lanka",
+    "premium tours Sri Lanka",
+    "Sri Lanka holiday packages",
+    "cultural triangle tours",
+    "Sri Lanka adventure packages",
+    "luxury tourism Sri Lanka"
+  ],
+  openGraph: {
+    title: "Sri Lanka Tours | Luxury Adventure Experiences",
+    description: "Discover curated luxury tour packages across Sri Lanka. Experience cultural heritage, beach paradises, and hill country adventures.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Explore_Destinations/ella.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sri Lanka Luxury Tours - Cultural, Beach & Adventure Experiences"
+      }
+    ]
+  },
+  twitter: {
+    title: "Sri Lanka Tours | Luxury Adventure Packages",
+    description: "Book luxury tour packages in Sri Lanka. Experience cultural heritage, beach paradises, and hill country adventures.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Explore_Destinations/ella.jpg",
+        alt: "Sri Lanka Luxury Tours"
+      }
+    ]
+  }
 };
 
 const tours = [

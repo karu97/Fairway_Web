@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // SEO and Performance optimizations
+  experimental: {
+    optimizeCss: true,
+    scrollRestoration: true,
+  },
+  // Enable SWC minification for better performance
+  swcMinify: true,
+  // Optimize fonts loading
+  optimizeFonts: true,
 };
 
 export default nextConfig;

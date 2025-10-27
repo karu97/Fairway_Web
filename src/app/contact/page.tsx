@@ -3,8 +3,47 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Contact Fairway Hotels | Book Your Luxury Stay in Sri Lanka",
-  description: "Get in touch with Fairway Hotels for personalized bookings, inquiries, and exceptional Sri Lankan hospitality experiences. Direct contact for the best rates.",
+  title: "Contact Fairway Hotels | Book Luxury Hotels Sri Lanka - Direct Reservations",
+  description: "Contact Fairway Hotels for personalized luxury bookings in Sri Lanka. Direct reservations for Meshendra Garden and e34 Koslanda hotels. Best rates guaranteed with expert service.",
+  keywords: [
+    "contact Fairway Hotels",
+    "book luxury hotels Sri Lanka",
+    "Sri Lanka hotel reservations",
+    "Fairway Hotels booking",
+    "luxury hotel contact Sri Lanka",
+    "hotel inquiries Sri Lanka",
+    "Sri Lanka accommodation booking",
+    "direct hotel booking Sri Lanka",
+    "luxury stay reservations Sri Lanka",
+    "Fairway Hotels contact",
+    "Sri Lanka hotel direct booking",
+    "luxury hospitality contact",
+    "boutique hotel reservations Sri Lanka",
+    "Sri Lanka hotel customer service",
+    "premium hotel booking Sri Lanka"
+  ],
+  openGraph: {
+    title: "Contact Fairway Hotels | Book Your Luxury Stay",
+    description: "Get in touch with Fairway Hotels for personalized bookings and exceptional Sri Lankan hospitality experiences.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/fairway_hotels_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact Fairway Hotels - Luxury Sri Lanka Accommodations"
+      }
+    ]
+  },
+  twitter: {
+    title: "Contact Fairway Hotels | Luxury Bookings Sri Lanka",
+    description: "Contact Fairway Hotels for personalized luxury bookings in Sri Lanka. Direct reservations with best rates.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/fairway_hotels_logo.png",
+        alt: "Contact Fairway Hotels"
+      }
+    ]
+  }
 };
 
 export default function ContactPage() {

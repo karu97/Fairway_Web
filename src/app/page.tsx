@@ -146,20 +146,20 @@ export default function Home() {
 
               <Reveal delayMs={300}>
                 <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-serif leading-[0.9] mb-6 sm:mb-8">
-                  <span className="block text-black/80">Experience</span>
+                  <span className="block text-black/80">Fairway Hotels</span>
                   <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse drop-shadow-2xl">
-                    Paradise
+                    Sri Lanka
                   </span>
                   <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-black/60 mt-2 sm:mt-4">
-                    Beyond Imagination
+                    Luxury Beyond Imagination
                   </span>
                 </h1>
               </Reveal>
 
               <Reveal delayMs={600}>
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-black/70 mb-8 sm:mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light px-4 sm:px-0">
-                  Step into a world where luxury meets serenity. Fairway Hotels redefines opulence
-                  with meticulously crafted experiences that transcend the ordinary.
+                  Fairway Hotels Sri Lanka - Step into a world where luxury meets serenity. Fairway redefines opulence
+                  with meticulously crafted experiences that transcend the ordinary in Colombo and beyond.
                 </p>
               </Reveal>
 
@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse delay-300"></div>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-serif mb-6 sm:mb-8 bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                Luxury Hotels Sri Lanka | Iconic Destinations
+                Fairway Luxury Boutique Hotels Sri Lanka | Premium Accommodations
               </h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-black/70 max-w-3xl mx-auto leading-relaxed font-light">
                 Each property is a masterpiece of design and luxury, crafted to provide

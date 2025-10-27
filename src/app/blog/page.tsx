@@ -3,8 +3,51 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Fairway Journal | Luxury Travel Stories & Sri Lanka Insights",
-  description: "Discover luxury travel stories, design inspiration, and insider insights from Fairway Hotels. Explore Sri Lanka's hidden gems through our curated journal of experiences.",
+  title: "Fairway Journal | Luxury Travel Stories & Sri Lanka Travel Blog",
+  description: "Read luxury travel stories, design inspiration, and insider insights from Fairway Hotels. Discover Sri Lanka's hidden gems, cultural experiences, and luxury hospitality tips.",
+  keywords: [
+    "Sri Lanka travel blog",
+    "luxury travel stories",
+    "Sri Lanka tourism blog",
+    "Fairway Hotels journal",
+    "Sri Lanka travel tips",
+    "luxury hospitality blog",
+    "Sri Lanka cultural insights",
+    "boutique hotel stories",
+    "Sri Lanka travel guide",
+    "luxury travel Sri Lanka",
+    "Sri Lanka destinations blog",
+    "hospitality industry insights",
+    "Sri Lanka luxury experiences",
+    "travel stories Sri Lanka",
+    "Sri Lanka adventure blog",
+    "luxury accommodation tips",
+    "Sri Lanka hidden gems",
+    "boutique hotel reviews",
+    "Sri Lanka travel experiences"
+  ],
+  openGraph: {
+    title: "Fairway Journal | Luxury Travel Stories & Sri Lanka Insights",
+    description: "Discover luxury travel stories, design inspiration, and insider insights from Fairway Hotels. Explore Sri Lanka's hidden gems.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Explore_Destinations/kandy.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fairway Journal - Sri Lanka Travel Stories & Luxury Insights"
+      }
+    ]
+  },
+  twitter: {
+    title: "Fairway Journal | Luxury Travel Stories",
+    description: "Read luxury travel stories and insider insights from Fairway Hotels. Discover Sri Lanka's hidden gems.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Explore_Destinations/kandy.jpg",
+        alt: "Fairway Journal - Sri Lanka Travel Stories"
+      }
+    ]
+  }
 };
 
 const featuredPosts = [

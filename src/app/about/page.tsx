@@ -2,15 +2,91 @@ import MainLayout from "@/components/layout/MainLayout";
 import TeamSection from "@/components/shared/TeamSection";
 import Image from "next/image";
 import Link from "next/link";
+import { jsonLdTeamPage, jsonLdPerson } from "@/lib/seo";
 
 export const metadata = {
-  title: "About Fairway Hotels | Luxury Hospitality in Sri Lanka",
-  description: "Discover the Fairway Hotels story, our commitment to contemporary design, sustainability, and authentic Sri Lankan experiences. Meet our leadership team.",
+  title: "About Fairway Hotels | Meet Our Leadership Team - C. Weerasinghe, P.S.Gunawardene, A.Rathnasuriya",
+  description: "Discover the Fairway Hotels story and meet our experienced leadership team: C. Weerasinghe (Chairman & Managing Director), P.S.Gunawardene (Director), and A.Rathnasuriya (General Manager). Luxury hospitality excellence in Sri Lanka.",
+  keywords: [
+    "Fairway Hotels leadership team",
+    "C. Weerasinghe",
+    "Chaminda Weerasinghe Chairman",
+    "Chaminda Weerasinghe Fairway Hotels",
+    "P.S.Gunawardene Director",
+    "A.Rathnasuriya General Manager",
+    "Sri Lanka hotel management",
+    "luxury hospitality leaders",
+    "boutique hotel owners Sri Lanka",
+    "Fairway Hotels team",
+    "Sri Lanka hospitality experts",
+    "luxury hotel leadership",
+    "hotel management Sri Lanka",
+    "boutique hotel directors",
+    "Sri Lanka tourism leaders",
+    "luxury accommodation management",
+    "premium hotel services team"
+  ],
+  openGraph: {
+    title: "About Fairway Hotels | Meet Our Leadership Team",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: C. Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya. World-class luxury hospitality.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Fairway Hotels Leadership Team - C. Weerasinghe, Chairman & Managing Director"
+      }
+    ]
+  },
+  twitter: {
+    title: "About Fairway Hotels | Meet Our Leadership Team",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: C. Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya.",
+    images: [
+      {
+        url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
+        alt: "Fairway Hotels Leadership Team"
+      }
+    ]
+  }
 };
 
 export default function AboutPage() {
+  const teamMembers = [
+    {
+      name: "C. Weerasinghe",
+      role: "Chairman / Managing Director",
+      image: "/images/Team/Chairman_Managing_Director.jpeg",
+      description: "C. Weerasinghe serves as Chairman and Managing Director of Fairway Hotels Sri Lanka, bringing extensive experience in hospitality and business leadership to deliver world-class luxury experiences."
+    },
+    {
+      name: "P.S.Gunawardene",
+      role: "Director",
+      image: "/images/Team/Director.png",
+      description: "P.S.Gunawardene is a Director at Fairway Hotels Sri Lanka, contributing strategic vision and operational excellence to our luxury hotel portfolio and premium guest services."
+    },
+    {
+      name: "A.Rathnasuriya",
+      role: "General Manager",
+      image: "/images/Team/General_Manager.png",
+      description: "A.Rathnasuriya serves as General Manager at Fairway Hotels Sri Lanka, overseeing daily operations and ensuring exceptional guest experiences across our boutique properties."
+    }
+  ];
+
   return (
     <MainLayout>
+      {/* Team Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdTeamPage()) }}
+      />
+      {teamMembers.map((member) => (
+        <script
+          key={member.name}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson(member)) }}
+        />
+      ))}
+
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(120,119,198,0.15),transparent_50%)] animate-pulse" />
