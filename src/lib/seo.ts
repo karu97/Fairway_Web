@@ -295,7 +295,7 @@ export function jsonLdTeamPage() {
     member: [
       {
         "@type": "Person",
-        name: "Chaminda Weerasinghe C. Weerasinghe",
+        name: "Chaminda Weerasinghe",
         jobTitle: "Chairman / Managing Director",
         image: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
         description: "Chaminda Weerasinghe serves as Chairman and Managing Director of Fairway Hotels Sri Lanka, bringing extensive experience in hospitality and business leadership."

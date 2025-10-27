@@ -5,42 +5,42 @@ import Link from "next/link";
 import { jsonLdTeamPage, jsonLdPerson } from "@/lib/seo";
 
 export const metadata = {
-  title: "About Fairway Hotels | Meet Our Leadership Team - C. Weerasinghe, P.S.Gunawardene, A.Rathnasuriya",
-  description: "Discover the Fairway Hotels story and meet our experienced leadership team: C. Weerasinghe (Chairman & Managing Director), P.S.Gunawardene (Director), and A.Rathnasuriya (General Manager). Luxury hospitality excellence in Sri Lanka.",
-  keywords: [
-    "Fairway Hotels leadership team",
-    "C. Weerasinghe",
-    "Chaminda Weerasinghe Chairman",
-    "Chaminda Weerasinghe Fairway Hotels",
-    "P.S.Gunawardene Director",
-    "A.Rathnasuriya General Manager",
-    "Sri Lanka hotel management",
-    "luxury hospitality leaders",
-    "boutique hotel owners Sri Lanka",
-    "Fairway Hotels team",
-    "Sri Lanka hospitality experts",
-    "luxury hotel leadership",
-    "hotel management Sri Lanka",
-    "boutique hotel directors",
-    "Sri Lanka tourism leaders",
-    "luxury accommodation management",
-    "premium hotel services team"
-  ],
+   title: "About Fairway Hotels | Meet Our Leadership Team - Chaminda Weerasinghe, P.S.Gunawardene, A.Rathnasuriya",
+   description: "Discover the Fairway Hotels story and meet our experienced leadership team: Chaminda Weerasinghe (Chairman & Managing Director), P.S.Gunawardene (Director), and A.Rathnasuriya (General Manager). Luxury hospitality excellence in Sri Lanka.",
+   keywords: [
+     "Fairway Hotels leadership team",
+     "Chaminda Weerasinghe",
+     "Chaminda Weerasinghe Chairman",
+     "Chaminda Weerasinghe Fairway Hotels",
+     "P.S.Gunawardene Director",
+     "A.Rathnasuriya General Manager",
+     "Sri Lanka hotel management",
+     "luxury hospitality leaders",
+     "boutique hotel owners Sri Lanka",
+     "Fairway Hotels team",
+     "Sri Lanka hospitality experts",
+     "luxury hotel leadership",
+     "hotel management Sri Lanka",
+     "boutique hotel directors",
+     "Sri Lanka tourism leaders",
+     "luxury accommodation management",
+     "premium hotel services team"
+   ],
   openGraph: {
     title: "About Fairway Hotels | Meet Our Leadership Team",
-    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: C. Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya. World-class luxury hospitality.",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya. World-class luxury hospitality.",
     images: [
       {
         url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
         width: 1200,
         height: 630,
-        alt: "Fairway Hotels Leadership Team - C. Weerasinghe, Chairman & Managing Director"
+        alt: "Fairway Hotels Leadership Team - Chaminda Weerasinghe, Chairman & Managing Director"
       }
     ]
   },
   twitter: {
     title: "About Fairway Hotels | Meet Our Leadership Team",
-    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: C. Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya.",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya.",
     images: [
       {
         url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",

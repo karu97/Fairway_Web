@@ -64,7 +64,6 @@ export const metadata: Metadata = {
     "Sri Lanka luxury hotels",
     "best hotels Sri Lanka",
     "luxury hospitality Sri Lanka",
-    "C. Weerasinghe",
     "Chaminda Weerasinghe",
     "Chaminda Weerasinghe Chairman",
     "Chaminda Weerasinghe Fairway Hotels",
