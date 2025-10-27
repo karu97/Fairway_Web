@@ -53,7 +53,15 @@ export default function Header({ scrolled }: HeaderProps) {
       <div className={`backdrop-blur supports-[backdrop-filter]:bg-white/70 ${scrolled ? "shadow-sm" : ""}`}>
         <div className="mx-auto max-w-7xl flex items-center justify-between px-4 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/images/fairway_hotels_logo.png" alt="Fairway Hotels" width={170} height={50} className="rounded" />
+            <Image
+              src="/images/fairway_hotels_logo.png"
+              alt="Fairway Hotels"
+              width={170}
+              height={50}
+              className="rounded"
+              priority={false}
+              quality={85}
+            />
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => {

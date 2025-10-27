@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+// Lazy load team images for better performance
+
 type Member = {
   name: string;
   role: string;
@@ -34,7 +36,15 @@ export default function TeamSection() {
             <div className="relative mx-auto h-40 w-40">
               <div className="absolute inset-0 rounded-full bg-gradient-to-b from-black/5 to-transparent blur-2xl" />
               <div className="relative h-40 w-40 rounded-full overflow-hidden ring-1 ring-black/10">
-                <Image fill src={m.photo} alt={m.name} className="object-cover" />
+                <Image
+                  fill
+                  src={m.photo}
+                  alt={m.name}
+                  className="object-cover"
+                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 160px, 160px"
+                  quality={80}
+                  loading="lazy"
+                />
               </div>
             </div>
             <div className="mt-5 text-center">

@@ -4,6 +4,13 @@ import MainLayout from "@/components/layout/MainLayout";
 import Reveal from "@/components/shared/Reveal";
 import { jsonLdHotel, jsonLdBreadcrumbList } from "@/lib/seo";
 
+// Lazy load heavy components
+import dynamic from "next/dynamic";
+const SnapCarousel = dynamic(() => import("@/components/home/SnapCarousel"), {
+  loading: () => <div className="h-40 bg-gray-100 animate-pulse rounded-xl" />,
+  ssr: false, // Disable SSR for this component if it causes hydration issues
+});
+
 export default function Home() {
   const breadcrumbData = [
     { name: "Home", url: "https://www.hotelsfairway.com" }
@@ -226,6 +233,8 @@ export default function Home() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-1000"
                       priority
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
@@ -313,6 +322,9 @@ export default function Home() {
                     alt="Meshendra Garden Hotel - Ultimate Luxury"
                     fill
                     className="object-cover group-hover:scale-125 transition-transform duration-1000"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={80}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -388,6 +400,9 @@ export default function Home() {
                     alt="e34 Café, Restaurant & Hotel Koslanda - Natural Paradise"
                     fill
                     className="object-cover group-hover:scale-125 transition-transform duration-1000"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={80}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 

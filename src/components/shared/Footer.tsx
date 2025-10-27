@@ -12,7 +12,15 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-6 grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="md:col-span-2">
-        <Image src="/images/fairway_hotels_logo.png" alt="Fairway Hotels" width={170} height={50} className="rounded" />
+        <Image
+          src="/images/fairway_hotels_logo.png"
+          alt="Fairway Hotels"
+          width={170}
+          height={50}
+          className="rounded"
+          priority={false}
+          quality={85}
+        />
         <p className="mt-3 text-sm text-black/60 max-w-sm">Luxury stays and curated tours across Sri Lanka. Thoughtful design, warm service, and unforgettable journeys.</p>
           <div className="flex items-center gap-4 mt-4 text-black/60">
             <a href="#" aria-label="Facebook" className="hover:text-black">𐄷</a>
@@ -42,7 +50,15 @@ export default function Footer() {
               { src: "/images/E34_hotel_koslanda/5.JPG", href: "/hotels/e34-koslanda" },
             ].map((item, i) => (
               <Link key={i} href={item.href} className="relative aspect-square rounded-md overflow-hidden border border-black/10">
-                <Image fill src={item.src} alt="Hotel gallery image" className="object-cover" />
+                <Image
+                  fill
+                  src={item.src}
+                  alt="Hotel gallery image"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                  quality={75}
+                  loading="lazy"
+                />
               </Link>
             ))}
           </div>

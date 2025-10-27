@@ -3,8 +3,20 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { jsonLdOrganization, jsonLdWebSite } from "@/lib/seo";
 
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+// Optimize fonts for performance
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  preload: true,
+});
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  preload: true,
+});
+
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.hotelsfairway.com"),

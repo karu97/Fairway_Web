@@ -126,6 +126,30 @@ body::after {
   }
 }
 
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .floating-orb,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-ping,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* Optimize animations for performance */
+.floating-orb {
+  will-change: transform;
+}
+
+.animate-pulse {
+  animation-duration: 2s;
+}
+
+.animate-bounce {
+  animation-duration: 1s;
+}
+
 .floating-orb:nth-child(1) {
   width: 80px;
   height: 80px;
