@@ -119,7 +119,7 @@ export default function Header({ scrolled }: HeaderProps) {
             </div>
 
             {/* Navigation */}
-            <nav className="px-6 py-4 flex flex-col space-y-1 bg-amber-50">
+            <nav className="px-6 py-4 flex flex-col space-y-1 bg-white">
               {navItems.map((item, index) => {
                 const active = pathname === item.href;
                 return (
