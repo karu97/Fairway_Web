@@ -123,7 +123,7 @@ export default function HotelsPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {hotels.map((hotel, idx) => (
+            {hotels.map((hotel) => (
               <div key={hotel.id} className="group relative overflow-hidden rounded-2xl lg:rounded-[2rem] bg-white shadow-2xl hover:shadow-black/20 transition-all duration-700 hover:-translate-y-4 border border-black/5">
                 <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
                   <Image
@@ -276,7 +276,7 @@ export default function HotelsPage() {
                 gradient: "from-purple-500 to-pink-500",
                 bgGradient: "from-purple-50 to-pink-50"
               }
-            ].map((feature, idx) => (
+            ].map((feature) => (
               <div key={feature.title} className={`group relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${feature.bgGradient} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-black/5 overflow-hidden`}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
 
