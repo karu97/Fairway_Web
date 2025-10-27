@@ -4,11 +4,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import Reveal from "@/components/shared/Reveal";
 import { jsonLdHotel, jsonLdBreadcrumbList } from "@/lib/seo";
 
-// Lazy load heavy components
-import dynamic from "next/dynamic";
-const SnapCarousel = dynamic(() => import("@/components/home/SnapCarousel"), {
-  loading: () => <div className="h-40 bg-gray-100 animate-pulse rounded-xl" />,
-});
+// Note: SnapCarousel component removed as it's not currently used in the page
 
 export default function Home() {
   const breadcrumbData = [
