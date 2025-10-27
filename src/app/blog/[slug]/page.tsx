@@ -1,10 +1,11 @@
 import MainLayout from "@/components/layout/MainLayout";
 import type { Metadata } from "next";
 
-type Params = { params: { slug: string } };
+type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const title = `${params.slug.replace(/-/g, " ")}`;
+  const { slug } = await params;
+  const title = `${slug.replace(/-/g, " ")}`;
   return {
     title,
     description: "Fairway Hotels journal article.",
@@ -12,8 +13,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-export default function BlogPostPage({ params }: Params) {
-  const { slug } = params;
+export default async function BlogPostPage({ params }: Params) {
+  const { slug } = await params;
   return (
     <MainLayout>
       <article className="mx-auto max-w-3xl px-4 py-12">
