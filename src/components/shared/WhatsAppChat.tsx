@@ -26,8 +26,8 @@ export default function WhatsAppChat() {
       <div className={`fixed z-50 transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
       } ${
-        // Responsive positioning: bottom-right on mobile, bottom-left on desktop
-        'bottom-4 right-4 md:bottom-6 md:left-6'
+        // Responsive positioning: bottom-left on mobile, bottom-left on desktop
+        'bottom-4 left-4 md:bottom-6 md:left-6'
       }`}>
         <div className="relative">
           {/* Chat Bubble (when expanded) */}
@@ -37,7 +37,7 @@ export default function WhatsAppChat() {
               : 'opacity-0 translate-y-2 scale-95 pointer-events-none'
           } ${
             // Responsive positioning for chat bubble
-            'bottom-full right-0 mb-4 md:left-0 md:right-auto'
+            'bottom-full left-0 mb-4 md:left-0 md:right-auto'
           }`}>
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-3 sm:p-4 max-w-[280px] sm:max-w-xs mx-4 md:mx-0">
               <div className="flex items-start gap-3">
@@ -69,7 +69,7 @@ export default function WhatsAppChat() {
               </div>
               {/* Chat bubble pointer - responsive positioning */}
               <div className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 sm:border-l-8 sm:border-r-8 sm:border-t-8 border-transparent transform translate-y-1/2 ${
-                'bottom-0 right-6 md:left-6 md:right-auto'
+                'bottom-0 left-6 md:left-6 md:right-auto'
               }`}>
                 <div className="border-t-white"></div>
                 <div className={`border-t-gray-200 ${
