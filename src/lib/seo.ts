@@ -7,6 +7,14 @@ export function jsonLdOrganization() {
     url: "https://www.hotelsfairway.com",
     logo: "https://www.hotelsfairway.com/images/fairway_hotels_logo.png",
     description: "Luxury boutique hotels and premium tours in Sri Lanka. Experience world-class hospitality with premium accommodations and curated adventure experiences.",
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Koslanda Plantation Private Limited",
+      alternateName: "Koslanda Plantation",
+      url: "https://www.koslandaplantation.com",
+      description:
+        "Koslanda Plantation Private Limited is a leading agriculture company specializing in the cultivation and production of high-quality vanilla.",
+    },
     foundingDate: "2020",
     address: {
       "@type": "PostalAddress",
@@ -306,13 +314,6 @@ export function jsonLdTeamPage() {
         jobTitle: "Director",
         image: "https://www.hotelsfairway.com/images/Team/Director.png",
         description: "P.S.Gunawardene is a Director at Fairway Hotels Sri Lanka, contributing strategic vision and operational excellence to our luxury hotel portfolio."
-      },
-      {
-        "@type": "Person",
-        name: "A.Rathnasuriya",
-        jobTitle: "General Manager",
-        image: "https://www.hotelsfairway.com/images/Team/General_Manager.png",
-        description: "A.Rathnasuriya serves as General Manager at Fairway Hotels Sri Lanka, overseeing daily operations and ensuring exceptional guest experiences."
       }
     ]
   };
@@ -336,7 +337,7 @@ export function jsonLdFAQ() {
         name: "Who leads Fairway Hotels Sri Lanka team?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Our leadership team includes C. Weerasinghe (Chairman & Managing Director), P.S.Gunawardene (Director), and A.Rathnasuriya (General Manager), all dedicated to providing exceptional luxury hospitality experiences."
+          text: "Our leadership team includes C. Weerasinghe (Chairman & Managing Director) and P.S.Gunawardene (Director), dedicated to providing exceptional luxury hospitality experiences."
         }
       },
       {

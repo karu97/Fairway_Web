@@ -1,6 +1,7 @@
 import Image from "next/image";
 import MainLayout from "@/components/layout/MainLayout";
 import Link from "next/link";
+import { ArrowRight, Car, Map as MapIcon, Phone, Users, Hotel, UtensilsCrossed } from "lucide-react";
 
 export const metadata = {
   title: "Sri Lanka Tours | Luxury Adventure Packages - Cultural, Beach & Hill Country",
@@ -130,7 +131,7 @@ export default function ToursPage() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
                     Explore Tours
-                    <span className="group-hover:translate-x-2 transition-transform duration-300">🗺️</span>
+                    <MapIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </Link>
@@ -203,7 +204,7 @@ export default function ToursPage() {
                     <div className="flex items-center gap-1 sm:gap-2">
                       <div className="flex gap-0.5 sm:gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} className="text-yellow-400 text-xs sm:text-sm animate-pulse" style={{animationDelay: `${i * 0.1}s`}}>
+                          <span key={i} className="text-yellow-400 text-xs sm:text-sm animate-pulse" style={{ animationDelay: `${i * 0.1}s` }}>
                             ★
                           </span>
                         ))}
@@ -314,28 +315,28 @@ export default function ToursPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
-                icon: "👥",
+                icon: Users,
                 title: "Expert Guides",
                 description: "Local experts with deep knowledge of Sri Lanka's culture, history, and hidden gems",
                 gradient: "from-blue-500 to-cyan-500",
                 bgGradient: "from-blue-50 to-cyan-50"
               },
               {
-                icon: "🏨",
+                icon: Hotel,
                 title: "Luxury Stays",
                 description: "Carefully selected boutique hotels and luxury resorts for ultimate comfort",
                 gradient: "from-green-500 to-teal-500",
                 bgGradient: "from-green-50 to-teal-50"
               },
               {
-                icon: "🍽️",
+                icon: UtensilsCrossed,
                 title: "Local Cuisine",
                 description: "Authentic Sri Lankan dining experiences with fresh, local ingredients",
                 gradient: "from-orange-500 to-red-500",
                 bgGradient: "from-orange-50 to-red-50"
               },
               {
-                icon: "🚗",
+                icon: Car,
                 title: "Private Transport",
                 description: "Comfortable, air-conditioned vehicles with professional chauffeurs",
                 gradient: "from-purple-500 to-pink-500",
@@ -347,7 +348,7 @@ export default function ToursPage() {
 
                 <div className="relative mb-6 sm:mb-8">
                   <div className={`w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${feature.gradient} rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                    <span className="text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300">{feature.icon}</span>
+                    <feature.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
 
@@ -395,8 +396,9 @@ export default function ToursPage() {
               className="group px-6 py-3 sm:px-8 sm:py-4 border-2 border-white/30 text-white rounded-full font-medium hover:border-white hover:bg-white hover:text-black transition-all duration-300 hover:shadow-xl relative overflow-hidden text-sm sm:text-base"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                📞 Call +94 72 250 9609
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <Phone className="w-4 h-4" />
+                Call +94 72 250 9609
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
           </div>

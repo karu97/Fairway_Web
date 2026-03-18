@@ -1,31 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Facebook, Instagram, MapPin, Mail, Phone, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="relative bg-white mt-12">
       <div className="absolute -top-6 left-0 right-0" aria-hidden>
         <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none">
-          <path d="M0,64 C 240,0 480,0 720,64 C 960,128 1200,128 1440,64 L1440,80 L0,80 Z" fill="#ffffff" stroke="#e5e5e5"/>
+          <path d="M0,64 C 240,0 480,0 720,64 C 960,128 1200,128 1440,64 L1440,80 L0,80 Z" fill="#ffffff" stroke="#e5e5e5" />
         </svg>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pt-12 pb-6 grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="md:col-span-2">
-        <Image
-          src="/images/fairway_hotels_logo.png"
-          alt="Fairway Hotels"
-          width={170}
-          height={50}
-          className="rounded"
-          priority={false}
-          quality={85}
-        />
-        <p className="mt-3 text-sm text-black/60 max-w-sm">Luxury stays and curated tours across Sri Lanka. Thoughtful design, warm service, and unforgettable journeys.</p>
+          <Image
+            src="/images/fairway_hotels_logo.png"
+            alt="Fairway Hotels"
+            width={170}
+            height={50}
+            className="rounded"
+            priority={false}
+            quality={85}
+          />
+          <p className="mt-3 text-sm text-black/60 max-w-sm">Luxury stays and curated tours across Sri Lanka. Thoughtful design, warm service, and unforgettable journeys.</p>
           <div className="flex items-center gap-4 mt-4 text-black/60">
-            <a href="#" aria-label="Facebook" className="hover:text-black">𐄷</a>
-            <a href="#" aria-label="Instagram" className="hover:text-black">◎</a>
-            <a href="#" aria-label="X" className="hover:text-black">𝕏</a>
+            <a href="#" aria-label="Facebook" className="hover:text-black transition-colors">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="#" aria-label="Instagram" className="hover:text-black transition-colors">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="#" aria-label="X" className="hover:text-black transition-colors">
+              <Twitter className="w-5 h-5" />
+            </a>
           </div>
         </div>
         <div>
@@ -36,6 +43,7 @@ export default function Footer() {
             <li><Link href="/blog" className="hover:text-black">Blog</Link></li>
             <li><Link href="/about" className="hover:text-black">About</Link></li>
             <li><Link href="/contact" className="hover:text-black">Contact</Link></li>
+            <li><Link href="/koslanda-plantation" className="hover:text-black">Koslanda Plantation</Link></li>
           </ul>
         </div>
         <div>
@@ -70,9 +78,18 @@ export default function Footer() {
             <button type="submit" className="px-4 py-2 rounded-md bg-black text-white text-sm">Subscribe</button>
           </form>
           <div className="mt-4 text-sm text-black/70">
-            📞 +94 72 250 9609
-            <br /> ✉️ info@hotelsfairway.com
-            <br /> 📍 Colombo, Sri Lanka
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4" />
+              +94 72 250 9609
+            </div>
+            <div className="flex items-center gap-2 mt-1">
+              <Mail className="w-4 h-4" />
+              info@hotelsfairway.com
+            </div>
+            <div className="flex items-center gap-2 mt-1">
+              <MapPin className="w-4 h-4" />
+              Colombo, Sri Lanka
+            </div>
           </div>
         </div>
       </div>

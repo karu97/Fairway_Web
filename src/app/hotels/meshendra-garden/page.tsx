@@ -1,5 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const metadata = {
   title: "Meshendra Garden Hotel",
@@ -58,9 +59,18 @@ export default function MeshendraGardenPage() {
             <p className="text-black/70 mt-2 text-sm sm:text-base">Katunayake, Western Province</p>
             <p className="text-black/70 mt-3 max-w-prose text-sm sm:text-base">A tranquil and convenient stay near Colombo Airport, with a focus on comfort, accessibility, and modern amenities.</p>
             <div className="mt-4 text-xs sm:text-sm text-black/80">
-              <div>📍 16B, Airport Road, Katunayake, Western Province, Sri Lanka</div>
-              <div>📞 +94 11 225 4050 | +94 11 225 2860</div>
-              <div>✉️ infor@hotelsfairway.com</div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                16B, Airport Road, Katunayake, Western Province, Sri Lanka
+              </div>
+              <div className="flex items-center gap-2 mt-1">
+                <Phone className="w-4 h-4" />
+                +94 11 225 4050 | +94 11 225 2860
+              </div>
+              <div className="flex items-center gap-2 mt-1">
+                <Mail className="w-4 h-4" />
+                infor@hotelsfairway.com
+              </div>
             </div>
           </div>
           <div className="relative h-48 sm:h-56 md:h-72 rounded-xl overflow-hidden border border-black/10">
@@ -131,14 +141,20 @@ export default function MeshendraGardenPage() {
             </div>
             <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5 text-xs sm:text-sm text-black/80">
               <div className="font-medium text-sm sm:text-base">Contact</div>
-              <div className="mt-2">📞 +94 11 225 4050 | +94 11 225 2860</div>
-              <div>✉️ infor@hotelsfairway.com</div>
+              <div className="mt-2 flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                +94 11 225 4050 | +94 11 225 2860
+              </div>
+              <div className="flex items-center gap-2 mt-1">
+                <Mail className="w-4 h-4" />
+                infor@hotelsfairway.com
+              </div>
               <a className="mt-3 inline-block px-3 sm:px-4 py-2 rounded-md border border-black/15 hover:bg-black/5 text-xs sm:text-sm" href="#">Visit Website</a>
             </div>
             <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
               <div className="font-medium text-sm sm:text-base">Gallery</div>
               <div className="mt-3 grid grid-cols-3 gap-2">
-                {["Swiming_pool.png","Swiming_pool_1.png","4.png","5.png","6.png","10.png"].map((src) => (
+                {["Swiming_pool.png", "Swiming_pool_1.png", "4.png", "5.png", "6.png", "10.png"].map((src) => (
                   <div key={src} className="relative aspect-square rounded-md overflow-hidden border border-black/10">
                     <Image fill src={`/images/Meshendra_Garden/${src}`} alt="Gallery" className="object-cover" />
                   </div>

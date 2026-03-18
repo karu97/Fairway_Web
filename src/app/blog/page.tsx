@@ -1,6 +1,7 @@
 import MainLayout from "@/components/layout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
+import { BookOpen, Map as MapIcon } from "lucide-react";
 
 export const metadata = {
   title: "Fairway Journal | Luxury Travel Stories & Sri Lanka Travel Blog",
@@ -71,7 +72,7 @@ const featuredPosts = [
     date: "2024-01-10",
     featured: true
   },
-  
+
   {
     id: 3,
     title: "Hidden Gems: Beyond the Tourist Trail",
@@ -132,7 +133,7 @@ export default function BlogIndexPage() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
                     Read Our Stories
-                    <span className="group-hover:translate-x-2 transition-transform duration-300">📖</span>
+                    <BookOpen className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </Link>
@@ -164,11 +165,10 @@ export default function BlogIndexPage() {
             {categories.map((category, idx) => (
               <button
                 key={category.name}
-                className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
-                  idx === 0
+                className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${idx === 0
                     ? 'bg-black text-white shadow-lg'
                     : 'bg-black/5 text-black/70 hover:bg-black/10 hover:text-black'
-                }`}
+                  }`}
               >
                 {category.name}
                 <span className="ml-2 text-xs opacity-70">({category.count})</span>
@@ -349,7 +349,7 @@ export default function BlogIndexPage() {
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Explore Sri Lanka
-                <span className="group-hover:translate-x-1 transition-transform">🗺️</span>
+                <MapIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
           </div>

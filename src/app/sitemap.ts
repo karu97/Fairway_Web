@@ -4,6 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.hotelsfairway.com";
   return [
     { url: `${base}/`, priority: 1 },
+    { url: `${base}/koslanda-plantation`, priority: 0.8 },
     { url: `${base}/hotels`, priority: 0.9 },
     { url: `${base}/tours`, priority: 0.9 },
     { url: `${base}/blog`, priority: 0.8 },

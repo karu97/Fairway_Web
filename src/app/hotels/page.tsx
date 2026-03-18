@@ -1,6 +1,8 @@
 import MainLayout from "@/components/layout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
+import CafeESection from "@/components/home/CafeESection";
+import { ArrowRight, Car, Phone, Sparkles, UtensilsCrossed, Waves, Leaf } from "lucide-react";
 
 export const metadata = {
   title: "Luxury Hotels Sri Lanka | Boutique Hotels Meshendra Garden & e34 Koslanda",
@@ -118,7 +120,7 @@ export default function HotelsPage() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
                     Explore Properties
-                    <span className="group-hover:translate-x-2 transition-transform duration-300">✨</span>
+                    <Sparkles className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </Link>
@@ -191,7 +193,7 @@ export default function HotelsPage() {
                     <div className="flex items-center gap-1 sm:gap-2">
                       <div className="flex gap-0.5 sm:gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} className="text-yellow-400 text-xs sm:text-sm animate-pulse" style={{animationDelay: `${i * 0.1}s`}}>
+                          <span key={i} className="text-yellow-400 text-xs sm:text-sm animate-pulse" style={{ animationDelay: `${i * 0.1}s` }}>
                             ★
                           </span>
                         ))}
@@ -263,6 +265,9 @@ export default function HotelsPage() {
         </div>
       </section>
 
+      {/* Cafe E34 Collection Section */}
+      <CafeESection variant="hotels" />
+
       {/* Why Choose Us Section */}
       <section className="py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
         <div className="absolute inset-0">
@@ -291,28 +296,28 @@ export default function HotelsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
-                icon: "🏊",
+                icon: Waves,
                 title: "Infinity Pools",
                 description: "Crystal-clear waters overlooking breathtaking landscapes that take your breath away",
                 gradient: "from-blue-500 to-cyan-500",
                 bgGradient: "from-blue-50 to-cyan-50"
               },
               {
-                icon: "🌿",
+                icon: Leaf,
                 title: "Spa & Wellness",
                 description: "Rejuvenate with traditional Sri Lankan wellness treatments passed down through generations",
                 gradient: "from-green-500 to-teal-500",
                 bgGradient: "from-green-50 to-teal-50"
               },
               {
-                icon: "🍽️",
+                icon: UtensilsCrossed,
                 title: "Chef's Table",
                 description: "Culinary experiences featuring local and international cuisine by world-renowned chefs",
                 gradient: "from-orange-500 to-red-500",
                 bgGradient: "from-orange-50 to-red-50"
               },
               {
-                icon: "🚘",
+                icon: Car,
                 title: "Private Transfers",
                 description: "Seamless transportation with luxury vehicles and professional chauffeurs at your service",
                 gradient: "from-purple-500 to-pink-500",
@@ -324,7 +329,7 @@ export default function HotelsPage() {
 
                 <div className="relative mb-6 sm:mb-8">
                   <div className={`w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${feature.gradient} rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                    <span className="text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300">{feature.icon}</span>
+                    <feature.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
 
@@ -372,8 +377,9 @@ export default function HotelsPage() {
               className="group px-6 py-3 sm:px-8 sm:py-4 border-2 border-white/30 text-white rounded-full font-medium hover:border-white hover:bg-white hover:text-black transition-all duration-300 hover:shadow-xl relative overflow-hidden text-sm sm:text-base"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                📞 Call +94 72 250 9609
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <Phone className="w-4 h-4" />
+                Call +94 72 250 9609
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
           </div>

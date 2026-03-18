@@ -3,32 +3,32 @@ import TeamSection from "@/components/shared/TeamSection";
 import Image from "next/image";
 import Link from "next/link";
 import { jsonLdTeamPage, jsonLdPerson } from "@/lib/seo";
+import { Handshake, Leaf, Palette } from "lucide-react";
 
 export const metadata = {
-   title: "About Fairway Hotels | Meet Our Leadership Team - Chaminda Weerasinghe, P.S.Gunawardene, A.Rathnasuriya",
-   description: "Discover the Fairway Hotels story and meet our experienced leadership team: Chaminda Weerasinghe (Chairman & Managing Director), P.S.Gunawardene (Director), and A.Rathnasuriya (General Manager). Luxury hospitality excellence in Sri Lanka.",
-   keywords: [
-     "Fairway Hotels leadership team",
-     "Chaminda Weerasinghe",
-     "Chaminda Weerasinghe Chairman",
-     "Chaminda Weerasinghe Fairway Hotels",
-     "P.S.Gunawardene Director",
-     "A.Rathnasuriya General Manager",
-     "Sri Lanka hotel management",
-     "luxury hospitality leaders",
-     "boutique hotel owners Sri Lanka",
-     "Fairway Hotels team",
-     "Sri Lanka hospitality experts",
-     "luxury hotel leadership",
-     "hotel management Sri Lanka",
-     "boutique hotel directors",
-     "Sri Lanka tourism leaders",
-     "luxury accommodation management",
-     "premium hotel services team"
-   ],
+  title: "About Fairway Hotels | Meet Our Leadership Team - Chaminda Weerasinghe, P.S.Gunawardene",
+  description: "Discover the Fairway Hotels story and meet our experienced leadership team: Chaminda Weerasinghe (Chairman & Managing Director) and P.S.Gunawardene (Director). Luxury hospitality excellence in Sri Lanka.",
+  keywords: [
+    "Fairway Hotels leadership team",
+    "Chaminda Weerasinghe",
+    "Chaminda Weerasinghe Chairman",
+    "Chaminda Weerasinghe Fairway Hotels",
+    "P.S.Gunawardene Director",
+    "Sri Lanka hotel management",
+    "luxury hospitality leaders",
+    "boutique hotel owners Sri Lanka",
+    "Fairway Hotels team",
+    "Sri Lanka hospitality experts",
+    "luxury hotel leadership",
+    "hotel management Sri Lanka",
+    "boutique hotel directors",
+    "Sri Lanka tourism leaders",
+    "luxury accommodation management",
+    "premium hotel services team"
+  ],
   openGraph: {
     title: "About Fairway Hotels | Meet Our Leadership Team",
-    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya. World-class luxury hospitality.",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe and P.S.Gunawardene. World-class luxury hospitality.",
     images: [
       {
         url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
@@ -40,7 +40,7 @@ export const metadata = {
   },
   twitter: {
     title: "About Fairway Hotels | Meet Our Leadership Team",
-    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe, P.S.Gunawardene, and A.Rathnasuriya.",
+    description: "Meet the experienced leadership team at Fairway Hotels Sri Lanka: Chaminda Weerasinghe and P.S.Gunawardene.",
     images: [
       {
         url: "https://www.hotelsfairway.com/images/Team/Chairman_Managing_Director.jpeg",
@@ -63,12 +63,6 @@ export default function AboutPage() {
       role: "Director",
       image: "/images/Team/Director.png",
       description: "P.S.Gunawardene is a Director at Fairway Hotels Sri Lanka, contributing strategic vision and operational excellence to our luxury hotel portfolio and premium guest services."
-    },
-    {
-      name: "A.Rathnasuriya",
-      role: "General Manager",
-      image: "/images/Team/General_Manager.png",
-      description: "A.Rathnasuriya serves as General Manager at Fairway Hotels Sri Lanka, overseeing daily operations and ensuring exceptional guest experiences across our boutique properties."
     }
   ];
 
@@ -160,21 +154,21 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                icon: "🎨",
+                icon: Palette,
                 title: "Contemporary Design",
                 description: "Timeless interiors blending natural textures with modern aesthetics, creating spaces that feel both luxurious and authentic.",
                 gradient: "from-blue-500 to-cyan-500",
                 bgGradient: "from-blue-50 to-cyan-50"
               },
               {
-                icon: "🌱",
+                icon: Leaf,
                 title: "Sustainability First",
                 description: "Local sourcing, eco-friendly amenities, and mindful operations that respect Sri Lanka's natural beauty and communities.",
                 gradient: "from-green-500 to-teal-500",
                 bgGradient: "from-green-50 to-teal-50"
               },
               {
-                icon: "🤝",
+                icon: Handshake,
                 title: "Personalized Service",
                 description: "Curated experiences and attentive service that anticipates your needs, making every moment special and memorable.",
                 gradient: "from-purple-500 to-pink-500",
@@ -186,7 +180,7 @@ export default function AboutPage() {
 
                 <div className="relative mb-6 sm:mb-8">
                   <div className={`w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${value.gradient} rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                    <span className="text-2xl sm:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-300">{value.icon}</span>
+                    <value.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
 

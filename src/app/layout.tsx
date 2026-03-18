@@ -68,7 +68,6 @@ export const metadata: Metadata = {
     "Chaminda Weerasinghe Chairman",
     "Chaminda Weerasinghe Fairway Hotels",
     "P.S.Gunawardene",
-    "A.Rathnasuriya",
     "Fairway Hotels Chairman",
     "Fairway Hotels Director",
     "Fairway Hotels General Manager",
@@ -176,7 +175,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="light">
-      <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+      <body suppressHydrationWarning className={`${playfair.variable} ${inter.variable} antialiased`}>
         {/* Floating animated orbs */}
         <div className="floating-orb"></div>
         <div className="floating-orb"></div>
