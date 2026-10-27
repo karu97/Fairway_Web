@@ -482,7 +482,7 @@ export default function Home() {
       {/* Cafe E34 Collection Section */}
       <CafeESection variant="home" />
 
-      <section className="py-24 bg-white relative overflow-hidden">
+      {/* <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(34,197,94,0.06),transparent_45%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.05),transparent_45%)]" />
 
@@ -542,7 +542,7 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section> */}
 
       {/* Ultra-Modern Why Choose Us Section */}
       <section className="py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
