@@ -757,7 +757,6 @@ export default function Home() {
               { name: "E34 Café", src: "/images/Our_Companies/e34_cafe.png" },
               { name: "Fairway Insurance Brokers", src: "/images/Our_Companies/Fairway_insurance_brokers.png" },
               { name: "Kosgolla Food Exports", src: "/images/Our_Companies/Kosgolla_Food_Exports.png" },
-              { name: "Koslanda Plantation", src: "/images/Our_Companies/Koslanda_Plantation.png" },
             ].map((company, idx) => (
               <Reveal key={company.name} delayMs={idx * 100}>
                 <div className="group bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:rotate-1 border border-black/10">
